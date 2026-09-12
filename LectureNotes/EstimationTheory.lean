@@ -13,8 +13,9 @@ noncomputable def Score {Θ α : Type*} [NormedAddCommGroup Θ] [NormedSpace ℝ
     (ℓ : Θ → α → ℝ) (x : α) (θ : Θ) : Θ →L[ℝ] ℝ :=
   fderiv ℝ (fun p => ℓ p x) θ
 
-def FisherInformation {α : Type*} (𝔼 : Expectation α)
-    (score : α → ℝ) : ℝ := 𝔼.E (fun x => score x ^ 2)
+noncomputable def FisherInformation {α : Type*} [MeasurableSpace α]
+    (P : MeasureTheory.Measure α) (score : α → ℝ) : ℝ :=
+  ∫ x, score x ^ 2 ∂P
 
 def IsMLE {Θ α : Type*} (L : Θ → α → ℝ) (x : α) (θhat : Θ) : Prop :=
   ∀ θ, L θhat x ≥ L θ x

@@ -1,170 +1,100 @@
 import Mathlib
 
-/-!
-# Lecture 1: probability foundations
+/-! # Lecture 1: probability and moments
+All probabilities and expectations are Mathlib measures and Bochner integrals.
+Linearity has integrability hypotheses; no moment identities are assumed. -/
 
-The notes use events as measurable subsets and probabilities as real numbers.
-The small interface below records exactly the finite-event laws used by the
-elementary proofs.  The countable-additivity field is included so that the
-interface is a genuine probability model rather than an unstructured list of
-identities.
--/
-
+noncomputable section
 namespace LectureNotes
+open MeasureTheory ProbabilityTheory Set
 
-open Set
+abbrev Event (Ω : Type*) [MeasurableSpace Ω] := {A : Set Ω // MeasurableSet A}
+abbrev RandomVariable (Ω : Type*) [MeasurableSpace Ω] := {X : Ω → ℝ // Measurable X}
 
-structure ProbabilitySpace (Ω : Type*) where
-  measurable : Set (Set Ω)
-  empty_mem : ∅ ∈ measurable
-  univ_mem : univ ∈ measurable
-  compl_mem : ∀ {A}, A ∈ measurable → Aᶜ ∈ measurable
-  iUnion_mem : ∀ {A : ℕ → Set Ω}, (∀ n, A n ∈ measurable) → (⋃ n, A n) ∈ measurable
-  P : Set Ω → ℝ
-  nonneg : ∀ {A}, A ∈ measurable → 0 ≤ P A
-  total : P univ = 1
-  compl_add : ∀ {A}, A ∈ measurable → P Aᶜ + P A = 1
-  mono : ∀ {A B}, A ∈ measurable → B ∈ measurable → A ⊆ B → P A ≤ P B
-  countably_additive : ∀ (A : ℕ → Set Ω), (∀ n, A n ∈ measurable) →
-    Pairwise (Function.onFun Disjoint A) → P (⋃ n, A n) = ∑' n, P (A n)
+section Probability
+variable {Ω : Type*} [MeasurableSpace Ω] (P : Measure Ω) [IsProbabilityMeasure P]
 
-abbrev Event (S : ProbabilitySpace Ω) := {A : Set Ω // A ∈ S.measurable}
+def conditionalProbability (A B : Set Ω) : ℝ := P.real (A ∩ B) / P.real B
+/-- Product independence also handles null events. -/
+def IndependentEvents (A B : Set Ω) : Prop :=
+  MeasurableSet A ∧ MeasurableSet B ∧ P (A ∩ B) = P A * P B
 
-namespace ProbabilitySpace
+theorem prob_empty : P.real ∅ = 0 := by simp
+theorem prob_univ : P.real univ = 1 := by simp
+theorem prob_compl {A : Set Ω} (hA : MeasurableSet A) :
+    P.real Aᶜ = 1 - P.real A := probReal_compl_eq_one_sub hA
+theorem prob_mono {A B : Set Ω} (hAB : A ⊆ B) : P.real A ≤ P.real B :=
+  measureReal_mono hAB
+theorem prob_bounds (A : Set Ω) : 0 ≤ P.real A ∧ P.real A ≤ 1 := by
+  exact ⟨ENNReal.toReal_nonneg, by simpa using measureReal_mono (μ := P) (subset_univ A)⟩
 
-variable {Ω : Type*} (S : ProbabilitySpace Ω)
-
-theorem prob_empty : S.P ∅ = 0 := by
-  have h := S.compl_add S.empty_mem
-  simp only [compl_empty] at h
-  rw [S.total] at h
+/-- L1 Theorem 1: derived from countable additivity in the measure API. -/
+theorem inclusion_exclusion {A B : Set Ω} (hB : MeasurableSet B) :
+    P.real (A ∪ B) = P.real A + P.real B - P.real (A ∩ B) := by
+  have h := measureReal_union_add_inter (μ := P) (s := A) hB
   linarith
+theorem union_bound (A B : Set Ω) :
+    P.real (A ∪ B) ≤ P.real A + P.real B := measureReal_union_le A B
+theorem conditional_probability {A B : Set Ω} (hB : P.real B ≠ 0) :
+    conditionalProbability P A B * P.real B = P.real (A ∩ B) := by
+  exact div_mul_cancel₀ _ hB
+theorem bayes {A B : Set Ω} (hA : P.real A ≠ 0) (_hB : P.real B ≠ 0) :
+    conditionalProbability P A B =
+      conditionalProbability P B A * P.real A / P.real B := by
+  rw [conditional_probability P hA, inter_comm]
+  rfl
+end Probability
 
-theorem prob_univ : S.P univ = 1 := S.total
+section Moments
+variable {Ω : Type*} [MeasurableSpace Ω] (P : Measure Ω) [IsProbabilityMeasure P]
 
-theorem prob_compl {A : Set Ω} (hA : A ∈ S.measurable) :
-    S.P Aᶜ = 1 - S.P A := by
-  linarith [S.compl_add hA]
+def expectation (X : Ω → ℝ) : ℝ := ∫ ω, X ω ∂P
+def mse (T : Ω → ℝ) (θ : ℝ) : ℝ := ∫ ω, (T ω - θ) ^ 2 ∂P
+def bias (T : Ω → ℝ) (θ : ℝ) : ℝ := P[T] - θ
 
-theorem prob_nonneg {A : Set Ω} (hA : A ∈ S.measurable) : 0 ≤ S.P A := S.nonneg hA
+theorem expectation_const (a : ℝ) : P[fun _ : Ω => a] = a := by simp
+theorem expectation_linear {X Y : Ω → ℝ} (hX : Integrable X P) (hY : Integrable Y P)
+    (a b : ℝ) : P[fun ω => a * X ω + b * Y ω] = a * P[X] + b * P[Y] := by
+  rw [integral_add (hX.const_mul a) (hY.const_mul b), integral_const_mul, integral_const_mul]
 
-theorem prob_le_one {A : Set Ω} (hA : A ∈ S.measurable) : S.P A ≤ 1 := by
-  have hc := S.compl_mem hA
-  have hsub : A ⊆ univ := subset_univ A
-  exact (S.mono hA S.univ_mem hsub).trans_eq S.total
+theorem expectation_add {X Y : Ω → ℝ} (hX : Integrable X P) (hY : Integrable Y P) :
+    P[fun ω => X ω + Y ω] = P[X] + P[Y] := integral_add hX hY
+theorem variance_eq_second_moment_sub_mean_sq {X : Ω → ℝ} (hX : MemLp X 2 P) :
+    Var[X; P] = (∫ ω, X ω ^ 2 ∂P) - P[X] ^ 2 := variance_eq_sub hX
+theorem variance_scale (a : ℝ) (X : Ω → ℝ) :
+    Var[fun ω => a * X ω; P] = a ^ 2 * Var[X; P] := variance_const_mul a X P
+theorem variance_translate {X : Ω → ℝ} (hX : AEMeasurable X P) (a : ℝ) :
+    Var[fun ω => X ω + a; P] = Var[X; P] :=
+  variance_add_const hX.aestronglyMeasurable a
+theorem zero_variance_is_constant {X : Ω → ℝ} (hX : MemLp X 2 P)
+    (hv : Var[X; P] = 0) : X =ᵐ[P] (fun _ => P[X]) :=
+  ae_eq_integral_of_variance_eq_zero hX hv
 
-theorem prob_bounds {A : Set Ω} (hA : A ∈ S.measurable) : 0 ≤ S.P A ∧ S.P A ≤ S.P univ := by
-  exact ⟨S.prob_nonneg hA, S.mono hA S.univ_mem (subset_univ A)⟩
-
-theorem prob_mono {A B : Set Ω} (hA : A ∈ S.measurable) (hB : B ∈ S.measurable)
-    (hAB : A ⊆ B) : S.P A ≤ S.P B := S.mono hA hB hAB
-
-/-! Conditional probability is only used when the conditioning event has
-positive probability.  The definition itself is totalized by real division;
-the multiplication theorem below records the meaningful case. -/
-noncomputable def conditionalProbability (A B : Set Ω) : ℝ :=
-  S.P (A ∩ B) / S.P B
-
-theorem inclusion_exclusion {A B : Set Ω} (_hA : A ∈ S.measurable) (_hB : B ∈ S.measurable)
-    (_hUnion : A ∪ B ∈ S.measurable) (_hInter : A ∩ B ∈ S.measurable)
-    (hLaw : S.P (A ∪ B) + S.P (A ∩ B) = S.P A + S.P B) :
-    S.P (A ∪ B) = S.P A + S.P B - S.P (A ∩ B) := by
+/-- L5 Theorem 1. The centering and second-moment identities are proved. -/
+theorem mse_eq_variance_add_bias_sq {T : Ω → ℝ} (hT : MemLp T 2 P) (θ : ℝ) :
+    mse P T θ = Var[T; P] + bias P T θ ^ 2 := by
+  have hi := hT.integrable (by norm_num : (1 : ENNReal) ≤ 2)
+  have hs := variance_eq_sub (hT.sub (memLp_const θ))
+  change Var[fun ω => T ω - θ; P] =
+    mse P T θ - (P[fun ω => T ω - θ]) ^ 2 at hs
+  rw [variance_sub_const hT.aestronglyMeasurable θ] at hs
+  have hm : P[fun ω => T ω - θ] = P[T] - θ := by
+    rw [integral_sub hi (integrable_const θ)]
+    simp
+  change Var[T; P] = mse P T θ - (P[fun ω => T ω - θ]) ^ 2 at hs
+  rw [hm] at hs
+  dsimp [bias]
   linarith
-
-theorem conditional_probability {A B : Set Ω} (_hA : A ∈ S.measurable)
-    (_hB : B ∈ S.measurable) (hpos : 0 < S.P B) :
-    S.conditionalProbability A B * S.P B = S.P (A ∩ B) := by
-  unfold conditionalProbability
-  field_simp [ne_of_gt hpos]
-
-end ProbabilitySpace
-
-/-! Elementary expectation notation used in the later lecture files. -/
-
-structure Expectation (Ω : Type*) where
-  E : (Ω → ℝ) → ℝ
-  map_zero : E 0 = 0
-  map_add : ∀ X Y, E (X + Y) = E X + E Y
-  map_smul : ∀ (a : ℝ) X, E (a • X) = a * E X
-  map_sum : ∀ {ι : Type*} (s : Finset ι) (X : ι → Ω → ℝ),
-    E (fun ω => s.sum (fun i => X i ω)) = s.sum (fun i => E (X i))
-  const : ∀ (a : ℝ), E (fun _ : Ω => a) = a
-
-namespace Expectation
-
-variable {Ω : Type*} (𝔼 : LectureNotes.Expectation Ω)
-
-def variance (X : Ω → ℝ) : ℝ := 𝔼.E (fun ω => (X ω - 𝔼.E X) ^ 2)
-
-def covariance (X Y : Ω → ℝ) : ℝ :=
-  𝔼.E (fun ω => (X ω - 𝔼.E X) * (Y ω - 𝔼.E Y))
-
-def mse (T : Ω → ℝ) (θ : ℝ) : ℝ := 𝔼.E (fun ω => (T ω - θ) ^ 2)
-
-def bias (T : Ω → ℝ) (θ : ℝ) : ℝ := 𝔼.E T - θ
-
-theorem variance_eq_second_moment_sub_mean_sq (X : Ω → ℝ)
-    (hcalc : 𝔼.E (fun ω => (X ω) ^ 2) - 2 * 𝔼.E X * 𝔼.E X + (𝔼.E X) ^ 2 =
-      𝔼.E (fun ω => (X ω - 𝔼.E X) ^ 2)) :
-    LectureNotes.Expectation.variance 𝔼 X = 𝔼.E (fun ω => X ω ^ 2) - (𝔼.E X) ^ 2 := by
-  unfold LectureNotes.Expectation.variance
+theorem covariance_eq_product_moment {X Y : Ω → ℝ}
+    (hX : MemLp X 2 P) (hY : MemLp Y 2 P) :
+    cov[X, Y; P] = (∫ ω, X ω * Y ω ∂P) - P[X] * P[Y] :=
+  covariance_eq_sub hX hY
+theorem independent_covariance_zero {X Y : Ω → ℝ}
+    (h : IndepFun X Y P) (hX : MemLp X 2 P) (hY : MemLp Y 2 P) :
+    cov[X, Y; P] = 0 := h.covariance_eq_zero hX hY
+theorem variance_of_sum {X Y : Ω → ℝ} (hX : MemLp X 2 P) (hY : MemLp Y 2 P) :
+    Var[fun ω => X ω + Y ω; P] = Var[X; P] + 2 * cov[X, Y; P] + Var[Y; P] := by
+  have h := variance_fun_add hX hY
   linarith
-
-theorem variance_const_mul (a : ℝ) (X : Ω → ℝ)
-    (hmean : 𝔼.E (a • X) = a * 𝔼.E X)
-    (hcalc : 𝔼.E (fun ω => (a * X ω - a * 𝔼.E X) ^ 2) =
-      a ^ 2 * 𝔼.E (fun ω => (X ω - 𝔼.E X) ^ 2)) :
-    LectureNotes.Expectation.variance 𝔼 (a • X) = a ^ 2 * LectureNotes.Expectation.variance 𝔼 X := by
-  simpa [LectureNotes.Expectation.variance, Pi.smul_apply, hmean] using hcalc
-
-theorem variance_add_const (X : Ω → ℝ) (a : ℝ)
-    (hcalc : 𝔼.E (fun ω => (X ω + a - 𝔼.E (fun ω => X ω + a)) ^ 2) =
-      𝔼.E (fun ω => (X ω - 𝔼.E X) ^ 2)) :
-    LectureNotes.Expectation.variance 𝔼 (fun ω => X ω + a) =
-      LectureNotes.Expectation.variance 𝔼 X := by
-  simpa [LectureNotes.Expectation.variance] using hcalc
-
-theorem mse_eq_variance_add_bias_sq (T : Ω → ℝ) (θ : ℝ)
-    (hcenter : 𝔼.E (fun ω => T ω - 𝔼.E T) = 0) :
-    LectureNotes.Expectation.mse 𝔼 T θ =
-      LectureNotes.Expectation.variance 𝔼 T + LectureNotes.Expectation.bias 𝔼 T θ ^ 2 := by
-  unfold LectureNotes.Expectation.mse LectureNotes.Expectation.variance
-    LectureNotes.Expectation.bias
-  have hlin := 𝔼.map_add (fun ω => (T ω - 𝔼.E T) ^ 2)
-    (fun _ : Ω => (𝔼.E T - θ) ^ 2)
-  have hcross : 𝔼.E (fun ω => 2 * (T ω - 𝔼.E T) * (𝔼.E T - θ)) = 0 := by
-    rw [show (fun ω => 2 * (T ω - 𝔼.E T) * (𝔼.E T - θ)) =
-        (2 * (𝔼.E T - θ)) • (fun ω => T ω - 𝔼.E T) by funext ω; simp [smul_eq_mul]; ring,
-      𝔼.map_smul, hcenter]
-    ring
-  calc
-    𝔼.E (fun ω => (T ω - θ) ^ 2) =
-        𝔼.E (fun ω => (T ω - 𝔼.E T) ^ 2 +
-          2 * (T ω - 𝔼.E T) * (𝔼.E T - θ) + (𝔼.E T - θ) ^ 2) := by
-            congr 1; funext ω; ring
-    _ = 𝔼.E (fun ω => (T ω - 𝔼.E T) ^ 2 +
-          2 * (T ω - 𝔼.E T) * (𝔼.E T - θ)) +
-          𝔼.E (fun _ : Ω => (𝔼.E T - θ) ^ 2) := by
-            have hfun : (fun ω => (T ω - 𝔼.E T) ^ 2 +
-                2 * (T ω - 𝔼.E T) * (𝔼.E T - θ) + (𝔼.E T - θ) ^ 2) =
-                (fun ω => (T ω - 𝔼.E T) ^ 2 +
-                2 * (T ω - 𝔼.E T) * (𝔼.E T - θ)) +
-                (fun _ : Ω => (𝔼.E T - θ) ^ 2) := by
-              funext ω
-              rfl
-            rw [hfun, 𝔼.map_add]
-    _ = 𝔼.E (fun ω => (T ω - 𝔼.E T) ^ 2) +
-          𝔼.E (fun ω => 2 * (T ω - 𝔼.E T) * (𝔼.E T - θ)) +
-          (𝔼.E T - θ) ^ 2 := by
-            have hfun : (fun ω => (T ω - 𝔼.E T) ^ 2 +
-                2 * (T ω - 𝔼.E T) * (𝔼.E T - θ)) =
-                (fun ω => (T ω - 𝔼.E T) ^ 2) +
-                (fun ω => 2 * (T ω - 𝔼.E T) * (𝔼.E T - θ)) := by
-              funext ω
-              rfl
-            rw [hfun, 𝔼.map_add, 𝔼.const]
-    _ = 𝔼.E (fun ω => (T ω - 𝔼.E T) ^ 2) + (𝔼.E T - θ) ^ 2 := by rw [hcross, add_zero]
-
-end Expectation
-
+end Moments
 end LectureNotes

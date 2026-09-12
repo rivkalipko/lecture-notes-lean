@@ -20,13 +20,15 @@ def ConvergesInDistribution {Ω Ω' : Type*} [MeasurableSpace Ω] [MeasurableSpa
     (X : ℕ → Ω → ℝ) (Y : Ω' → ℝ) : Prop :=
   TendstoInDistribution X atTop Y (fun _ => μ) μ'
 
-def ConvergesInMean {Ω : Type*} (𝔼 : Expectation Ω)
+def ConvergesInMean {Ω : Type*} [MeasurableSpace Ω] (P : Measure Ω)
     (X : ℕ → Ω → ℝ) (Y : Ω → ℝ) : Prop :=
-  Tendsto (fun n => 𝔼.E (fun ω => |X n ω - Y ω|)) atTop (𝓝 0)
+  (∀ n, Integrable (fun ω => X n ω - Y ω) P) ∧
+    Tendsto (fun n => ∫ ω, |X n ω - Y ω| ∂P) atTop (𝓝 0)
 
-def ConvergesInMeanSquare {Ω : Type*} (𝔼 : Expectation Ω)
+def ConvergesInMeanSquare {Ω : Type*} [MeasurableSpace Ω] (P : Measure Ω)
     (X : ℕ → Ω → ℝ) (Y : Ω → ℝ) : Prop :=
-  Tendsto (fun n => 𝔼.E (fun ω => |X n ω - Y ω| ^ 2)) atTop (𝓝 0)
+  (∀ n, MemLp (fun ω => X n ω - Y ω) 2 P) ∧
+    Tendsto (fun n => ∫ ω, |X n ω - Y ω| ^ 2 ∂P) atTop (𝓝 0)
 
 def Consistent {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω)
     (T : ℕ → Ω → ℝ) (θ : ℝ) : Prop :=
@@ -34,8 +36,9 @@ def Consistent {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω)
 
 def AsymptoticallyNormal {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω)
     [IsProbabilityMeasure μ]
-    (T : ℕ → Ω → ℝ) (a r : ℕ → ℝ) (_σ : ℝ) (Z : Ω → ℝ) : Prop :=
-  ConvergesInDistribution μ μ (fun n ω => r n * (T n ω - a n)) Z
+    (T : ℕ → Ω → ℝ) (a r : ℕ → ℝ) (σ : ℝ) (Z : Ω → ℝ) : Prop :=
+  0 < σ ∧ HasLaw Z (gaussianReal 0 ⟨σ ^ 2, sq_nonneg σ⟩) μ ∧
+    ConvergesInDistribution μ μ (fun n ω => r n * (T n ω - a n)) Z
 
 theorem strong_law_of_large_numbers
     {Ω : Type*} [MeasurableSpace Ω] {P : Measure Ω}
