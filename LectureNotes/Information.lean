@@ -48,8 +48,11 @@ theorem cramer_rao_bound {W S : Ω → ℝ} (hW : MemLp W 2 P) (hS : MemLp S 2 P
   rw [hd.deriv]
   exact (div_le_iff₀ hI).2 h
 
-/-- Unbiased-estimation corollary of L6 Theorem 2: the mean function is θ. -/
-theorem cramer_rao_unbiased {W S : Ω → ℝ} (hW : MemLp W 2 P) (hS : MemLp S 2 P)
+/-- Algebraic corollary when the score-product moment is the derivative of
+the identity. `RegularDensity.cramer_rao_unbiased` derives this situation from
+unbiasedness throughout an open parameter domain. -/
+theorem cramer_rao_unbiased_from_score_identity {W S : Ω → ℝ}
+    (hW : MemLp W 2 P) (hS : MemLp S 2 P)
     (hscore : P[S] = 0) (hI : 0 < FisherInformation P S) {θ : ℝ}
     (hd : HasDerivAt (fun t : ℝ => t) (∫ ω, W ω * S ω ∂P) θ) :
     1 / FisherInformation P S ≤ Var[W; P] := by

@@ -35,7 +35,8 @@ def studentT (n : ℕ) : Measure ℝ :=
 instance (n : ℕ) : IsProbabilityMeasure (studentT n) :=
   Measure.isProbabilityMeasure_map (by fun_prop)
 
-/-- The ratio of two independently scaled chi-square variables. -/
+/-- The ratio of two independently scaled chi-square variables.
+The statistical F distribution requires both degrees of freedom to be positive. -/
 def fDistribution (k l : ℕ) : Measure ℝ :=
   ((chiSquared k).prod (chiSquared l)).map (fun xy => (xy.1 / k) / (xy.2 / l))
 

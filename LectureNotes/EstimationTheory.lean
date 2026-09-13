@@ -2,23 +2,26 @@ import LectureNotes.LargeSample
 
 namespace LectureNotes
 
-/-! Formal definitions for the estimation language in Lectures 5 and 6. -/
+/-! Formal definitions for the estimation language in Lectures 5 and 6.
+All likelihood functions take the data first and the parameter second. -/
 
 noncomputable def Likelihood {Θ α : Type*} (f : α → Θ → ℝ) (x : α) : Θ → ℝ := f x
 
 noncomputable def LogLikelihood {Θ α : Type*} (f : α → Θ → ℝ) (x : α) (θ : Θ) : ℝ :=
   Real.log (Likelihood f x θ)
 
+/-- The derivative of a log-likelihood in its parameter argument. For a
+density `f`, the score is `Score (LogLikelihood f) x θ`. -/
 noncomputable def Score {Θ α : Type*} [NormedAddCommGroup Θ] [NormedSpace ℝ Θ]
-    (ℓ : Θ → α → ℝ) (x : α) (θ : Θ) : Θ →L[ℝ] ℝ :=
-  fderiv ℝ (fun p => ℓ p x) θ
+    (ℓ : α → Θ → ℝ) (x : α) (θ : Θ) : Θ →L[ℝ] ℝ :=
+  fderiv ℝ (ℓ x) θ
 
 noncomputable def FisherInformation {α : Type*} [MeasurableSpace α]
     (P : MeasureTheory.Measure α) (score : α → ℝ) : ℝ :=
   ∫ x, score x ^ 2 ∂P
 
-def IsMLE {Θ α : Type*} (L : Θ → α → ℝ) (x : α) (θhat : Θ) : Prop :=
-  ∀ θ, L θhat x ≥ L θ x
+def IsMLE {Θ α : Type*} (L : α → Θ → ℝ) (x : α) (θhat : Θ) : Prop :=
+  ∀ θ, L x θhat ≥ L x θ
 
 def MomentEquation {Θ : Type*} (m : Θ → ℝ) (observed : ℝ) (θhat : Θ) : Prop :=
   observed = m θhat
@@ -28,20 +31,33 @@ theorem score_eq_deriv_log_likelihood {f : ℝ → ℝ}
     HasDerivAt (fun θ => Real.log (f θ)) (d / f θ₀) θ₀ := by
   simpa using hderiv.log (ne_of_gt hf)
 
-theorem score_zero_at_interior_mle {L : ℝ → ℝ} {θhat d : ℝ}
+theorem derivative_zero_at_interior_maximum {L : ℝ → ℝ} {θhat d : ℝ}
     (hmax : IsLocalMax L θhat) (hderiv : HasDerivAt L d θhat) : d = 0 := by
   calc
     d = deriv L θhat := hderiv.deriv.symm
     _ = 0 := hmax.deriv_eq_zero
 
-theorem log_likelihood_preserves_mle {Θ α : Type*} {L : Θ → α → ℝ} {x : α}
-    {θhat : Θ} (hpos : ∀ θ, 0 < L θ x) :
-    IsMLE L x θhat ↔ ∀ θ, Real.log (L θhat x) ≥ Real.log (L θ x) := by
+theorem log_likelihood_preserves_mle {Θ α : Type*} {L : α → Θ → ℝ} {x : α}
+    {θhat : Θ} (hpos : ∀ θ, 0 < L x θ) :
+    IsMLE L x θhat ↔ IsMLE (LogLikelihood L) x θhat := by
   constructor
   · intro h θ
     exact (Real.strictMonoOn_log.monotoneOn (hpos θ) (hpos θhat) (h θ))
   · intro h θ
     exact (Real.strictMonoOn_log.le_iff_le (hpos θ) (hpos θhat)).mp (h θ)
+
+/-- L6's first-order condition for the actual log-likelihood score. The
+maximum is interior, the likelihood is positive there, and it is differentiable. -/
+theorem score_zero_at_interior_mle {α : Type*} {f : α → ℝ → ℝ} {x : α} {θhat : ℝ}
+    (hmax : IsLocalMax (Likelihood f x) θhat) (hpos : 0 < f x θhat)
+    (hd : DifferentiableAt ℝ (f x) θhat) :
+    Score (LogLikelihood f) x θhat = 0 := by
+  have hz : deriv (f x) θhat = 0 := hmax.deriv_eq_zero
+  have hl := hd.hasDerivAt.log hpos.ne'
+  apply ContinuousLinearMap.ext
+  intro y
+  change fderiv ℝ (fun θ => Real.log (f x θ)) θhat y = 0
+  rw [fderiv_eq_deriv_mul, hl.deriv, hz, zero_div, zero_mul]
 
 theorem moment_equation_is_definition {Θ : Type*} (m : Θ → ℝ)
     (observed : ℝ) (θhat : Θ) :

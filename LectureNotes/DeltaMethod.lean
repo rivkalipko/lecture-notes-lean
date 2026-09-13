@@ -43,6 +43,15 @@ theorem convergence_distribution_congr_eventually {X Y : ℕ → Ω → ℝ} {Z 
     apply Subtype.ext
     exact congrArg (Measure.map · P) hn))
 
+/-- The zero-limit probability conclusion printed after L3 Theorem 8. -/
+theorem slutsky_mul_zero {X Y : ℕ → Ω → ℝ} {Z : Ω' → ℝ}
+    (hX : ConvergesInDistribution P Q X Z)
+    (hY : ConvergesInProbability P Y (fun _ => 0))
+    (hYm : ∀ n, AEMeasurable (Y n) P) :
+    ConvergesInProbability P (fun n ω => X n ω * Y n ω) (fun _ => 0) := by
+  apply distribution_to_constant_implies_probability (Q := Q)
+  simpa only [mul_zero] using slutsky_mul hX hY hYm
+
 /-- General scalar delta method. Rates are eventually nonzero and their
 inverses tend to zero; this includes the notes' square-root rate exactly. -/
 theorem delta_method {X : ℕ → Ω → ℝ} {Z : Ω' → ℝ} {μ : ℝ} {r : ℕ → ℝ}

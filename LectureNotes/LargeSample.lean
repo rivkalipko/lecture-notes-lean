@@ -34,11 +34,17 @@ def Consistent {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω)
     (T : ℕ → Ω → ℝ) (θ : ℝ) : Prop :=
   ConvergesInProbability μ T (fun _ => θ)
 
+/-- L5 asymptotic normality, using the canonical normal law on the real line
+as the target probability space. Zero asymptotic variance is allowed; the
+rate is eventually nonzero so the normal approximation can be rescaled. -/
 def AsymptoticallyNormal {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω)
     [IsProbabilityMeasure μ]
-    (T : ℕ → Ω → ℝ) (a r : ℕ → ℝ) (σ : ℝ) (Z : Ω → ℝ) : Prop :=
-  0 < σ ∧ HasLaw Z (gaussianReal 0 ⟨σ ^ 2, sq_nonneg σ⟩) μ ∧
-    ConvergesInDistribution μ μ (fun n ω => r n * (T n ω - a n)) Z
+    (T : ℕ → Ω → ℝ) (a r : ℕ → ℝ) (σ : ℝ) : Prop :=
+  letI : IsProbabilityMeasure (gaussianReal 0 ⟨σ ^ 2, sq_nonneg σ⟩) :=
+    instIsProbabilityMeasureGaussianReal 0 _
+  0 ≤ σ ∧ (∀ n, AEMeasurable (T n) μ) ∧ (∀ᶠ n in atTop, r n ≠ 0) ∧
+    ConvergesInDistribution (Ω' := ℝ) μ (gaussianReal 0 ⟨σ ^ 2, sq_nonneg σ⟩)
+      (fun n ω => r n * (T n ω - a n)) id
 
 theorem strong_law_of_large_numbers
     {Ω : Type*} [MeasurableSpace Ω] {P : Measure Ω}

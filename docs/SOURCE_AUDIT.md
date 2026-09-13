@@ -68,6 +68,7 @@ the source. The coverage ledger separately records that obligation.
 | L6 p1, causal identification | Conditional unconfoundedness also needs overlap/positivity and consistency of observed and potential outcomes. |
 | L6 pp3–4, MLE first-order condition | Differentiability alone does not imply a zero score at a constrained/boundary maximum. Require an interior local maximum. Log-likelihood comparison requires positive likelihood or an extended logarithm convention. |
 | L6 p4, normal/uniform MLE | The normal variance MLE may fail to exist in the positive-variance parameter space if all observations coincide. The uniform endpoint MLE requires a positive observed maximum when the parameter space is positive. |
+| L6 p4, uniform likelihood indicators | The density initially includes the endpoints, but the later likelihood uses strict indicators `theta > X_(n)` and `X_(1) > 0`. The strict upper inequality excludes the claimed maximizer `theta = X_(n)`; with that version the supremum is not attained. Use the original closed-support density to obtain the stated endpoint MLE. Visually verified during the semantic audit. |
 | L6 pp4–5, information equalities | State sufficient local domination conditions for differentiating the density integral twice. A bound only on the second log-density derivative, as written, does not justify all interchanges automatically. |
 | L6 p7, Cramér–Rao | Require finite, positive Fisher information and explicit differentiation-under-integral regularity. |
 | L6 p8, uniform counterexample | Outside regular models information need not add: the joint uniform score is `-n/theta`, so its squared expectation is `n^2/theta^2`, not `n/theta^2`. The displayed latter value is only the invalid regular-model calculation. |
@@ -116,3 +117,10 @@ integrability, mean preservation, MSE reduction, and the unbiased variance
 comparison. `sufficientKernel_of_disintegration` gives a measure-level
 criterion for the common conditional law. The general density factorization
 and minimal-sufficiency theorems remain separate unfinished work.
+
+## Follow-up semantic audit
+
+[SEMANTIC_AUDIT.md](SEMANTIC_AUDIT.md) records the review of every included
+module, corrections to project definitions, and a concrete Bernoulli model
+checking the strengthened exponential-family and regular-density definitions.
+L5 p10 and L6 pp4 and 6 were additionally checked against rendered PDF pages.

@@ -54,23 +54,38 @@ def ConditionallyIndependentEvents (A B C : Set Ω) : Prop :=
     conditionalProbability P (A ∩ B) C =
     conditionalProbability P A C * conditionalProbability P B C
 
-def cdfOf (X : Ω → ℝ) : ℝ → ℝ := cdf (P.map X)
+/-- L1 Definition 8, directly as the probability of a sublevel set.
+The CDF theorems below require a measurable random variable. -/
+def cdfOf (X : Ω → ℝ) (x : ℝ) : ℝ := P.real {ω | X ω ≤ x}
 
-theorem cdfOf_eq_probability {X : Ω → ℝ} (hX : AEMeasurable X P) (x : ℝ) :
-    cdfOf P X x = P.real {ω | X ω ≤ x} := by
+theorem cdfOf_eq_probability {X : Ω → ℝ} (_hX : AEMeasurable X P) (x : ℝ) :
+    cdfOf P X x = P.real {ω | X ω ≤ x} := rfl
+
+/-- The library CDF agrees with the source definition when the pushforward
+is a probability measure. This hypothesis rules out its nonprobability default. -/
+theorem cdfOf_eq_cdf {X : Ω → ℝ} (hX : AEMeasurable X P) :
+    cdfOf P X = cdf (P.map X) := by
   letI : IsProbabilityMeasure (P.map X) := Measure.isProbabilityMeasure_map hX
+  funext x
   rw [cdfOf, cdf_eq_real]
   simp only [measureReal_def, Measure.map_apply_of_aemeasurable hX measurableSet_Iic]
   rfl
 
-theorem cdfOf_monotone (X : Ω → ℝ) : Monotone (cdfOf P X) :=
-  monotone_cdf (P.map X)
-theorem cdfOf_atBot (X : Ω → ℝ) : Tendsto (cdfOf P X) atBot (𝓝 0) :=
-  tendsto_cdf_atBot (P.map X)
-theorem cdfOf_atTop (X : Ω → ℝ) : Tendsto (cdfOf P X) atTop (𝓝 1) :=
-  tendsto_cdf_atTop (P.map X)
-theorem cdfOf_right_continuous (X : Ω → ℝ) (x : ℝ) :
-    ContinuousWithinAt (cdfOf P X) (Ici x) x := (cdf (P.map X)).right_continuous x
+theorem cdfOf_monotone {X : Ω → ℝ} (hX : AEMeasurable X P) : Monotone (cdfOf P X) := by
+  rw [cdfOf_eq_cdf P hX]
+  exact monotone_cdf (P.map X)
+theorem cdfOf_atBot {X : Ω → ℝ} (hX : AEMeasurable X P) :
+    Tendsto (cdfOf P X) atBot (𝓝 0) := by
+  rw [cdfOf_eq_cdf P hX]
+  exact tendsto_cdf_atBot (P.map X)
+theorem cdfOf_atTop {X : Ω → ℝ} (hX : AEMeasurable X P) :
+    Tendsto (cdfOf P X) atTop (𝓝 1) := by
+  rw [cdfOf_eq_cdf P hX]
+  exact tendsto_cdf_atTop (P.map X)
+theorem cdfOf_right_continuous {X : Ω → ℝ} (hX : AEMeasurable X P) (x : ℝ) :
+    ContinuousWithinAt (cdfOf P X) (Ici x) x := by
+  rw [cdfOf_eq_cdf P hX]
+  exact (cdf (P.map X)).right_continuous x
 
 /-- L1 Definition 6, using all finite subfamilies, not just pairs. -/
 def JointlyIndependentEvents {ι : Type*} (A : ι → Set Ω) : Prop :=

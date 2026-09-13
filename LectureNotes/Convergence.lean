@@ -120,7 +120,9 @@ theorem slutsky_div {X Y : ℕ → Ω → ℝ} {Z : Ω' → ℝ} {c : ℝ}
   have hi := continuous_mapping_probability_const (continuousAt_inv₀ hc) hY
   simpa only [div_eq_mul_inv] using slutsky_mul hX hi (fun n => (hYm n).inv)
 
-/-- L3 Definition 5, with absolute values on deterministic scale sequences. -/
+/-- L3 Definition 5, with absolute values on deterministic scale sequences.
+The source indexes from one; use `n + 1` for power scales in Lean's zero-based
+sequences so that every scale is nonzero. -/
 def StochasticLittleO (X : ℕ → Ω → ℝ) (a : ℕ → ℝ) : Prop :=
   (∀ n, a n ≠ 0) ∧ ConvergesInProbability P (fun n ω => X n ω / a n) (fun _ => 0)
 def StochasticBigO (X : ℕ → Ω → ℝ) (a : ℕ → ℝ) : Prop :=

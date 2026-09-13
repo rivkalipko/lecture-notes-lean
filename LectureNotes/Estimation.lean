@@ -18,9 +18,40 @@ def Unbiased {Ω : Type*} [MeasurableSpace Ω] (P : MeasureTheory.Measure Ω)
 def factorizesThrough {α θ τ : Type*} (f : α → θ → ℝ) (T : α → τ) : Prop :=
   ∃ g : τ → θ → ℝ, ∃ h : α → ℝ, ∀ x p, f x p = g (T x) p * h x
 
-def ExponentialFamily {α θ : Type*} (f : α → θ → ℝ) (k : ℕ) : Prop :=
+/-- Purely algebraic exponential form. This alone does not say that `f` is
+a family of probability densities; use `ExponentialFamily` for that assertion. -/
+def HasExponentialForm {α θ : Type*} (f : α → θ → ℝ) (k : ℕ) : Prop :=
   ∃ h : α → ℝ, ∃ c : θ → ℝ, ∃ w : Fin k → θ → ℝ, ∃ t : Fin k → α → ℝ,
     ∀ x p, f x p = h x * c p * Real.exp (∑ j, w j p * t j x)
+
+/-- L5 Definition 2: normalized densities with respect to one reference
+measure, with measurable data factors and parameter-independent support.
+Counting measure gives the PMF case; Lebesgue measure gives the PDF case. -/
+structure ExponentialFamily {α θ : Type*} [MeasurableSpace α]
+    (ν : MeasureTheory.Measure α) (f : α → θ → ℝ) (k : ℕ) : Prop where
+  integrable : ∀ p, MeasureTheory.Integrable (fun x => f x p) ν
+  nonneg : ∀ x p, 0 ≤ f x p
+  normalized : ∀ p, (∫ x, f x p ∂ν) = 1
+  representation : ∃ h : α → ℝ, ∃ c : θ → ℝ, ∃ w : Fin k → θ → ℝ,
+    ∃ t : Fin k → α → ℝ, Measurable h ∧ (∀ j, Measurable (t j)) ∧
+      (∀ x, 0 ≤ h x) ∧ (∀ p, 0 < c p) ∧
+      ∀ x p, f x p = h x * c p * Real.exp (∑ j, w j p * t j x)
+
+theorem ExponentialFamily.hasExponentialForm {α θ : Type*} [MeasurableSpace α]
+    {ν : MeasureTheory.Measure α} {f : α → θ → ℝ} {k : ℕ}
+    (hf : ExponentialFamily ν f k) : HasExponentialForm f k := by
+  obtain ⟨h, c, w, t, _, _, _, _, he⟩ := hf.representation
+  exact ⟨h, c, w, t, he⟩
+
+theorem ExponentialFamily.isProbabilityMeasure {α θ : Type*} [MeasurableSpace α]
+    {ν : MeasureTheory.Measure α} {f : α → θ → ℝ} {k : ℕ}
+    (hf : ExponentialFamily ν f k) (p : θ) :
+    MeasureTheory.IsProbabilityMeasure (ν.withDensity (fun x => ENNReal.ofReal (f x p))) := by
+  constructor
+  rw [MeasureTheory.withDensity_apply _ MeasurableSet.univ, MeasureTheory.Measure.restrict_univ,
+    ← MeasureTheory.ofReal_integral_eq_lintegral_ofReal (hf.integrable p)
+      (MeasureTheory.ae_of_all _ (fun x => hf.nonneg x p)), hf.normalized p]
+  simp
 
 theorem exponential_family_factorizes_sum {α θ : Type*} {k n : ℕ}
     {f : α → θ → ℝ} (h : α → ℝ) (c : θ → ℝ)
@@ -49,12 +80,19 @@ theorem exponential_family_factorizes_sum {α θ : Type*} {k n : ℕ}
       rw [hs]
       ring
 
-theorem exponential_family_sample_factorization {α θ : Type*} {k n : ℕ}
-    {f : α → θ → ℝ} (hf : ExponentialFamily f k) :
+theorem exponential_form_sample_factorization {α θ : Type*} {k n : ℕ}
+    {f : α → θ → ℝ} (hf : HasExponentialForm f k) :
     ∃ T : (Fin n → α) → (Fin k → ℝ),
       factorizesThrough (fun y p => ∏ i, f (y i) p) T := by
   obtain ⟨h, c, w, t, hf⟩ := hf
   exact ⟨fun y j => ∑ i, t j (y i), exponential_family_factorizes_sum h c w t hf⟩
+
+theorem exponential_family_sample_factorization {α θ : Type*} [MeasurableSpace α]
+    {ν : MeasureTheory.Measure α} {k n : ℕ} {f : α → θ → ℝ}
+    (hf : ExponentialFamily ν f k) :
+    ∃ T : (Fin n → α) → (Fin k → ℝ),
+      factorizesThrough (fun y p => ∏ i, f (y i) p) T :=
+  exponential_form_sample_factorization hf.hasExponentialForm
 
 open MeasureTheory ProbabilityTheory
 

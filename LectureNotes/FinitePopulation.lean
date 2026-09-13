@@ -213,4 +213,30 @@ theorem simpleRandomSampling_variance {N n : ℕ} (hn : 0 < n) (hN : n ≤ N)
         subst n
         rw [simpleRandomSampling_pair_single_draw hN i j hij]
         norm_num
+
+/-- L2 Theorem 3 for an actual sampling design on population subsets. -/
+theorem horvitzThompson_design_unbiased {N : ℕ} (hN : 0 < N) (x : Fin N → ℝ)
+    (P : Measure (Finset (Fin N))) [IsProbabilityMeasure P]
+    (hπ : ∀ i : Fin N, 0 < P.real {s | i ∈ s}) :
+    P[horvitzThompson x selectionIndicator P] = sampleMean x := by
+  apply horvitzThompson_unbiased hN x
+    (fun i => (selectionIndicator_memLp i P).integrable (by norm_num))
+  intro i
+  simpa only [inclusionProbability, selectionIndicator_expectation] using (hπ i).ne'
+
+/-- Both marginal and joint inclusion quantities are probabilities under the
+design, including diagonal terms. All dividing inclusion probabilities are positive. -/
+theorem horvitzThompson_design_variance {N : ℕ} (hN : 0 < N) (x : Fin N → ℝ)
+    (P : Measure (Finset (Fin N))) [IsProbabilityMeasure P]
+    (hπ : ∀ i : Fin N, 0 < P.real {s | i ∈ s}) :
+    Var[horvitzThompson x selectionIndicator P; P] =
+      (N : ℝ)⁻¹ ^ 2 * ∑ i, ∑ j,
+        (P.real {s | i ∈ s ∧ j ∈ s} - P.real {s | i ∈ s} * P.real {s | j ∈ s}) *
+          (x i * x j / (P.real {s | i ∈ s} * P.real {s | j ∈ s})) := by
+  have hp (i : Fin N) : inclusionProbability selectionIndicator P i ≠ 0 := by
+    simpa only [inclusionProbability, selectionIndicator_expectation] using (hπ i).ne'
+  simpa only [inclusionProbability, pairInclusionProbability,
+    selectionIndicator_expectation, selectionIndicator_product_expectation] using
+      horvitzThompson_variance hN x (fun i => selectionIndicator_memLp i P) hp
+
 end LectureNotes

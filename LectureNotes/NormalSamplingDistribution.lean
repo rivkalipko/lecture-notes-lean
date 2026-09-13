@@ -131,7 +131,7 @@ theorem normal_studentized_mean {Ω : Type*} [MeasurableSpace Ω] {P : Measure �
     have hvn : (0 : ℝ≥0) < v / n := div_pos hv (by exact_mod_cast hn0)
     simpa using! normal_standardize hvn (normal_sampleMean hn0 hX hind)
   have hY := normal_sampleVariance hn hv hX hind
-  have hi := (normal_sampleMean_independent_sampleVariance hn0 hX hind).comp
+  have hi := (normal_sampleMean_independent_sampleVariance hn hX hind).comp
     (show Measurable (fun m : ℝ => (m - μ) / Real.sqrt ((v : ℝ) / n)) by fun_prop)
     (show Measurable (fun s : ℝ => ((n : ℝ) - 1) * s / v) by fun_prop)
   have ht := studentT_ratio (by omega : 0 < n - 1) hW hY hi

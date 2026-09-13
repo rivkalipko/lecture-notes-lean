@@ -124,12 +124,19 @@ theorem finite_minimal_sufficiency [Nonempty Θ] {f : α → Θ → ℝ}
     (sufficient_of_likelihood_ratios hf T (fun x y h => (hr x y).mp h))
     (fun x y h => (hr x y).mpr h)
 /-- Finite positive-support instance of L5 Theorem 3. -/
-theorem finite_exponential_family_sufficient [Nonempty Θ] {f : α → Θ → ℝ}
-    (hf : ∀ x θ, 0 < f x θ) {k n : ℕ} (he : ExponentialFamily f k) :
+theorem finite_exponential_form_sufficient [Nonempty Θ] {f : α → Θ → ℝ}
+    (hf : ∀ x θ, 0 < f x θ) {k n : ℕ} (he : HasExponentialForm f k) :
     ∃ T : (Fin n → α) → (Fin k → ℝ),
       IsSufficientFinite (fun y θ => ∏ i, f (y i) θ) T := by
-  obtain ⟨T, hT⟩ := exponential_family_sample_factorization (n := n) he
+  obtain ⟨T, hT⟩ := exponential_form_sample_factorization (n := n) he
   exact ⟨T, (finite_factorization_iff (fun y θ => prod_pos (fun i _ => hf (y i) θ)) T).mpr hT⟩
+
+theorem finite_exponential_family_sufficient [Nonempty Θ] [MeasurableSpace α]
+    {ν : MeasureTheory.Measure α} {f : α → Θ → ℝ}
+    (hf : ∀ x θ, 0 < f x θ) {k n : ℕ} (he : ExponentialFamily ν f k) :
+    ∃ T : (Fin n → α) → (Fin k → ℝ),
+      IsSufficientFinite (fun y θ => ∏ i, f (y i) θ) T :=
+  finite_exponential_form_sufficient hf he.hasExponentialForm
 /-- The specific summed statistic printed in L5 Theorem 3, for finite
 positive-support data, with the family's representation explicitly given. -/
 theorem finite_exponential_family_sum_sufficient [Nonempty Θ] {f : α → Θ → ℝ}

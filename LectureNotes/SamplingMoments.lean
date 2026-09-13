@@ -74,16 +74,18 @@ theorem sampleVariance_unbiased {n : ℕ} (hn : 1 < n) {X : Fin n → Ω → ℝ
   field_simp
   ring
 
-/-- Inclusion probabilities are the actual first moments of the design. -/
+/-- First moment of a sampling weight. For a selection indicator this is its
+inclusion probability, as proved in `FinitePopulation`. -/
 def inclusionProbability {N : ℕ} (R : Fin N → Ω → ℝ) (P : Measure Ω) (i : Fin N) : ℝ :=
   P[R i]
+/-- Product moment; this is a joint inclusion probability for indicators. -/
 def pairInclusionProbability {N : ℕ} (R : Fin N → Ω → ℝ) (P : Measure Ω)
     (i j : Fin N) : ℝ := ∫ ω, R i ω * R j ω ∂P
 def horvitzThompson {N : ℕ} (x : Fin N → ℝ) (R : Fin N → Ω → ℝ)
     (P : Measure Ω) (ω : Ω) : ℝ :=
   (N : ℝ)⁻¹ * ∑ i, R i ω * (x i / inclusionProbability R P i)
 
-theorem horvitzThompson_unbiased {N : ℕ} (x : Fin N → ℝ)
+theorem horvitzThompson_unbiased {N : ℕ} (_hN : 0 < N) (x : Fin N → ℝ)
     {R : Fin N → Ω → ℝ} (hR : ∀ i, Integrable (R i) P)
     (hπ : ∀ i, inclusionProbability R P i ≠ 0) :
     P[horvitzThompson x R P] = sampleMean x := by
@@ -96,8 +98,9 @@ theorem horvitzThompson_unbiased {N : ℕ} (x : Fin N → ℝ)
   change inclusionProbability R P i * (x i / inclusionProbability R P i) = x i
   field_simp [hπ i]
 
-theorem horvitzThompson_variance {N : ℕ} (x : Fin N → ℝ)
-    {R : Fin N → Ω → ℝ} (hR : ∀ i, MemLp (R i) 2 P) :
+theorem horvitzThompson_variance {N : ℕ} (_hN : 0 < N) (x : Fin N → ℝ)
+    {R : Fin N → Ω → ℝ} (hR : ∀ i, MemLp (R i) 2 P)
+    (_hπ : ∀ i, inclusionProbability R P i ≠ 0) :
     Var[horvitzThompson x R P; P] =
       (N : ℝ)⁻¹ ^ 2 * ∑ i, ∑ j,
         (pairInclusionProbability R P i j -

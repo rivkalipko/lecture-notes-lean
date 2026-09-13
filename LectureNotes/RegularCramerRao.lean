@@ -78,4 +78,19 @@ theorem cramer_rao (T : Ω → ℝ) (hT : AEStronglyMeasurable T ν)
   rw [← D.model_fisherInformation hθ] at hI ⊢
   exact LectureNotes.cramer_rao_bound _ hT2 hS2 (D.model_score_zero hθ) hI
     (D.differentiate_mean hθ T hT hTf hbound)
+
+/-- The unbiased Cramér–Rao bound. Unbiasedness is imposed throughout the
+parameter domain, not just at the parameter where the bound is evaluated. -/
+theorem cramer_rao_unbiased (T : Ω → ℝ) (hT : AEStronglyMeasurable T ν)
+    (hTf : Integrable (fun ω => T ω * D.density θ ω) ν)
+    (hbound : Integrable (fun ω => ‖T ω‖ * D.boundFirst ω) ν)
+    (hT2 : MemLp T 2 (D.model θ)) (hS2 : MemLp (D.score θ) 2 (D.model θ))
+    (hI : 0 < D.information θ)
+    (hunbiased : ∀ t ∈ D.domain, LectureNotes.Unbiased (D.model t) T t) :
+    1 / D.information θ ≤ Var[T; D.model θ] := by
+  have hmean : (fun t => (D.model t)[T]) =ᶠ[𝓝 θ] (fun t => t) :=
+    Filter.Eventually.mono (D.isOpen_domain.mem_nhds hθ) (fun t ht => (hunbiased t ht).2)
+  have hd : deriv (fun t => (D.model t)[T]) θ = 1 :=
+    ((hasDerivAt_id θ).congr_of_eventuallyEq hmean).deriv
+  simpa only [hd, one_pow] using D.cramer_rao hθ T hT hTf hbound hT2 hS2 hI
 end LectureNotes.RegularDensity

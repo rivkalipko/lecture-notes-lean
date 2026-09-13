@@ -71,12 +71,12 @@ theorem normal_sampleMean_independent_residuals {Ω : Type*} [MeasurableSpace Ω
     hi.comp (measurable_pi_apply ()) measurable_id
 
 theorem normal_sampleMean_independent_sampleVariance {Ω : Type*} [MeasurableSpace Ω]
-    {P : Measure Ω} [IsProbabilityMeasure P] {n : ℕ} (hn : 0 < n)
+    {P : Measure Ω} [IsProbabilityMeasure P] {n : ℕ} (hn : 1 < n)
     {X : Fin n → Ω → ℝ} {μ : ℝ} {v : ℝ≥0}
     (hX : ∀ i, HasLaw (X i) (gaussianReal μ v) P) (hind : iIndepFun X P) :
     IndepFun (fun ω => sampleMean (fun i => X i ω))
       (fun ω => sampleVariance (fun i => X i ω)) P := by
-  have hi := normal_sampleMean_independent_residuals hn hX hind
+  have hi := normal_sampleMean_independent_residuals (by omega : 0 < n) hX hind
   simpa only [Function.comp_def, id_eq, sampleVariance] using
     hi.comp measurable_id
       (show Measurable (fun y : Fin n → ℝ => (∑ i, y i ^ 2) / (n - 1 : ℝ)) by fun_prop)

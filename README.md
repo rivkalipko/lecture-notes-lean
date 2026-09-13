@@ -17,6 +17,10 @@ extra hypotheses. The six source PDFs are preserved unchanged. Compilation
 certifies the formal statements; it does not establish complete coverage or
 literal agreement with an incorrect statement in the notes.
 
+The [semantic audit](docs/SEMANTIC_AUDIT.md) reviews the included statements,
+documents corrected definitions and domain conditions, and checks the density
+frameworks against a concrete Bernoulli model from the notes.
+
 ## Check the proofs
 
 Install Lean using Elan, then run:
@@ -53,7 +57,7 @@ proofs** passed; it does not turn a missing coverage entry into a proved result.
   `StochasticOrder`.
 * Empirical distributions: `EmpiricalDistribution`, `Bootstrap`.
 * Estimation: `Estimation`, `Sufficiency`, `EstimationTheory`, `Information`,
-  `RegularDensity`, `RegularCramerRao`, `RaoBlackwell`.
+  `RegularDensity`, `RegularCramerRao`, `RaoBlackwell`, `BernoulliModel`.
 
 Some proofs follow the notes' algebra or conditional-expectation argument;
 others apply established Mathlib theorems, notably SLLN, scalar CLT, Jensen,

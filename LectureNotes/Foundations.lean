@@ -14,6 +14,8 @@ abbrev RandomVariable (Ω : Type*) [MeasurableSpace Ω] := {X : Ω → ℝ // Me
 section Probability
 variable {Ω : Type*} [MeasurableSpace Ω] (P : Measure Ω) [IsProbabilityMeasure P]
 
+/-- The ratio used for measurable events with positive conditioning
+probability. At a null conditioning event Lean returns zero by convention. -/
 def conditionalProbability (A B : Set Ω) : ℝ := P.real (A ∩ B) / P.real B
 /-- Product independence also handles null events. -/
 def IndependentEvents (A B : Set Ω) : Prop :=
@@ -48,7 +50,10 @@ end Probability
 section Moments
 variable {Ω : Type*} [MeasurableSpace Ω] (P : Measure Ω) [IsProbabilityMeasure P]
 
+/-- Real expectation, interpreted as a finite expectation when `X` is integrable. -/
 def expectation (X : Ω → ℝ) : ℝ := ∫ ω, X ω ∂P
+/-- Finite squared-error risk for square-integrable estimators. The totalized
+real integral does not represent infinite risk outside this domain. -/
 def mse (T : Ω → ℝ) (θ : ℝ) : ℝ := ∫ ω, (T ω - θ) ^ 2 ∂P
 def bias (T : Ω → ℝ) (θ : ℝ) : ℝ := P[T] - θ
 
@@ -61,9 +66,9 @@ theorem expectation_add {X Y : Ω → ℝ} (hX : Integrable X P) (hY : Integrabl
     P[fun ω => X ω + Y ω] = P[X] + P[Y] := integral_add hX hY
 theorem variance_eq_second_moment_sub_mean_sq {X : Ω → ℝ} (hX : MemLp X 2 P) :
     Var[X; P] = (∫ ω, X ω ^ 2 ∂P) - P[X] ^ 2 := variance_eq_sub hX
-theorem variance_scale (a : ℝ) (X : Ω → ℝ) :
+theorem variance_scale (a : ℝ) {X : Ω → ℝ} (_hX : MemLp X 2 P) :
     Var[fun ω => a * X ω; P] = a ^ 2 * Var[X; P] := variance_const_mul a X P
-theorem variance_translate {X : Ω → ℝ} (hX : AEMeasurable X P) (a : ℝ) :
+theorem variance_translate {X : Ω → ℝ} (hX : MemLp X 2 P) (a : ℝ) :
     Var[fun ω => X ω + a; P] = Var[X; P] :=
   variance_add_const hX.aestronglyMeasurable a
 theorem zero_variance_is_constant {X : Ω → ℝ} (hX : MemLp X 2 P)
