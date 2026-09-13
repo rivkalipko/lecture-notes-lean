@@ -97,3 +97,22 @@ against the preserved PDFs in addition to the extracted text.
 * `NormalVarianceRisk` uses `v^2` for the source's `sigma^4`, because `v`
   denotes variance. The two MSEs are `2*v^2/(n-1)` and
   `(2*n-1)*v^2/n^2`. Strict comparison requires `n > 1` and `v > 0`.
+
+## Sufficiency and the parameter-independent estimator
+
+L5 Definition 1 (p7) defines sufficiency by a conditional distribution that
+does not depend on the parameter. `IsSufficientStatistic` in `RaoBlackwell.lean`
+formalizes this as a measurable statistic and
+one Markov kernel that agrees with the regular conditional law of the data
+under every probability measure in the model. The sample space is nonempty
+and standard Borel, as is the finite-dimensional Euclidean sample space in
+the notes. Each parameter may have its own exceptional null set.
+
+For L5 Theorem 5 (pp13–14), `raoBlackwellEstimator K U` integrates `U` against
+that common kernel and has no parameter argument. The formal theorem places
+existence of the measurable estimator before the universal parameter
+quantifier. It derives the conditional-expectation identity, square
+integrability, mean preservation, MSE reduction, and the unbiased variance
+comparison. `sufficientKernel_of_disintegration` gives a measure-level
+criterion for the common conditional law. The general density factorization
+and minimal-sufficiency theorems remain separate unfinished work.

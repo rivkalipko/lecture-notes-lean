@@ -53,7 +53,7 @@ proofs** passed; it does not turn a missing coverage entry into a proved result.
   `StochasticOrder`.
 * Empirical distributions: `EmpiricalDistribution`, `Bootstrap`.
 * Estimation: `Estimation`, `Sufficiency`, `EstimationTheory`, `Information`,
-  `RegularDensity`, `RegularCramerRao`.
+  `RegularDensity`, `RegularCramerRao`, `RaoBlackwell`.
 
 Some proofs follow the notes' algebra or conditional-expectation argument;
 others apply established Mathlib theorems, notably SLLN, scalar CLT, Jensen,
