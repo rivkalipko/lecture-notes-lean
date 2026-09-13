@@ -8,10 +8,9 @@ in the PDFs.
 
 The [coverage ledger](docs/COVERAGE.md) lists every numbered theorem and
 distinguishes proved, restricted, and missing results. Major remaining work
-includes Lindeberg–Feller, Glivenko–Cantelli and DKW, normal quadratic-form and
-Student-t sampling laws, and sufficiency for general dominated continuous
-models. A finite positive-support sufficiency theorem is proved and is labeled
-with that restriction.
+includes Lindeberg–Feller, Glivenko–Cantelli and DKW, and sufficiency for general
+dominated continuous models. A finite positive-support sufficiency theorem is
+proved and is labeled with that restriction.
 
 The [source audit](docs/SOURCE_AUDIT.md) records mathematical corrections and
 extra hypotheses. The six source PDFs are preserved unchanged. Compilation
@@ -44,7 +43,11 @@ proofs** passed; it does not turn a missing coverage entry into a proved result.
 
 * Probability and moments: `Foundations`, `ProbabilityLaws`,
   `ConditionalExpectation`.
-* Sampling: `Sampling`, `SamplingMoments`, `NormalSampling`, `FinitePopulation`.
+* Gaussian distributions: `GaussianQuadraticForms`, `GaussianMahalanobis`,
+  `ChiSquaredMoments`.
+* Sampling: `Sampling`, `SamplingMoments`, `NormalSampling`,
+  `NormalSamplingDistribution`, `NormalFStatistic`, `NormalVarianceRisk`,
+  `FinitePopulation`.
 * Inequalities and limits: `Inequalities`, `Concentration`, `LargeSample`,
   `Convergence`, `WeakLaw`, `CramerWold`, `MultivariateCLT`, `DeltaMethod`,
   `StochasticOrder`.

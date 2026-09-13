@@ -22,3 +22,9 @@ import LectureNotes.RegularCramerRao
 import LectureNotes.MultivariateCLT
 import LectureNotes.StochasticOrder
 import LectureNotes.Bootstrap
+import LectureNotes.GaussianQuadraticForms
+import LectureNotes.NormalSamplingDistribution
+import LectureNotes.ChiSquaredMoments
+import LectureNotes.NormalVarianceRisk
+import LectureNotes.GaussianMahalanobis
+import LectureNotes.NormalFStatistic

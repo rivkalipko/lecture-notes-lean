@@ -75,3 +75,25 @@ the source. The coverage ledger separately records that obligation.
 These qualifications are not additional axioms. Any theorem claiming a result
 must prove it from its stated hypotheses. Restricted results must be labeled as
 restricted results, and must not be counted as the general theorem.
+
+## Gaussian passages checked against rendered pages
+
+The normal-sampling theorem and proof on L2 pp7–8, the quadratic-form passage
+on L1 p15, and the variance-estimator comparison on L5 p4 were checked visually
+against the preserved PDFs in addition to the extracted text.
+
+* `NormalSamplingDistribution` uses the centered standardized observations
+  `(X_i - mu) / sqrt(v)`, where `v` is the population variance. Projection
+  removes the common mean. The chi-square degrees of freedom are `n - 1`,
+  and the t-statistic denominator is `sqrt(s^2 / n)`.
+* `normal_sampleVariance_pos` proves that the sample variance is positive
+  almost surely for `n > 1` and `v > 0`. The t and F ratios therefore have
+  nonzero random denominators outside null sets.
+* `NormalFStatistic` retains the population-variance ratio in the denominator;
+  it permits different means and variances in the two samples.
+* `GaussianMahalanobis` uses positive definite covariance, the nondegenerate
+  covariance condition in the source, and proves cancellation of its matrix
+  square root with its inverse.
+* `NormalVarianceRisk` uses `v^2` for the source's `sigma^4`, because `v`
+  denotes variance. The two MSEs are `2*v^2/(n-1)` and
+  `(2*n-1)*v^2/n^2`. Strict comparison requires `n > 1` and `v > 0`.
