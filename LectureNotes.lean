@@ -60,3 +60,5 @@ import LectureNotes.JamesSteinRisk
 import LectureNotes.JamesStein
 import LectureNotes.EmpiricalBayesStein
 import LectureNotes.SteinDecision
+import LectureNotes.NormalDecisionExamples
+import LectureNotes.WilsonInterval

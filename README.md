@@ -75,13 +75,13 @@ proofs** passed; it does not turn a missing coverage entry into a proved result.
 * MLE and testing: `MLEConsistency`, `Testing`, `NeymanPearson`,
   `MonotoneLikelihoodRatio`, `LikelihoodRatio`, `AsymptoticTests`,
   `LogisticRegression`, `MLEAsymptotics`, `IIDScoreAsymptotics`, `WilksAnalytic`.
-* Confidence and Bayesian inference: `ConfidenceSets`, `BayesianUpdating`,
+* Confidence and Bayesian inference: `ConfidenceSets`, `WilsonInterval`, `BayesianUpdating`,
   `NormalConjugacy`, `BetaConjugacy`, `GammaConjugacy`, `ExponentialConjugacy`,
   `PosteriorAsymptotics`, `NormalPosteriorLimit`, `HighestDensity`,
   `BayesianDecision`, `BayesianTesting`.
 * Decision theory: `DecisionTheory`, `NormalMeansDecision`, `GaussianStein`,
   `NormalSteinRisk`, `RegularizedStein`, `JamesSteinRisk`, `JamesStein`,
-  `SteinDecision`, `EmpiricalBayesStein`.
+  `SteinDecision`, `EmpiricalBayesStein`, `NormalDecisionExamples`.
 
 Some proofs follow the notes' algebra or conditional-expectation argument;
 others apply established Mathlib theorems, notably SLLN, scalar CLT, Jensen,

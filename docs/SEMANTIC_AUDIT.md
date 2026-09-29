@@ -123,7 +123,7 @@ layout-preserving extraction and rendered checks of the key theorem pages.
 The original Lectures 1–6 are unchanged. See
 [NEW_NOTES_AUDIT.md](NEW_NOTES_AUDIT.md) for the new mathematical corrections and
 [NEW_NOTES_COVERAGE.md](NEW_NOTES_COVERAGE.md) for every new numbered theorem's
-status. Thirty new modules use `autoImplicit false` so a misspelled identifier
+status. Thirty-two new modules use `autoImplicit false` so a misspelled identifier
 cannot silently become an extra theorem parameter.
 
 The audit checks that tests are measurable `[0,1]`-valued rejection probabilities;
@@ -192,3 +192,17 @@ input criterion is not itself required to be a normalized log density: each
 statistical application must verify that interpretation and the information
 identities. These are sufficient scalar conditions, not a proof of every
 model covered by the notes' unspecified regularity language.
+
+The constant-estimator admissibility proof uses nonnegative extended risk and
+compares all measurable estimators. A competitor with risk at most zero at
+θ = c must equal c almost surely at that parameter. Absolute continuity of
+all normal sample laws transfers this equality to every parameter, precluding
+strict improvement. Finite product absolute continuity is proved explicitly;
+no restriction to affine competitors or finite-risk competitors is imposed.
+Sample-mean and normal Bayes risks use the actual normal sample-mean law.
+
+Wilson endpoint inversion retains both tails and assumes a positive sample
+size and an observed mean in [0,1]. The bridge to the divided Bernoulli score
+statistic requires the null parameter in (0,1), where its denominator is
+positive. This algebraic equivalence does not assert exact finite-sample
+coverage from an asymptotic critical value.
