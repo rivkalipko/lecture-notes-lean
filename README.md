@@ -10,8 +10,11 @@ The [coverage ledger](docs/COVERAGE.md) lists every numbered theorem and
 distinguishes proved, restricted, and missing results. Major remaining work
 includes Lindeberg–Feller, Glivenko–Cantelli and DKW, and sufficiency for general
 dominated continuous models, general MLE/Wilks regularity arguments,
-Bernstein–von Mises, and the James–Stein risk theorem. A finite positive-support sufficiency theorem is
-proved and is labeled with that restriction.
+general/vector Bernstein–von Mises, and the James–Stein risk theorem. A scalar
+posterior approximation theorem is proved under explicit local quadraticity
+and domination conditions, verified for normal-mean kernels and bounded
+continuous priors. A finite positive-support sufficiency theorem is proved
+and is labeled with that restriction.
 
 The [source audit](docs/SOURCE_AUDIT.md) records mathematical corrections and
 extra hypotheses. The thirteen source PDFs are preserved unchanged. Compilation
@@ -70,7 +73,9 @@ proofs** passed; it does not turn a missing coverage entry into a proved result.
   `MonotoneLikelihoodRatio`, `LikelihoodRatio`, `AsymptoticTests`,
   `LogisticRegression`.
 * Confidence and Bayesian inference: `ConfidenceSets`, `BayesianUpdating`,
-  `NormalConjugacy`, `BayesianDecision`.
+  `NormalConjugacy`, `BetaConjugacy`, `GammaConjugacy`, `ExponentialConjugacy`,
+  `PosteriorAsymptotics`, `NormalPosteriorLimit`, `HighestDensity`,
+  `BayesianDecision`, `BayesianTesting`.
 * Decision theory: `DecisionTheory`, `NormalMeansDecision`.
 
 Some proofs follow the notes' algebra or conditional-expectation argument;

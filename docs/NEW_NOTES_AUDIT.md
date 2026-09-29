@@ -124,6 +124,12 @@ source result has been proved. See the coverage ledger for proof status.
   General Bernstein–von Mises is substantially stronger than pointwise Taylor
   expansion of a likelihood, and is not proved merely by defining a Gaussian
   approximation or assuming that the posterior already converges.
+  `PosteriorAsymptotics` now proves a scalar theorem under explicit local
+  quadraticity and integrable domination, including exact coordinate changes,
+  uniform event error, and an almost-sure sampling version. These sufficient
+  hypotheses are stronger than the usual weak informal regularity claim.
+  `NormalPosteriorLimit` verifies them for a quadratic normal-mean likelihood
+  with a bounded continuous integrable prior positive at the true parameter.
 * Posterior-odds testing with a cutoff of one presupposes symmetric losses.
 
 ## Lecture 13: decision theory and shrinkage

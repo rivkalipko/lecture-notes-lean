@@ -123,7 +123,7 @@ layout-preserving extraction and rendered checks of the key theorem pages.
 The original Lectures 1–6 are unchanged. See
 [NEW_NOTES_AUDIT.md](NEW_NOTES_AUDIT.md) for the new mathematical corrections and
 [NEW_NOTES_COVERAGE.md](NEW_NOTES_COVERAGE.md) for every new numbered theorem's
-status. Thirteen new modules use `autoImplicit false` so a misspelled identifier
+status. Twenty new modules use `autoImplicit false` so a misspelled identifier
 cannot silently become an extra theorem parameter.
 
 The audit checks that tests are measurable `[0,1]`-valued rejection probabilities;
@@ -137,5 +137,26 @@ score-root and Wilks results are explicitly probabilistic reductions, with
 their analytic model obligations still open. Normal conjugacy identifies an
 actual Gaussian law of the normalized product of kernels.
 
-General Bernstein–von Mises and James–Stein are not claimed as proved. The
-James–Stein definition is kept separate from the constant-shrinkage risk proof.
+The scalar posterior theorem derives normalized L1 convergence from domination
+and convergence of the unnormalized local kernels. An exact affine change of
+variables links these kernels to the posterior distribution of the centered,
+scaled parameter. Its event bound is uniform over all measurable sets. A
+separate theorem records almost-sure convergence under almost-sure pathwise
+conditions. A normal-mean example verifies the quadratic expansion and envelope
+for bounded continuous integrable priors positive at the true parameter. The
+hypotheses are deliberately stronger than an unspecified general regularity
+claim; general/vector Bernstein–von Mises is not claimed as proved.
+
+Beta and Gamma conjugacy identify actual probability measures and calculate
+moments from normalized densities. Beta(1,1) is proved equal to Lebesgue measure
+restricted to [0,1]. The Gamma proofs distinguish rate from scale and ignore only
+the null singleton at zero. Integer moments have integrability proofs before
+they are used to calculate variances. Exponential-family conjugacy checks prior
+and posterior normalizers; the finite-sample kernel product verifies the sample
+size and sufficient-statistic updates. HPD optimality compares sets with at
+least the threshold region’s posterior content, so calibration is necessary
+before claiming optimality at a prescribed credible level. Posterior-odds testing
+minimizes actual integral loss and distinguishes unequal error costs.
+
+James–Stein is not claimed as proved. Its definition is kept separate from the
+constant-shrinkage risk proof.

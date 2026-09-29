@@ -43,3 +43,10 @@ import LectureNotes.BayesianUpdating
 import LectureNotes.LogisticRegression
 import LectureNotes.NormalMeansDecision
 import LectureNotes.NormalConjugacy
+import LectureNotes.PosteriorAsymptotics
+import LectureNotes.NormalPosteriorLimit
+import LectureNotes.BetaConjugacy
+import LectureNotes.GammaConjugacy
+import LectureNotes.HighestDensity
+import LectureNotes.ExponentialConjugacy
+import LectureNotes.BayesianTesting
