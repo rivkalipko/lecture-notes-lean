@@ -30,3 +30,16 @@ import LectureNotes.GaussianMahalanobis
 import LectureNotes.NormalFStatistic
 import LectureNotes.RaoBlackwell
 import LectureNotes.BernoulliModel
+import LectureNotes.Testing
+import LectureNotes.NeymanPearson
+import LectureNotes.ConfidenceSets
+import LectureNotes.DecisionTheory
+import LectureNotes.BayesianDecision
+import LectureNotes.MLEConsistency
+import LectureNotes.AsymptoticTests
+import LectureNotes.MonotoneLikelihoodRatio
+import LectureNotes.LikelihoodRatio
+import LectureNotes.BayesianUpdating
+import LectureNotes.LogisticRegression
+import LectureNotes.NormalMeansDecision
+import LectureNotes.NormalConjugacy

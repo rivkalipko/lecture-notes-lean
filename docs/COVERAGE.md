@@ -7,6 +7,12 @@ Statements marked **proved** include the explicit measurability, integrability,
 nonzero-denominator, and regularity hypotheses described below and in
 [SOURCE_AUDIT.md](SOURCE_AUDIT.md).
 
+The new Lectures 7–13 contain **9 additional numbered theorems** (41 total).
+Their complete numbered-theorem inventory and other material are tracked in
+[NEW_NOTES_COVERAGE.md](NEW_NOTES_COVERAGE.md), with corrections in
+[NEW_NOTES_AUDIT.md](NEW_NOTES_AUDIT.md). This original ledger remains the
+Lectures 1–6 inventory.
+
 Declaration names are in the `LectureNotes` namespace except where a nested
 namespace is shown. The files linked below are all imported by `LectureNotes.lean`.
 
@@ -57,7 +63,7 @@ namespace is shown. The files linked below are all imported by `LectureNotes.lea
 | L2 statistics and simulation | Measurable statistic/estimator types, integral-based unbiasedness; sample mean, sample variance, unbiased sample-variance lemma; finite population and Horvitz–Thompson calculations; [NormalFStatistic](../LectureNotes/NormalFStatistic.lean): `normal_fStatistic` proves the law of the sample-variance ratio divided by the population-variance ratio for two independent normal samples | General sampling-distribution examples, Monte Carlo algorithms, empirical quantile/order-statistic proofs. |
 | L3 convergence and stochastic order | Almost-sure, probability, distribution, mean, mean-square convergence; consistency and Gaussian asymptotic normality with a canonical target law, measurable estimators, and eventually nonzero rates; `StochasticLittleO`, `StochasticBigO` with nonzero scales and the uniform-in-n tail bound; [StochasticOrder](../LectureNotes/StochasticOrder.lean) proves weak convergence implies stochastic boundedness, op implies Op, addition/product rules, Op times op, and vanishing-scale rules | The bridge between the source's CDF definition of weak convergence and Mathlib's weak topology; specializations to power scales and the remaining examples. |
 | L4 bootstrap | `BootstrapIndex`, `bootstrapSample`; [Bootstrap](../LectureNotes/Bootstrap.lean) defines the empirical probability law, proves its CDF equals the empirical CDF, and proves independent uniform index draws have the IID empirical sampling law | Bootstrap quantile algorithms and validity theorems. |
-| L5 risk and examples | MSE/bias/variance, exact shrinkage risk, normalized `ExponentialFamily` and the separate algebraic `HasExponentialForm`, exponential-family factorization, finite positive sufficiency and minimal sufficiency; [NormalVarianceRisk](../LectureNotes/NormalVarianceRisk.lean) proves Example 5's sample-variance variance, both estimator MSEs, empirical-variance bias, and strict risk improvement for `n > 1` and positive variance | General loss/risk decision theory; remaining strict risk comparisons; fourth-moment CLT examples; concrete sufficient/minimal statistics and Rao–Blackwell counting examples. |
+| L5 risk and examples | MSE/bias/variance, exact shrinkage risk, normalized `ExponentialFamily` and the separate algebraic `HasExponentialForm`, exponential-family factorization, finite positive sufficiency and minimal sufficiency; [NormalVarianceRisk](../LectureNotes/NormalVarianceRisk.lean) proves Example 5's sample-variance variance, both estimator MSEs, empirical-variance bias, and strict risk improvement for `n > 1` and positive variance | Remaining strict risk comparisons; fourth-moment CLT examples; concrete sufficient/minimal statistics and Rao–Blackwell counting examples. |
 | L6 estimation methods | Likelihood, log-likelihood, score, Fisher information, MLE, moment equation; log-likelihood comparison, score derivative, interior-MLE score condition; regular density model and information results; [BernoulliModel](../LectureNotes/BernoulliModel.lean) constructs a regular Bernoulli family and proves its exponential representation, actual score, Fisher information `1/(p*(1-p))`, unbiasedness, and application of the unbiased Cramér–Rao bound for `0 < p < 1` | Concrete normal/uniform MLE calculations, identification examples, all method-of-moments examples and nonregular counterexamples. |
 
 The formal proofs sometimes use stronger Mathlib results instead of reproducing

@@ -1,6 +1,6 @@
 # MIT 14.380 lecture notes in Lean
 
-This is an **incomplete formalization** of the six supplied lecture notes.
+This is an **incomplete formalization** of thirteen supplied lecture notes.
 The included results have Lean proofs, using Mathlib's measures, integrals,
 conditional expectations, independence, and convergence of probability laws.
 The project does not yet formalize every definition, theorem, example, or proof
@@ -9,17 +9,25 @@ in the PDFs.
 The [coverage ledger](docs/COVERAGE.md) lists every numbered theorem and
 distinguishes proved, restricted, and missing results. Major remaining work
 includes Lindeberg–Feller, Glivenko–Cantelli and DKW, and sufficiency for general
-dominated continuous models. A finite positive-support sufficiency theorem is
+dominated continuous models, general MLE/Wilks regularity arguments,
+Bernstein–von Mises, and the James–Stein risk theorem. A finite positive-support sufficiency theorem is
 proved and is labeled with that restriction.
 
 The [source audit](docs/SOURCE_AUDIT.md) records mathematical corrections and
-extra hypotheses. The six source PDFs are preserved unchanged. Compilation
+extra hypotheses. The thirteen source PDFs are preserved unchanged. Compilation
 certifies the formal statements; it does not establish complete coverage or
 literal agreement with an incorrect statement in the notes.
 
 The [semantic audit](docs/SEMANTIC_AUDIT.md) reviews the included statements,
 documents corrected definitions and domain conditions, and checks the density
 frameworks against a concrete Bernoulli model from the notes.
+
+The September 29 export adds Lectures 7–13; Lectures 1–6 are unchanged.
+[NEW_NOTES_AUDIT.md](docs/NEW_NOTES_AUDIT.md) records source corrections,
+including insufficient MLE assumptions, non-strict MLR power monotonicity,
+and the invalid use of a two-sided UMP test in a confidence-interval example.
+[NEW_NOTES_COVERAGE.md](docs/NEW_NOTES_COVERAGE.md) distinguishes full results,
+restricted results, intermediate arguments, and unproved claims in these notes.
 
 ## Check the proofs
 
@@ -58,6 +66,12 @@ proofs** passed; it does not turn a missing coverage entry into a proved result.
 * Empirical distributions: `EmpiricalDistribution`, `Bootstrap`.
 * Estimation: `Estimation`, `Sufficiency`, `EstimationTheory`, `Information`,
   `RegularDensity`, `RegularCramerRao`, `RaoBlackwell`, `BernoulliModel`.
+* MLE and testing: `MLEConsistency`, `Testing`, `NeymanPearson`,
+  `MonotoneLikelihoodRatio`, `LikelihoodRatio`, `AsymptoticTests`,
+  `LogisticRegression`.
+* Confidence and Bayesian inference: `ConfidenceSets`, `BayesianUpdating`,
+  `NormalConjugacy`, `BayesianDecision`.
+* Decision theory: `DecisionTheory`, `NormalMeansDecision`.
 
 Some proofs follow the notes' algebra or conditional-expectation argument;
 others apply established Mathlib theorems, notably SLLN, scalar CLT, Jensen,

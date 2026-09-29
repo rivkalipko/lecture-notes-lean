@@ -116,3 +116,26 @@ Glivenko–Cantelli/DKW, general density factorization and minimal sufficiency,
 distribution transformations, and several examples and algorithms. Some
 included proofs apply Mathlib results instead of reproducing the lecture proof
 line by line. No claim of complete transcription follows from this audit.
+# September 29 additions
+
+The new Lectures 7–13 were compared against the supplied PDFs, using both
+layout-preserving extraction and rendered checks of the key theorem pages.
+The original Lectures 1–6 are unchanged. See
+[NEW_NOTES_AUDIT.md](NEW_NOTES_AUDIT.md) for the new mathematical corrections and
+[NEW_NOTES_COVERAGE.md](NEW_NOTES_COVERAGE.md) for every new numbered theorem's
+status. Thirteen new modules use `autoImplicit false` so a misspelled identifier
+cannot silently become an extra theorem parameter.
+
+The audit checks that tests are measurable `[0,1]`-valued rejection probabilities;
+density power is linked to actual model measures; MLR power is nonincreasing;
+test inversion proves coverage inequalities in the correct direction; Pratt
+uses a jointly measurable confidence graph; Bayesian risk uses the actual
+posterior kernel; extended nonnegative risks handle infinity; and normal
+shrinkage risk is derived from Gaussian laws and moment conditions. Generic
+argmax consistency requires uniform criterion control and separation. The
+score-root and Wilks results are explicitly probabilistic reductions, with
+their analytic model obligations still open. Normal conjugacy identifies an
+actual Gaussian law of the normalized product of kernels.
+
+General Bernstein–von Mises and James–Stein are not claimed as proved. The
+James–Stein definition is kept separate from the constant-shrinkage risk proof.
