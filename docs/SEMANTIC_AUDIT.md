@@ -123,7 +123,7 @@ layout-preserving extraction and rendered checks of the key theorem pages.
 The original Lectures 1–6 are unchanged. See
 [NEW_NOTES_AUDIT.md](NEW_NOTES_AUDIT.md) for the new mathematical corrections and
 [NEW_NOTES_COVERAGE.md](NEW_NOTES_COVERAGE.md) for every new numbered theorem's
-status. Twenty-three new modules use `autoImplicit false` so a misspelled identifier
+status. Thirty new modules use `autoImplicit false` so a misspelled identifier
 cannot silently become an extra theorem parameter.
 
 The audit checks that tests are measurable `[0,1]`-valued rejection probabilities;
@@ -159,8 +159,24 @@ least the threshold region’s posterior content, so calibration is necessary
 before claiming optimality at a prescribed credible level. Posterior-odds testing
 minimizes actual integral loss and distinguishes unequal error costs.
 
-James–Stein is not claimed as proved. Its definition is kept separate from the
-constant-shrinkage risk proof.
+The James–Stein proof now starts with integration by parts against the actual
+Gaussian density. It proves coordinate Stein identities under the product
+normal law and the unbiased risk formula for bounded smooth corrections.
+For gε(y) = −a y/(S+ε), where S is the sum of coordinate squares and
+a = (p−2)v, the regularized risk is
+
+    p v − a² E[S/(S+ε)²] − 2 a p v ε E[1/(S+ε)²].
+
+Nonnegativity of risk bounds the first expectation uniformly; Fatou proves
+integrability of 1/S. The origin is null under the nondegenerate normal law.
+Dominated convergence proves the exact singular risk formula, with the loss
+bounded by twice the unshrunk squared loss plus 2a²/S. Positivity of E[1/S]
+then gives strict improvement for p ≥ 3 and v > 0. All squared losses used
+with real integrals are proved integrable. The extended-real risk bridge
+establishes dominance and inadmissibility using the repository's definitions.
+The centered calculation gives E[1/S] = 1/((p−2)v) and verifies the empirical
+Bayes noise-fraction formula. This does not prove the separate minimax lower
+bound or positive-part dominance assertion.
 
 The scalar MLE/Wilks extension uses a measurable divided difference, avoiding
 an unjustified measurable choice of a mean-value point. Its value at a

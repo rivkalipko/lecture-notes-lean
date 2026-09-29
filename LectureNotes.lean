@@ -53,3 +53,10 @@ import LectureNotes.BayesianTesting
 import LectureNotes.MLEAsymptotics
 import LectureNotes.IIDScoreAsymptotics
 import LectureNotes.WilksAnalytic
+import LectureNotes.GaussianStein
+import LectureNotes.NormalSteinRisk
+import LectureNotes.RegularizedStein
+import LectureNotes.JamesSteinRisk
+import LectureNotes.JamesStein
+import LectureNotes.EmpiricalBayesStein
+import LectureNotes.SteinDecision

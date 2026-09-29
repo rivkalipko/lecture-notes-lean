@@ -10,13 +10,14 @@ The [coverage ledger](docs/COVERAGE.md) lists every numbered theorem and
 distinguishes proved, restricted, and missing results. Major remaining work
 includes Lindeberg–Feller, Glivenko–Cantelli and DKW, and sufficiency for general
 dominated continuous models, constrained vector MLE/Wilks asymptotics,
-general/vector Bernstein–von Mises, and the James–Stein risk theorem. A scalar
-IID MLE normality theorem and scalar Wilks theorem are proved under explicit
+general/vector Bernstein–von Mises, the normal minimax lower bound, and
+positive-part James–Stein improvement. A scalar IID MLE normality theorem and scalar Wilks theorem are proved under explicit
 derivative, moment, consistency, and interior-maximization conditions. A scalar
 posterior approximation theorem is proved under explicit local quadraticity
 and domination conditions, verified for normal-mean kernels and bounded
-continuous priors. A finite positive-support sufficiency theorem is proved
-and is labeled with that restriction.
+continuous priors. The James–Stein exact risk and strict dominance theorem is
+proved, including inverse-square integrability and the singular limit. A finite
+positive-support sufficiency theorem is proved and labeled with that restriction.
 
 The [source audit](docs/SOURCE_AUDIT.md) records mathematical corrections and
 extra hypotheses. The thirteen source PDFs are preserved unchanged. Compilation
@@ -78,7 +79,9 @@ proofs** passed; it does not turn a missing coverage entry into a proved result.
   `NormalConjugacy`, `BetaConjugacy`, `GammaConjugacy`, `ExponentialConjugacy`,
   `PosteriorAsymptotics`, `NormalPosteriorLimit`, `HighestDensity`,
   `BayesianDecision`, `BayesianTesting`.
-* Decision theory: `DecisionTheory`, `NormalMeansDecision`.
+* Decision theory: `DecisionTheory`, `NormalMeansDecision`, `GaussianStein`,
+  `NormalSteinRisk`, `RegularizedStein`, `JamesSteinRisk`, `JamesStein`,
+  `SteinDecision`, `EmpiricalBayesStein`.
 
 Some proofs follow the notes' algebra or conditional-expectation argument;
 others apply established Mathlib theorems, notably SLLN, scalar CLT, Jensen,

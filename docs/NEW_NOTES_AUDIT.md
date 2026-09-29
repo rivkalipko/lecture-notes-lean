@@ -150,7 +150,10 @@ source result has been proved. See the coverage ledger for proof status.
 * James–Stein's strict risk improvement needs positive sampling variance and
   dimension at least three. Its correction is singular at zero. Integration
   by parts for globally smooth functions alone does not justify its use: the
-  singularity and inverse-square integrability must be handled.
+  singularity and inverse-square integrability must be handled. The formal
+  proof now establishes bounded regularized corrections, derives inverse-square
+  integrability from their risk bounds and Fatou, and passes to the original
+  estimator by dominated convergence. The Gaussian origin is proved null.
 * Pointwise oracle shrinkage is not one estimator: its coefficient depends on
   the unknown parameter. The minimax claim needs a lower bound as well as an
   estimator attaining it. Domination of a minimax rule transfers minimaxity,
