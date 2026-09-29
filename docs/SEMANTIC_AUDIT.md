@@ -123,7 +123,7 @@ layout-preserving extraction and rendered checks of the key theorem pages.
 The original Lectures 1–6 are unchanged. See
 [NEW_NOTES_AUDIT.md](NEW_NOTES_AUDIT.md) for the new mathematical corrections and
 [NEW_NOTES_COVERAGE.md](NEW_NOTES_COVERAGE.md) for every new numbered theorem's
-status. Twenty new modules use `autoImplicit false` so a misspelled identifier
+status. Twenty-three new modules use `autoImplicit false` so a misspelled identifier
 cannot silently become an extra theorem parameter.
 
 The audit checks that tests are measurable `[0,1]`-valued rejection probabilities;
@@ -133,8 +133,9 @@ uses a jointly measurable confidence graph; Bayesian risk uses the actual
 posterior kernel; extended nonnegative risks handle infinity; and normal
 shrinkage risk is derived from Gaussian laws and moment conditions. Generic
 argmax consistency requires uniform criterion control and separation. The
-score-root and Wilks results are explicitly probabilistic reductions, with
-their analytic model obligations still open. Normal conjugacy identifies an
+scalar IID score-root and Wilks results now derive the CLT, LLNs, and likelihood
+expansion from explicit derivative and moment hypotheses. They retain
+consistency and measurable interior maximization as assumptions. Normal conjugacy identifies an
 actual Gaussian law of the normalized product of kernels.
 
 The scalar posterior theorem derives normalized L1 convergence from domination
@@ -160,3 +161,18 @@ minimizes actual integral loss and distinguishes unequal error costs.
 
 James–Stein is not claimed as proved. Its definition is kept separate from the
 constant-shrinkage risk proof.
+
+The scalar MLE/Wilks extension uses a measurable divided difference, avoiding
+an unjustified measurable choice of a mean-value point. Its value at a
+coincident endpoint preserves the exact score identity. Finite-sample curvature
+may vanish: convergence to positive information makes those events negligible.
+The third-derivative envelope and two fixed-parameter LLNs control the entire
+random segment. The sample criterion uses the average with divisor n; Wilks
+multiplies its difference by 2n, whereas the estimator uses square-root n.
+The target variances are I for the score and inverse I for the estimator,
+and I times the squared limiting estimation error has χ²(1) law. All moment,
+measurability, domain, and positive-information assumptions are explicit. The
+input criterion is not itself required to be a normalized log density: each
+statistical application must verify that interpretation and the information
+identities. These are sufficient scalar conditions, not a proof of every
+model covered by the notes' unspecified regularity language.

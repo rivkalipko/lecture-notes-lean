@@ -50,3 +50,6 @@ import LectureNotes.GammaConjugacy
 import LectureNotes.HighestDensity
 import LectureNotes.ExponentialConjugacy
 import LectureNotes.BayesianTesting
+import LectureNotes.MLEAsymptotics
+import LectureNotes.IIDScoreAsymptotics
+import LectureNotes.WilksAnalytic

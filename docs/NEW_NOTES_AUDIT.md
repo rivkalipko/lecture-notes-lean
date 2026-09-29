@@ -19,8 +19,11 @@ source result has been proved. See the coverage ledger for proof status.
 * Asymptotic normality needs consistent interior score roots, a score CLT,
   convergence of curvature near the truth, and positive finite information.
   A pointwise LLN at the true parameter does not justify evaluation at a random
-  intermediate parameter. The limit argument is separated from these analytic
-  obligations. In higher dimensions information must be nonsingular.
+  intermediate parameter. The scalar IID theorem proves the CLT and LLNs
+  from moment conditions, and uses an integrable third-derivative envelope
+  to control curvature on the random estimation interval. Consistency is an
+  explicit assumption in this theorem. In higher dimensions information must
+  be nonsingular.
 * Logistic log-likelihood concavity does not establish existence or uniqueness
   of a finite maximizer: separation and deficient design rank matter.
 * A variable constrained to be nonpositive cannot have a **nondegenerate**
@@ -65,9 +68,10 @@ source result has been proved. See the coverage ledger for proof status.
 ## Lecture 10: LR, Wald, and score
 
 * The scalar Wilks proof requires actual likelihood expansion, consistent
-  curvature, and a nondegenerate asymptotically normal MLE. The formal limit
-  argument states these inputs explicitly rather than calling unspecified
-  regularity sufficient.
+  curvature, and a nondegenerate asymptotically normal MLE. `WilksAnalytic`
+  derives the scalar expansion and estimator limit from explicit IID,
+  derivative, moment, consistency, and interior-maximization assumptions.
+  It does not assume either limit statement as a regularity hypothesis.
 * Irredundant constraints do not imply a full-rank constraint Jacobian. For
   example `g(θ)=θ²` at zero is a single irredundant constraint with zero derivative.
   The usual χ² degrees-of-freedom result requires a regular constraint manifold.

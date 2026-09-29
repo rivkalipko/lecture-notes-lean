@@ -9,8 +9,10 @@ in the PDFs.
 The [coverage ledger](docs/COVERAGE.md) lists every numbered theorem and
 distinguishes proved, restricted, and missing results. Major remaining work
 includes Lindeberg–Feller, Glivenko–Cantelli and DKW, and sufficiency for general
-dominated continuous models, general MLE/Wilks regularity arguments,
+dominated continuous models, constrained vector MLE/Wilks asymptotics,
 general/vector Bernstein–von Mises, and the James–Stein risk theorem. A scalar
+IID MLE normality theorem and scalar Wilks theorem are proved under explicit
+derivative, moment, consistency, and interior-maximization conditions. A scalar
 posterior approximation theorem is proved under explicit local quadraticity
 and domination conditions, verified for normal-mean kernels and bounded
 continuous priors. A finite positive-support sufficiency theorem is proved
@@ -71,7 +73,7 @@ proofs** passed; it does not turn a missing coverage entry into a proved result.
   `RegularDensity`, `RegularCramerRao`, `RaoBlackwell`, `BernoulliModel`.
 * MLE and testing: `MLEConsistency`, `Testing`, `NeymanPearson`,
   `MonotoneLikelihoodRatio`, `LikelihoodRatio`, `AsymptoticTests`,
-  `LogisticRegression`.
+  `LogisticRegression`, `MLEAsymptotics`, `IIDScoreAsymptotics`, `WilksAnalytic`.
 * Confidence and Bayesian inference: `ConfidenceSets`, `BayesianUpdating`,
   `NormalConjugacy`, `BetaConjugacy`, `GammaConjugacy`, `ExponentialConjugacy`,
   `PosteriorAsymptotics`, `NormalPosteriorLimit`, `HighestDensity`,
