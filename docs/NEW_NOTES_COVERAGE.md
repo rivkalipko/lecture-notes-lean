@@ -24,7 +24,7 @@ of “regularity.” Source corrections are in [NEW_NOTES_AUDIT.md](NEW_NOTES_AU
 
 | Material | Included | Remaining |
 | --- | --- | --- |
-| L7 MLE and logistic example | Uniform-error argmax bound and consistency; likelihood-to-log-criterion comparison; scalar IID MLE asymptotic normality from explicit moment and derivative conditions with consistency assumed. [LogisticRegression](../LectureNotes/LogisticRegression.lean): logistic probabilities strictly in `(0,1)`, normalized Bernoulli masses, actual log-likelihood identity, score derivative, second derivative, and nonpositive Hessian quadratic forms. | Exponential-model MLE law and information; logistic multivariate derivative identification and existence/uniqueness conditions; plug-in information estimates; sandwich covariance; bootstrap variance; nonregular and incidental-parameter examples. |
+| L7 MLE and logistic example | Uniform-error argmax bound and consistency; likelihood-to-log-criterion comparison; scalar IID MLE asymptotic normality from explicit moment and derivative conditions with consistency assumed. [LogisticRegression](../LectureNotes/LogisticRegression.lean): logistic probabilities strictly in `(0,1)`, normalized Bernoulli masses, actual log-likelihood identity, score derivative, second derivative, and nonpositive Hessian quadratic forms. [ExponentialMLE](../LectureNotes/ExponentialMLE.lean) proves the actual exponential log-density, global MLE, score mean and both information identities, IID consistency, asymptotic normality with rate-squared limiting variance, and plug-in variance consistency. | Logistic multivariate derivative identification and existence/uniqueness conditions; plug-in information estimates; sandwich covariance; bootstrap variance; nonregular and incidental-parameter examples. |
 | L8 testing | [Testing](../LectureNotes/Testing.lean): measurable randomized tests, integral power, type-II error, level, UMP and unbiasedness, valid p-values, p-value threshold tests, Bonferroni with arbitrary allocations and no independence. [NormalTestPower](../LectureNotes/NormalTestPower.lean) proves exact Gaussian lower/upper-tail probabilities, two-sided power with both tails retained, and quantile-test size. [QuantileConvergence](../LectureNotes/QuantileConvergence.lean) proves bootstrap upper-tail size from conditional CDF convergence to an atomless strictly increasing limiting CDF. | Numerical quantile calculations and sample-size inversion, two-sample examples, and verification of conditional bootstrap CDF convergence for specific resampling models. |
 | L9 optimality and LRT | Neyman–Pearson integral comparison and equality case; MLR cross-product definition; composite-null lower-tail UMP result; derivative of unbiased power at a simple null. [LikelihoodRatio](../LectureNotes/LikelihoodRatio.lean): supremum-ratio definition, equality under attained maximizers, bounds, log-ratio identity. Generalized-inverse quantiles give randomized-threshold existence and exact size; MLR existence permits cutoffs outside the range of the statistic. | Two-sided nonexistence/UMPU proofs, full Gaussian LRT example and ROC/Lagrangian applications. |
 | L10 asymptotic tests | Scalar IID Wilks theorem with a proved likelihood expansion; standard-normal square has χ²(1) law; normal studentization; weak-limit rejection probabilities for null boundaries; equivalence of quadratic statistics from vanishing curvature differences. Scalar Wald/score formulas, Poisson score-statistic algebra, exact example values `W=20` and `LM=100/6`. | General model regularity, constrained vector LR/score limits, estimated-matrix inverse convergence, empirical balance/pre-trend applications, and numerical p-values. |
@@ -40,14 +40,14 @@ not a line-by-line transcription of every informal argument in the PDFs.
 ## Verification
 
 On 2026-09-30, the complete project passed `scripts/check.sh` with the pinned
-Lean/Mathlib v4.33.0 dependencies: 78 imported source modules; successful build
-(8785 jobs); and 1100 audited declarations, including 931 theorem declarations
-when private/compiler-generated declarations are counted. The 46 modules added
-for Lectures 7–13 contain 290 source theorem declarations, 63 source definitions/structures, and
+Lean/Mathlib v4.33.0 dependencies: 79 imported source modules; successful build
+(8786 jobs); and 1141 audited declarations, including 969 theorem declarations
+when private/compiler-generated declarations are counted. The 47 modules added
+for Lectures 7–13 contain 309 source theorem declarations, 66 source definitions/structures, and
 one abbreviation for the measurable normal-means decision space.
 The source scan found no forbidden proof tokens and the dependency audit
 found no forbidden logical assumptions. All thirteen PDFs match the supplied
 export byte for byte. Local verification used a clean temporary checkout of
 the same sources and pinned dependencies because macOS-offloaded files in the
-original local toolchain were stalling reads. All 85 proof, audit, and dependency
+original local toolchain were stalling reads. All 86 proof, audit, and dependency
 files were compared byte for byte with the verification checkout.

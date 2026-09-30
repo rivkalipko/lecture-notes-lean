@@ -30,6 +30,10 @@ values and interval coverage are proved conditional on convergence of the
 conditional CDFs to an atomless strictly increasing limiting CDF. The
 model-specific conditional limit is still required.
 
+The exponential-rate example includes the global likelihood maximum, the
+information identities, consistency from the IID law, asymptotic normality
+with variance equal to the squared rate, and plug-in variance consistency.
+
 The [source audit](docs/SOURCE_AUDIT.md) records mathematical corrections and
 extra hypotheses. The thirteen source PDFs are preserved unchanged. Compilation
 certifies the formal statements; it does not establish complete coverage or
@@ -86,7 +90,8 @@ proofs** passed; it does not turn a missing coverage entry into a proved result.
   `RegularDensity`, `RegularCramerRao`, `RaoBlackwell`, `BernoulliModel`.
 * MLE and testing: `MLEConsistency`, `Testing`, `NeymanPearson`,
   `MonotoneLikelihoodRatio`, `LikelihoodRatio`, `AsymptoticTests`,
-  `LogisticRegression`, `MLEAsymptotics`, `IIDScoreAsymptotics`, `WilksAnalytic`.
+  `LogisticRegression`, `MLEAsymptotics`, `IIDScoreAsymptotics`, `WilksAnalytic`,
+  `ExponentialMLE`.
   Threshold existence and exact power: `Quantiles`, `NeymanPearsonExistence`,
   `MLRExistence`, `NormalTestPower`.
 * Confidence and Bayesian inference: `ConfidenceSets`, `WilsonInterval`,

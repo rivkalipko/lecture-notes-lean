@@ -296,3 +296,23 @@ quantile gives a positive cutoff, exact content, and minimum reference volume.
 Positive-mass density plateaus require a separate tie-breaking construction.
 Quantile reparameterization is proved for increasing bijections of the real
 line; decreasing and non-surjective maps are not silently included.
+
+## Exponential MLE example
+
+The exponential parameter is a positive rate `r`, with mean `1/r` and
+variance `1/r²`. The log-likelihood identity is established for the actual
+normalized density on its nonnegative support. The derivative equation alone
+is not used to assert a maximum: the logarithm inequality proves that
+`n/sum(x)` globally maximizes the likelihood when `n > 0` and `sum(x) > 0`.
+The latter condition holds almost surely under the model. At a zero sum no
+finite rate maximizer is claimed.
+
+The score has mean zero, second moment and variance `1/r²`, equal to minus the
+expected Hessian. The sample-mean LLN and CLT follow from the IID exponential
+law and its proved moments. Continuity at the positive mean gives MLE
+consistency; an exact reciprocal identity and Slutsky give the rate MLE's
+normal limit with variance `r²`. The almost-sure positivity proof justifies
+division for each positive sample size, while the zero-sample index has zero
+square-root scaling. Neither consistency nor estimator asymptotic normality
+is assumed. The plug-in theorem estimates the variance of the scaled limit;
+the unscaled estimator's asymptotic variance includes the additional `1/n`.

@@ -76,3 +76,4 @@ import LectureNotes.NormalTestPower
 import LectureNotes.QuantileConvergence
 import LectureNotes.BootstrapIntervals
 import LectureNotes.HighestDensityExistence
+import LectureNotes.ExponentialMLE
