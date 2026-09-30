@@ -62,3 +62,7 @@ import LectureNotes.EmpiricalBayesStein
 import LectureNotes.SteinDecision
 import LectureNotes.NormalDecisionExamples
 import LectureNotes.WilsonInterval
+import LectureNotes.GaussianBayesRisk
+import LectureNotes.NormalMinimax
+import LectureNotes.GaussianReflection
+import LectureNotes.PositivePartStein

@@ -123,7 +123,7 @@ layout-preserving extraction and rendered checks of the key theorem pages.
 The original Lectures 1–6 are unchanged. See
 [NEW_NOTES_AUDIT.md](NEW_NOTES_AUDIT.md) for the new mathematical corrections and
 [NEW_NOTES_COVERAGE.md](NEW_NOTES_COVERAGE.md) for every new numbered theorem's
-status. Thirty-two new modules use `autoImplicit false` so a misspelled identifier
+status. Thirty-six new modules use `autoImplicit false` so a misspelled identifier
 cannot silently become an extra theorem parameter.
 
 The audit checks that tests are measurable `[0,1]`-valued rejection probabilities;
@@ -175,8 +175,8 @@ then gives strict improvement for p ≥ 3 and v > 0. All squared losses used
 with real integrals are proved integrable. The extended-real risk bridge
 establishes dominance and inadmissibility using the repository's definitions.
 The centered calculation gives E[1/S] = 1/((p−2)v) and verifies the empirical
-Bayes noise-fraction formula. This does not prove the separate minimax lower
-bound or positive-part dominance assertion.
+Bayes noise-fraction formula. The separate minimax and positive-part proofs
+are described below.
 
 The scalar MLE/Wilks extension uses a measurable divided difference, avoiding
 an unjustified measurable choice of a mean-value point. Its value at a
@@ -206,3 +206,37 @@ size and an observed mean in [0,1]. The bridge to the divided Bernoulli score
 statistic requires the null parameter in (0,1), where its denominator is
 positive. This algebraic equivalence does not assert exact finite-sample
 coverage from an asymptotic critical value.
+
+## Normal minimax and positive-part review
+
+The normal-normal calculation retains both density normalizers. Its scalar
+identity is multiplied over the finite coordinates, and Tonelli exchanges
+prior and sampling integration for every nonnegative measurable loss. The
+posterior law has mean `w/(v+w) y` and variance `v*w/(v+w)`, with `v` and `w`
+denoting sampling and prior variances, not standard deviations or precisions.
+The posterior loss at action `a` is exactly `p*v*w/(v+w)` plus the squared
+distance from the posterior mean. This proves the Bayes lower bound without
+assuming a competitor's risk is finite, or assuming that it is linear.
+The posterior-mean rule attains the bound and is proved Bayes.
+
+The minimax proof uses the proper priors with variance `w = v*(n+1)`. Their
+Bayes lower bounds increase toward `p*v`, so every measurable rule has worst
+risk at least `p*v`. The identity attains it. Both shrinkage rules inherit
+minimaxity and their worst risks are proved equal to `p*v`. In particular,
+strictly smaller pointwise risks do not imply a strictly smaller supremum.
+The decision space for minimaxity is explicitly all measurable rules; it has
+no boundedness, finite-risk, linearity, or equivariance restriction.
+
+The positive-part proof does not apply a smooth Stein identity at the kink.
+For a reflected pair `y,-y`, the sign of the difference between Gaussian
+densities agrees with the sign of the inner product of the mean with `y`.
+Expanding the two squared losses proves that truncating any negative,
+reflection-invariant multiplier lowers their density-weighted sum. Nonnegative
+integration and reflection invariance of Lebesgue measure give the risk
+inequality, even for infinite risks. At the zero mean the inequality is strict
+on `0 < sum(y_i^2) < (p-2)*v`; this is a nonempty open set with positive normal
+probability. Thus the proved conclusion is dominance (weakly at every mean,
+strictly at zero) and inadmissibility of James–Stein among measurable rules.
+It does not claim the stronger, unnecessary assertion of strict positive-part
+improvement at every mean. The estimator values at the origin are both zero.
+All strict claims explicitly require `p ≥ 3` and `v > 0`.
