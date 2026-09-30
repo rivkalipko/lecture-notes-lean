@@ -66,3 +66,13 @@ import LectureNotes.GaussianBayesRisk
 import LectureNotes.NormalMinimax
 import LectureNotes.GaussianReflection
 import LectureNotes.PositivePartStein
+import LectureNotes.Quantiles
+import LectureNotes.NeymanPearsonExistence
+import LectureNotes.MLRExistence
+import LectureNotes.QuantileIntervals
+import LectureNotes.SamplingAtomlessness
+import LectureNotes.NormalConfidenceIntervals
+import LectureNotes.NormalTestPower
+import LectureNotes.QuantileConvergence
+import LectureNotes.BootstrapIntervals
+import LectureNotes.HighestDensityExistence

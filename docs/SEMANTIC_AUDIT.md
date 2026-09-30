@@ -123,7 +123,7 @@ layout-preserving extraction and rendered checks of the key theorem pages.
 The original Lectures 1–6 are unchanged. See
 [NEW_NOTES_AUDIT.md](NEW_NOTES_AUDIT.md) for the new mathematical corrections and
 [NEW_NOTES_COVERAGE.md](NEW_NOTES_COVERAGE.md) for every new numbered theorem's
-status. Thirty-six new modules use `autoImplicit false` so a misspelled identifier
+status. The new modules use `autoImplicit false` so a misspelled identifier
 cannot silently become an extra theorem parameter.
 
 The audit checks that tests are measurable `[0,1]`-valued rejection probabilities;
@@ -240,3 +240,59 @@ strictly at zero) and inadmissibility of James–Stein among measurable rules.
 It does not claim the stronger, unnecessary assertion of strict positive-part
 improvement at every mean. The estimator values at the origin are both zero.
 All strict claims explicitly require `p ≥ 3` and `v > 0`.
+
+## September 30: quantiles, calibration, and intervals
+
+The quantile is the lower generalized inverse `inf {x | q ≤ F(x)}`. Its
+theorems require `0 < q < 1`, ensuring a finite real endpoint. The proof uses
+both tails of the CDF and its right continuity; it retains jumps through
+`P(X < c) ≤ q ≤ P(X ≤ c)`. Exact calibration without randomization is asserted
+only for atomless laws. Randomization at a boundary atom uses a coefficient in
+`[0,1]` and exactly fills the gap between open and closed tails.
+
+Neyman–Pearson existence handles zero null density explicitly: the rule
+rejects there, including where the alternative density is positive. It does
+not assume absolute continuity of the alternative with respect to the null.
+The null density is normalized; comparison is proved against every measurable
+randomized test of size at most the target. The alternative need only be
+integrable and nonnegative for the mathematical comparison. When interpreted
+as power under a probability model, it must also integrate to one.
+
+The MLR proof retains common strictly positive densities. A cutoff need not
+belong to the statistic's range: in that case a supremum of likelihood ratios
+above the cutoff separates the two regions. Nontriviality follows from
+interior-size calibration. Composite-null level and alternative optimality
+are separate conclusions. The additional monotonicity theorem says
+nonincreasing power; it does not inherit the notes' incorrect strict claim.
+
+The normal formulas use variances, with standard deviation `sqrt v` and sample
+mean standard error `sqrt (v/n)`. Exact two-sided power keeps both tails.
+Student intervals require `n > 1`, positive population variance, and the
+proved almost-sure positivity of sample variance. Variance intervals use
+`(n-1)s²` and chi-square degrees of freedom `n-1`; quantile positivity is
+proved before division. Chi-square atomlessness is proved by conditioning on
+one normal coordinate, and Student atomlessness by conditioning on the
+positive chi-square denominator. Arbitrary interior tail allocations include
+equal and unequal tails. Gaussian credible content is measured under the
+posterior Gaussian, separately from frequentist coverage.
+
+Bootstrap quantile consistency uses conditional CDF convergence to a fixed,
+atomless, strictly increasing CDF. Random cutoffs may depend on the same data
+as the statistic: Slutsky and null-boundary convergence justify their use.
+The interval theorem applies to the normalized estimation error and to the
+conditional law of its normalized bootstrap analogue. For a consistent basic
+estimator, the scale is a vanishing deterministic inverse rate; convergence of
+both unscaled errors to zero would be insufficient. For studentization the
+scale is the estimated standard error. Measurability of the statistic and
+cutoffs and almost-sure positivity of the scale are explicit. The proof does
+not establish model-specific conditional CLTs, higher-order refinements,
+uniform-in-parameter coverage, or validity with a fixed number of Monte Carlo
+replicates.
+
+HPD cutoff existence assumes that density values have an atomless law under
+the posterior. Positivity of the density almost surely under its own measure
+is derived even when it vanishes on part of the reference space. An interior
+quantile gives a positive cutoff, exact content, and minimum reference volume.
+Positive-mass density plateaus require a separate tie-breaking construction.
+Quantile reparameterization is proved for increasing bijections of the real
+line; decreasing and non-surjective maps are not silently included.

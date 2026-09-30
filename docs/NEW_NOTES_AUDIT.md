@@ -106,6 +106,14 @@ source result has been proved. See the coverage ledger for proof status.
   Projection gives conservative simultaneous coverage. Two marginal 95%
   intervals need not have joint coverage **strictly** below 95% in degenerate
   perfectly dependent cases; equality can occur.
+* The bootstrap validity sentence must concern a suitable normalized error
+  and a nondegenerate continuous limit. Merely having both unscaled errors
+  converge weakly to zero is insufficient: errors with variances `1/n` and
+  `4/n` share that weak limit but give different calibrated coverage. The
+  formal interval theorem requires matching sampling and conditional CDF
+  limits after normalization. A fixed number of simulated bootstrap replicates
+  also retains Monte Carlo error; no exact asymptotic coverage claim for a
+  fixed simulation count is made.
 
 ## Lecture 12: Bayesian updating
 

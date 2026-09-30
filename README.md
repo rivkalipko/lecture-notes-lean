@@ -10,7 +10,7 @@ The [coverage ledger](docs/COVERAGE.md) lists every numbered theorem and
 distinguishes proved, restricted, and missing results. Major remaining work
 includes Lindeberg–Feller, Glivenko–Cantelli and DKW, and sufficiency for general
 dominated continuous models, constrained vector MLE/Wilks asymptotics,
-general/vector Bernstein–von Mises, bootstrap validity, and several examples. A scalar IID MLE normality theorem and scalar Wilks theorem are proved under explicit
+general/vector Bernstein–von Mises, model-specific bootstrap validity, and several examples. A scalar IID MLE normality theorem and scalar Wilks theorem are proved under explicit
 derivative, moment, consistency, and interior-maximization conditions. A scalar
 posterior approximation theorem is proved under explicit local quadraticity
 and domination conditions, verified for normal-mean kernels and bounded
@@ -19,6 +19,16 @@ proved, including inverse-square integrability and the singular limit. The norma
 minimax lower bound, minimaxity of the identity and James–Stein rules, and
 positive-part dominance and minimaxity are also proved among measurable rules. A finite
 positive-support sufficiency theorem is proved and labeled with that restriction.
+
+Randomized Neyman–Pearson threshold existence and calibration are proved,
+including alternatives with mass where the null density is zero. The MLR
+existence theorem permits discrete statistics and cutoffs outside their range,
+under a common strictly positive density assumption. Exact normal, Student,
+and chi-square confidence intervals, normal test power, and Gaussian credible
+intervals are proved using a generalized-inverse quantile. Bootstrap critical
+values and interval coverage are proved conditional on convergence of the
+conditional CDFs to an atomless strictly increasing limiting CDF. The
+model-specific conditional limit is still required.
 
 The [source audit](docs/SOURCE_AUDIT.md) records mathematical corrections and
 extra hypotheses. The thirteen source PDFs are preserved unchanged. Compilation
@@ -70,15 +80,19 @@ proofs** passed; it does not turn a missing coverage entry into a proved result.
 * Inequalities and limits: `Inequalities`, `Concentration`, `LargeSample`,
   `Convergence`, `WeakLaw`, `CramerWold`, `MultivariateCLT`, `DeltaMethod`,
   `StochasticOrder`.
-* Empirical distributions: `EmpiricalDistribution`, `Bootstrap`.
+* Empirical distributions: `EmpiricalDistribution`, `Bootstrap`,
+  `QuantileConvergence`, `BootstrapIntervals`.
 * Estimation: `Estimation`, `Sufficiency`, `EstimationTheory`, `Information`,
   `RegularDensity`, `RegularCramerRao`, `RaoBlackwell`, `BernoulliModel`.
 * MLE and testing: `MLEConsistency`, `Testing`, `NeymanPearson`,
   `MonotoneLikelihoodRatio`, `LikelihoodRatio`, `AsymptoticTests`,
   `LogisticRegression`, `MLEAsymptotics`, `IIDScoreAsymptotics`, `WilksAnalytic`.
-* Confidence and Bayesian inference: `ConfidenceSets`, `WilsonInterval`, `BayesianUpdating`,
+  Threshold existence and exact power: `Quantiles`, `NeymanPearsonExistence`,
+  `MLRExistence`, `NormalTestPower`.
+* Confidence and Bayesian inference: `ConfidenceSets`, `WilsonInterval`,
+  `QuantileIntervals`, `SamplingAtomlessness`, `NormalConfidenceIntervals`, `BayesianUpdating`,
   `NormalConjugacy`, `BetaConjugacy`, `GammaConjugacy`, `ExponentialConjugacy`,
-  `PosteriorAsymptotics`, `NormalPosteriorLimit`, `HighestDensity`,
+  `PosteriorAsymptotics`, `NormalPosteriorLimit`, `HighestDensity`, `HighestDensityExistence`,
   `BayesianDecision`, `BayesianTesting`.
 * Decision theory: `DecisionTheory`, `NormalMeansDecision`, `GaussianStein`,
   `NormalSteinRisk`, `RegularizedStein`, `JamesSteinRisk`, `JamesStein`,
