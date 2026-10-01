@@ -77,3 +77,7 @@ import LectureNotes.QuantileConvergence
 import LectureNotes.BootstrapIntervals
 import LectureNotes.HighestDensityExistence
 import LectureNotes.ExponentialMLE
+import LectureNotes.LogisticMultivariate
+import LectureNotes.VectorWald
+import LectureNotes.EllipseProjection
+import LectureNotes.BoundaryNormalMLE

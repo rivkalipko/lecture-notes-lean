@@ -316,3 +316,48 @@ division for each positive sample size, while the zero-sample index has zero
 square-root scaling. Neither consistency nor estimator asymptotic normality
 is assumed. The plug-in theorem estimates the variance of the scaled limit;
 the unscaled estimator's asymptotic variance includes the additional `1/n`.
+
+
+## Full logistic derivatives, vector Wald inference, and boundary normal estimation
+
+The October 1 additions were checked against L7's logistic and boundary examples,
+L7's information-estimation paragraph, L10's vector Wald discussion, and L11's
+ellipse projection. Their precise scope is:
+
+- `LogisticMultivariate` takes fixed covariates and Boolean outcomes. Its sample
+  criterion is proved equal to the log of the product of the normalized Bernoulli
+  masses. Both the criterion's Fréchet derivative and the score's derivative are
+  identified, so the Hessian quadratic form is attached to the actual likelihood.
+  The conditional score mean and information use the same Bernoulli probabilities.
+- Concavity gives global optimality of every score root. The converse uses a
+  local-maximum derivative theorem on the whole Euclidean parameter space. Full
+  column rank is injectivity of the design map, which gives strict concavity,
+  negative curvature in every nonzero direction, and uniqueness if a maximum
+  exists. Complete separation strictly improves the likelihood along a fixed
+  direction and hence prevents a finite maximum. Full rank alone does not assert
+  existence. Random-design logistic asymptotic normality is not claimed here.
+- `VectorWald` uses the ordinary finite matrix Borel structure and entrywise sup
+  metric. A nonsingular limiting matrix justifies inverse consistency, even when
+  finite-sample estimated matrices can be singular. The limiting Gaussian
+  covariance is positive definite; the dimension must be positive for continuous
+  chi-square quantile calibration. The estimator's Gaussian limit and consistency
+  of the estimated covariance remain explicit inputs. No independence of these
+  two estimates is assumed. Coverage is pointwise, not uniform over parameters.
+- Plug-in information requires continuity at the parameter and nonsingularity
+  there. Sandwich consistency requires consistency of both component matrices.
+  The general formula is `H⁻¹ J (H⁻¹)ᵀ`; the transpose is redundant for symmetric
+  Hessians, as in the notes. No law of large numbers for an arbitrary estimated
+  score or Hessian is smuggled into this continuous-mapping result.
+- `EllipseProjection` proves equality with the actual two-by-two inverse matrix
+  quadratic form before completing the square. Positive marginal variance,
+  positive determinant, positive sample-size scale, and a nonnegative cutoff are
+  explicit. The two radii are `sqrt(q*a/N)` and `sqrt(q*b/N)`, where `q` is the
+  joint cutoff. The minimizing other coordinate depends on the covariance. These
+  are projection intervals, not a claim that two marginal 95% intervals provide
+  95% simultaneous coverage.
+- `BoundaryNormalMLE` compares actual products of unit-variance Gaussian
+  densities over nonnegative means. The square-root limit at mean zero is derived
+  from IID Gaussian observations and the continuous positive-part map. Its atom
+  at zero is proved positive, ruling out every Gaussian with positive variance.
+  This does not claim that the positive-part law is a truncated and renormalized
+  normal distribution: mass on negative outcomes is placed at zero.

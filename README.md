@@ -33,6 +33,14 @@ model-specific conditional limit is still required.
 The exponential-rate example includes the global likelihood maximum, the
 information identities, consistency from the IID law, asymptotic normality
 with variance equal to the squared rate, and plug-in variance consistency.
+The fixed-design logistic example now identifies the full likelihood derivatives,
+proves global optimality of score roots and uniqueness under full column rank,
+and proves nonexistence of a finite maximum under complete separation. Vector
+Wald limits and coverage follow from a supplied Gaussian estimator limit and
+consistent covariance estimates; covariance inversion, plug-in information,
+sandwich consistency, and both bivariate ellipse projections are proved. The
+constrained normal-mean example includes its actual likelihood maximum and
+the nonnormal boundary limit derived from IID normal observations.
 
 The [source audit](docs/SOURCE_AUDIT.md) records mathematical corrections and
 extra hypotheses. The thirteen source PDFs are preserved unchanged. Compilation
@@ -91,10 +99,10 @@ proofs** passed; it does not turn a missing coverage entry into a proved result.
 * MLE and testing: `MLEConsistency`, `Testing`, `NeymanPearson`,
   `MonotoneLikelihoodRatio`, `LikelihoodRatio`, `AsymptoticTests`,
   `LogisticRegression`, `MLEAsymptotics`, `IIDScoreAsymptotics`, `WilksAnalytic`,
-  `ExponentialMLE`.
+  `ExponentialMLE`, `LogisticMultivariate`, `BoundaryNormalMLE`, `VectorWald`.
   Threshold existence and exact power: `Quantiles`, `NeymanPearsonExistence`,
   `MLRExistence`, `NormalTestPower`.
-* Confidence and Bayesian inference: `ConfidenceSets`, `WilsonInterval`,
+* Confidence and Bayesian inference: `ConfidenceSets`, `WilsonInterval`, `EllipseProjection`,
   `QuantileIntervals`, `SamplingAtomlessness`, `NormalConfidenceIntervals`, `BayesianUpdating`,
   `NormalConjugacy`, `BetaConjugacy`, `GammaConjugacy`, `ExponentialConjugacy`,
   `PosteriorAsymptotics`, `NormalPosteriorLimit`, `HighestDensity`, `HighestDensityExistence`,
