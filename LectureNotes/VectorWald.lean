@@ -122,6 +122,16 @@ theorem continuous_matrixQuadratic {d : ℕ} :
   simp only [matrixQuadratic_eq_sum]
   fun_prop
 
+theorem matrixQuadratic_smul {d : ℕ} (S : Matrix (Fin d) (Fin d) ℝ)
+    (a : ℝ) (z : EuclideanSpace ℝ (Fin d)) :
+    matrixQuadratic S (a • z) = a ^ 2 * matrixQuadratic S z := by
+  simp only [matrixQuadratic_eq_sum, PiLp.smul_apply, smul_eq_mul, Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro i _
+  apply Finset.sum_congr rfl
+  intro j _
+  ring
+
 set_option backward.isDefEq.respectTransparency false in
 /-- An estimated covariance matrix can be used in the Wald quadratic form.
 No independence between the estimator and its estimated covariance is required. -/
@@ -174,5 +184,35 @@ theorem vector_wald_coverage {d : ℕ} (hd : 0 < d)
     (Set.Iic (distributionQuantile (chiSquared d) q)))) at h
   rw [distributionQuantile_exact (chiSquared d) q hq] at h
   exact h
+
+/-- The exact sample-size-scaled statistic printed in L10 and used in L11. -/
+theorem vector_wald_estimator_limit {d : ℕ}
+    {T : ℕ → Ω → EuclideanSpace ℝ (Fin d)} {θ : EuclideanSpace ℝ (Fin d)}
+    {Z : Ω' → EuclideanSpace ℝ (Fin d)}
+    {S : ℕ → Ω → Matrix (Fin d) (Fin d) ℝ} {V : Matrix (Fin d) (Fin d) ℝ}
+    (hV : V.PosDef)
+    (hT : TendstoInDistribution (fun (n : ℕ) ω => Real.sqrt n • (T n ω - θ)) atTop Z (fun _ => P) Q)
+    (hZ : HasLaw Z (multivariateGaussian 0 V) Q)
+    (hS : TendstoInMeasure P S atTop (fun _ => V))
+    (hSm : ∀ n, AEMeasurable (S n) P) :
+    ConvergesInDistribution P Q (fun n ω => n * matrixQuadratic (S n ω)⁻¹ (T n ω - θ))
+      (fun ω => matrixQuadratic V⁻¹ (Z ω)) ∧
+      HasLaw (fun ω => matrixQuadratic V⁻¹ (Z ω)) (chiSquared d) Q := by
+  simpa only [matrixQuadratic_smul, Real.sq_sqrt (Nat.cast_nonneg _)] using!
+    vector_wald_limit hV hT hZ hS hSm
+
+theorem vector_wald_ellipsoid_coverage {d : ℕ} (hd : 0 < d)
+    {T : ℕ → Ω → EuclideanSpace ℝ (Fin d)} {θ : EuclideanSpace ℝ (Fin d)}
+    {Z : Ω' → EuclideanSpace ℝ (Fin d)}
+    {S : ℕ → Ω → Matrix (Fin d) (Fin d) ℝ} {V : Matrix (Fin d) (Fin d) ℝ}
+    (hV : V.PosDef)
+    (hT : TendstoInDistribution (fun (n : ℕ) ω => Real.sqrt n • (T n ω - θ)) atTop Z (fun _ => P) Q)
+    (hZ : HasLaw Z (multivariateGaussian 0 V) Q)
+    (hS : TendstoInMeasure P S atTop (fun _ => V))
+    (hSm : ∀ n, AEMeasurable (S n) P) {q : ℝ} (hq : q ∈ Set.Ioo (0 : ℝ) 1) :
+    Tendsto (fun n => P.real {ω | n * matrixQuadratic (S n ω)⁻¹ (T n ω - θ) ≤
+      distributionQuantile (chiSquared d) q}) atTop (𝓝 q) := by
+  simpa only [matrixQuadratic_smul, Real.sq_sqrt (Nat.cast_nonneg _)] using!
+    vector_wald_coverage hd hV hT hZ hS hSm hq
 
 end LectureNotes

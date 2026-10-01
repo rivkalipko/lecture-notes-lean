@@ -342,7 +342,10 @@ ellipse projection. Their precise scope is:
   covariance is positive definite; the dimension must be positive for continuous
   chi-square quantile calibration. The estimator's Gaussian limit and consistency
   of the estimated covariance remain explicit inputs. No independence of these
-  two estimates is assumed. Coverage is pointwise, not uniform over parameters.
+  two estimates is assumed. The quadratic-form scaling identity explicitly
+  connects normalized errors to the displayed `n * (estimate - truth)ᵀ S⁻¹
+  (estimate - truth)` statistic and its ellipsoid coverage. Coverage is pointwise,
+  not uniform over parameters.
 - Plug-in information requires continuity at the parameter and nonsingularity
   there. Sandwich consistency requires consistency of both component matrices.
   The general formula is `H⁻¹ J (H⁻¹)ᵀ`; the transpose is redundant for symmetric
