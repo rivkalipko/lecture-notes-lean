@@ -4,9 +4,13 @@ import LectureNotes.BayesianDecision
 import LectureNotes.BayesianTesting
 import LectureNotes.BayesianUpdating
 import LectureNotes.BernoulliBinomialMoments
+import LectureNotes.BernoulliCramerRao
 import LectureNotes.BernoulliLikelihoodRatio
 import LectureNotes.BernoulliModel
 import LectureNotes.BernoulliOdds
+import LectureNotes.BernoulliSampleInformation
+import LectureNotes.BernoulliScoreTests
+import LectureNotes.BernoulliWilks
 import LectureNotes.Bernstein
 import LectureNotes.BernsteinAnalytic
 import LectureNotes.BetaConjugacy
@@ -49,12 +53,15 @@ import LectureNotes.CDFConvergence
 import LectureNotes.CauchyPolynomial
 import LectureNotes.CauchySufficiency
 import LectureNotes.CausalIdentification
+import LectureNotes.ChiSquaredGamma
 import LectureNotes.ChiSquaredMoments
 import LectureNotes.ClassifierConcentration
 import LectureNotes.Concentration
 import LectureNotes.ConditionalDensities
 import LectureNotes.ConditionalDensityLaws
 import LectureNotes.ConditionalExpectation
+import LectureNotes.ConditionalPrediction
+import LectureNotes.ConfidenceLevel
 import LectureNotes.ConfidenceSets
 import LectureNotes.ConstrainedScoreTests
 import LectureNotes.ConstrainedVectorMLE
@@ -74,6 +81,7 @@ import LectureNotes.DKWQuantileCoupling
 import LectureNotes.DKWQuasiconcavity
 import LectureNotes.DKWUniform
 import LectureNotes.DecisionTheory
+import LectureNotes.DegenerateInfluence
 import LectureNotes.DeltaMethod
 import LectureNotes.DensityDerivatives
 import LectureNotes.DensityTransform
@@ -152,9 +160,11 @@ import LectureNotes.MixtureSufficiency
 import LectureNotes.MonotoneLikelihoodRatio
 import LectureNotes.MonteCarlo
 import LectureNotes.MonteCarloBias
+import LectureNotes.MonteCarloBiasExpectation
 import LectureNotes.MonteCarloBiasJoint
 import LectureNotes.MonteCarloBootstrapApplications
 import LectureNotes.MonteCarloBootstrapIntervals
+import LectureNotes.MonteCarloStudentizedIntervals
 import LectureNotes.MultivariateCLT
 import LectureNotes.NeymanPearson
 import LectureNotes.NeymanPearsonExistence
@@ -164,6 +174,7 @@ import LectureNotes.NormalConjugacy
 import LectureNotes.NormalDecisionExamples
 import LectureNotes.NormalFStatistic
 import LectureNotes.NormalFullSampleUMP
+import LectureNotes.NormalHierarchicalGaussian
 import LectureNotes.NormalHighestDensity
 import LectureNotes.NormalJointInsufficiency
 import LectureNotes.NormalJointSufficiency
@@ -173,6 +184,8 @@ import LectureNotes.NormalMeansDecision
 import LectureNotes.NormalMinimax
 import LectureNotes.NormalPosteriorLimit
 import LectureNotes.NormalPowerDerivative
+import LectureNotes.NormalPowerMonotonicity
+import LectureNotes.NormalSampleConjugacy
 import LectureNotes.NormalSamplePower
 import LectureNotes.NormalSampling
 import LectureNotes.NormalSamplingDistribution
@@ -191,6 +204,7 @@ import LectureNotes.PValues
 import LectureNotes.ParametricNormalBootstrap
 import LectureNotes.ParametricNormalBootstrapLimits
 import LectureNotes.ParametricUniformBootstrap
+import LectureNotes.PivotalStatistics
 import LectureNotes.PointwiseMinimalityCounterexample
 import LectureNotes.PoissonAsymptotics
 import LectureNotes.PoissonComparison
@@ -246,6 +260,7 @@ import LectureNotes.Sufficiency
 import LectureNotes.SufficiencyObstruction
 import LectureNotes.SufficientTests
 import LectureNotes.SurveySampling
+import LectureNotes.SymmetricHighestDensity
 import LectureNotes.TargetingROC
 import LectureNotes.TestFormulation
 import LectureNotes.Testing

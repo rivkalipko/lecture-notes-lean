@@ -1,20 +1,27 @@
 # MIT 14.380 lecture notes in Lean
 
-This is an **incomplete formalization** of thirteen supplied lecture notes.
-The included results have Lean proofs, using Mathlib's measures, integrals,
-conditional expectations, independence, and convergence of probability laws.
-The project does not yet formalize every definition, theorem, example, or proof
-in the PDFs.
+This repository formalizes thirteen supplied lecture notes with explicit
+mathematical hypotheses and corrections to source errors. The proofs use
+Mathlib's measures, integrals, conditional expectations, independence, and
+convergence of probability laws.
 
-The [coverage ledger](docs/COVERAGE.md) lists every numbered theorem and
-distinguishes proved, restricted, and missing results. Major remaining work
-includes general IID posterior regularity beyond the explicit sufficient
-conditions and some generality and numerical-law identifications recorded
-in the ledgers. Bootstrap bias correction now has separate expectation-level,
-conditional and simulation proofs under their stated sufficient conditions. The literal
-pointwise minimal-sufficiency criterion in the source is false; a checked
-null-point counterexample explains the almost-sure formulation used here. The sharp two-sided DKW bound
-is proved for arbitrary IID real laws, including atoms. Lindeberg–Feller, Lyapunov, and Glivenko–Cantelli are now
+The [source index](docs/SOURCE_INDEX.md) maps all 24 numbered definitions,
+54 numbered examples and both numbered lemmas. The
+[coverage ledgers](docs/COVERAGE.md) account for all 41 numbered theorems and
+record the precise scope of each formal result. Qualified statements are not
+unconditional proofs of the corresponding informal assertions.
+
+Some notes omit essential assumptions or make incorrect general claims.
+MLE, Wilks and posterior approximation results therefore state explicit
+sufficient conditions. The source's unspecified general posterior regularity,
+complete-class remark and deferred MCMC discussion are scope qualifications,
+not additional unrestricted theorems exported by this project. The literal
+pointwise minimal-sufficiency criterion is false; a checked null-point
+counterexample explains the almost-sure formulation used here. Bootstrap bias
+correction has separate expectation-level, conditional and simulation proofs.
+
+The sharp two-sided DKW bound is proved for arbitrary IID real laws,
+including atoms. Lindeberg–Feller, Lyapunov, and Glivenko–Cantelli are
 proved, including non-identically distributed observations for the CLT and
 distributions with atoms for uniform CDF convergence. The CDF characterization
 of weak convergence and measurability of the empirical supremum error are proved.
@@ -49,8 +56,9 @@ conditional CDFs to an atomless strictly increasing limiting CDF. For the
 IID sample mean, that conditional limit and the resulting basic interval
 coverage are derived under finite second moments and positive variance.
 The bootstrap-t interval is also derived under finite fourth moments, including
-rare zero-variance samples. Exact conditional quantiles are used; a separate
-Monte Carlo theorem gives simulation consistency at crossing quantiles.
+rare zero-variance samples. Exact conditional quantiles and simulated quantiles are distinguished.
+Separate theorems control the actual joint data/resampling law, with
+replication count tending to infinity for first-order interval coverage.
 
 The exponential-rate example includes the global likelihood maximum, the
 information identities, consistency from the IID law, asymptotic normality
@@ -111,8 +119,15 @@ fourth moments. Exact quadratic correction has an explicit residual bias;
 the general corrected-expectation theorem uses bounded observations and bounded
 second/third derivatives. Simulated bias has an actual joint data/index error
 bound with n/B→0 under the stated smoothness and Lipschitz assumptions.
-The classifier sample-size example is numerically certified, and Bernstein's
-variance-sensitive bound is proved from its exponential-series argument.
+Under these integrability conditions, every positive finite simulation count
+preserves the expected correction exactly; its expected bias inherits the o(1/n) result without a
+replication-growth condition.
+The Bernoulli sample mean’s UMVU property is proved for arbitrary unbiased
+competitors in the actual finite sample model. Exact normal sample conjugacy,
+the hierarchical covariance block, and symmetric-unimodal HPD intervals are
+also derived. The χ²₁₀₀ numerical variance-test example is certified from the
+actual Gaussian-square law. The classifier sample-size example is numerically
+certified, and Bernstein's variance-sensitive bound is proved from its exponential-series argument.
 
 The [source audit](docs/SOURCE_AUDIT.md) records mathematical corrections and
 extra hypotheses. The thirteen source PDFs are preserved unchanged. Compilation
@@ -127,8 +142,8 @@ The September 29 export adds Lectures 7–13; Lectures 1–6 are unchanged.
 [NEW_NOTES_AUDIT.md](docs/NEW_NOTES_AUDIT.md) records source corrections,
 including insufficient MLE assumptions, non-strict MLR power monotonicity,
 and the invalid use of a two-sided UMP test in a confidence-interval example.
-[NEW_NOTES_COVERAGE.md](docs/NEW_NOTES_COVERAGE.md) distinguishes full results,
-restricted results, intermediate arguments, and unproved claims in these notes.
+[NEW_NOTES_COVERAGE.md](docs/NEW_NOTES_COVERAGE.md) records the precise
+hypotheses, source corrections and scope qualifications for these notes.
 
 ## Check the proofs
 
@@ -150,7 +165,7 @@ The check script builds every source module and runs two audits:
   axioms, and any other axiom dependency.
 
 GitHub Actions runs the same checks. A successful check means the **included
-proofs** passed; it does not turn a missing coverage entry into a proved result.
+proofs** passed; agreement with the source is a separate semantic-review obligation.
 
 ## Organization
 

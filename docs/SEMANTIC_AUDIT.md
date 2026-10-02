@@ -6,7 +6,8 @@ The review covered definitions, theorem statements, and proof arguments in
 all 31 modules present at that revision. It compared the mathematical objects,
 quantifiers, hypotheses, and conclusions with the corresponding passages in
 the six source PDFs. `BernoulliModel` was added as a concrete check of the
-density and score definitions. The project now has 32 modules.
+density and score definitions. That reviewed snapshot had 32 modules; later
+additions and current verification results are recorded below.
 
 This review concerns the included formalization. It does not establish that
 every item in the notes has been transcribed. The [coverage ledger](COVERAGE.md)
@@ -75,11 +76,11 @@ statistical theorems.
 
 | Modules reviewed | Mathematical checks and limits |
 | --- | --- |
-| `Foundations`, `ProbabilityLaws`, `ConditionalExpectation` | Event products, intersections and complements; conditional-probability direction and denominators; CDF endpoints and right continuity; L1/L2 hypotheses; almost-everywhere equalities; conditional squared-loss orthogonality. Best prediction remains restricted to square-integrable competitors because the risk is real-valued. |
+| `Foundations`, `ProbabilityLaws`, `ConditionalExpectation` | Event products, intersections and complements; conditional-probability direction and denominators; CDF endpoints and right continuity; L1/L2 hypotheses; almost-everywhere equalities; conditional squared-loss orthogonality. The initial real-risk result required square-integrable competitors; ConditionalPrediction subsequently removed that restriction using extended risks. |
 | `Sampling`, `SamplingMoments`, `FinitePopulation` | Mean denominator `n`, sample-variance denominator `(n : Real) - 1`; positivity of sample/population sizes; off-diagonal and diagonal covariance terms; HT population-mean normalization `1/N`; actual uniform-subset design and inclusion probabilities; finite-population correction, including one draw and the census case. |
 | `NormalSampling`, `NormalSamplingDistribution`, `GaussianQuadraticForms`, `GaussianMahalanobis`, `NormalFStatistic`, `ChiSquaredMoments`, `NormalVarianceRisk` | Independence is joint where needed; mean variance is `v/n`; residual rank and t degrees of freedom are `n-1`; nonzero random denominators follow almost surely; F statistic includes the population-variance ratio; matrix projections require symmetry and idempotence; Mahalanobis covariance is positive definite; fourth normal moment is proved, not assumed; `v^2` denotes the notes' fourth power of the standard deviation. |
 | `Inequalities`, `Concentration` | Hölder absolute values and conjugate exponents; Markov/Chebyshev thresholds; Hoeffding exponent and interval width; independent bounded observations. The subgaussian auxiliary bound at zero variance proxy is only its totalized, possibly uninformative extension; the statistical Hoeffding formulas require positive interval width and sample size. |
-| `LargeSample`, `Convergence`, `WeakLaw`, `CramerWold`, `MultivariateCLT`, `DeltaMethod`, `StochasticOrder` | Centering, square-root scaling, finite moments, common versus separate probability spaces, all five convergence implications, Slutsky division limit, every linear projection in Cramér–Wold, transformed delta-method variance, measurability of the divided difference, and uniform-in-n stochastic-order quantifiers. The multivariate CLT specifies the target through Gaussian projection laws; it does not construct a target from a covariance matrix. The CDF equivalence bridge was subsequently completed in `WeakCDF`. |
+| `LargeSample`, `Convergence`, `WeakLaw`, `CramerWold`, `MultivariateCLT`, `DeltaMethod`, `StochasticOrder` | Centering, square-root scaling, finite moments, common versus separate probability spaces, all five convergence implications, Slutsky division limit, every linear projection in Cramér–Wold, transformed delta-method variance, measurability of the divided difference, and uniform-in-n stochastic-order quantifiers. The multivariate CLT specifies the target through Gaussian projection laws; it does not construct a target from a covariance matrix. The CDF equivalence bridge was subsequently completed in `CDFConvergence`. |
 | `EmpiricalDistribution`, `Bootstrap` | The CDF uses `<=`; indicator expectation and variance are actual probabilities; consistency and concentration quantify over a fixed threshold. The separate uniform DKW and Glivenko–Cantelli results were subsequently completed; see the coverage ledger. Bootstrap samples use independent indices drawn with replacement from the uniform index law. |
 | `Estimation`, `EstimationTheory`, `Sufficiency`, `RaoBlackwell` | Measurable statistics, integrable unbiasedness, parameter independence of factors and estimators, correct shrinkage bias and variance coefficients, and nonzero likelihood ratios. Finite sufficiency concerns conditional masses on positive common support; minimality is the fiber reduction criterion. General sufficiency uses one conditional kernel for the model, with parameter-specific exceptional null sets. The Rao–Blackwell conclusion is `exists g, for all theta`, so it gives one estimator for the entire model. |
 | `Information`, `RegularDensity`, `RegularCramerRao` | The covariance bound includes zero variance. Positive finite information and score second moments are explicit. Density normalization is differentiated under integrable bounds twice. The estimator's mean derivative is derived using an integrable bound on the estimator times the density derivative. An open domain and a parameter in that domain appear in the results. These assumptions are stronger and more explicit than the insufficient log-Hessian domination condition printed in the notes. |
@@ -1006,3 +1007,137 @@ with no prohibited dependencies. Verification-copy parity covered 291 files:
 34 added modules contain 230 source theorem declarations, 34 definitions and
 4 instances. This certifies the included statements with their recorded
 hypotheses; the remaining scope qualifications still apply.
+
+## Final source-application review (2026-10-02)
+
+`ConditionalPrediction` removes the finite-risk restriction from L1 Theorem 6.
+The competitor is any real-valued predictor measurable with respect to the
+conditioning information. If its squared loss is finite, square integrability
+follows from that of Y and its residual; otherwise the extended-risk comparison
+is immediate. Independent semantic review passed this argument.
+
+`DegenerateInfluence` constructs the actual equal-mass ±1 law, with mean zero,
+variance one and finite moments of all orders. For h(mean,variance)=variance
+the derivative is nonzero, but the squared-centered influence is identically
+zero. Thus the extra positive influence-variance assumption used for normal
+calibration is necessary even with positive population variance. This
+counterexample passed independent semantic review.
+
+`ChiSquaredGamma` identifies the actual even-dimensional Gaussian-square law
+with Gamma(shape=dimension/2, rate=1/2), using polar integration and the
+squared-radius Jacobian. The existing exact Erlang CDF yields the certified
+χ²₁₀₀ CDF bound 0.246<F(90)<0.247, its comparison with the 5% critical value,
+and the source sample-variance test's nonrejection. Independent review checked
+the full bridge and the numerical decision.
+
+`SymmetricHighestDensity` derives quantile reflection and equal-tail content
+for any measurable integrable normalized nonnegative density which decreases
+with distance from a center. Compact support and nonstrict monotonicity are
+allowed. The equal-tailed interval is between the strict and weak density
+superlevel sets and has minimum Lebesgue volume. Density plateaus may give
+other minimizers; uniqueness is not claimed. Independent review passed.
+
+`BernoulliScoreTests` derives the actual count/product likelihood score, its
+information-based LM formula, the two-sided quadratic confidence inequality,
+the IID χ²₁ limit, asymptotic null size and pointwise coverage.
+`BernoulliWilks` derives the LR limit by an exact success/failure deviance
+decomposition and proved removable quadratic coefficients, then connects it
+to the actual open-parameter product likelihood supremum. All-zero and
+all-one observed samples are retained. Root and independent agent review
+passed the formulas, parameter domains, scales, and actual-model limits.
+
+`NormalSampleConjugacy` connects the actual product of all normalized Gaussian
+observation densities and the normal prior measure to the exact posterior,
+its mean/variance and posterior-loss minimizer. The empty sample is included
+separately. With positive fixed noise/prior variances, actual IID sampling
+implies almost-sure posterior concentration via the sample-mean strong law
+and posterior second moments.
+
+`NormalHierarchicalGaussian` starts with independent prior and error draws,
+derives the conditional IID observation law, and identifies the full joint
+Gaussian vector. Its observation block has covariance w·11ᵀ+vI, the
+observation/latent cross-covariances are w, and latent variance is w. Setting
+v=1 gives the printed source matrix. Zero variances and the empty sample
+remain valid in this joint-law theorem. Both modules passed two independent
+semantic reviews.
+
+`BernoulliSampleInformation` derives actual full-sample moments and information
+n/[p(1−p)]. `BernoulliCramerRao` differentiates the finite weighted expectation
+of an arbitrary estimator and derives the score identity needed by Cramér–Rao.
+It then proves the source sample-mean attainment and uniform minimum-variance
+unbiasedness, including both degenerate endpoints. The competing estimator
+is unbiased across the model, not merely at the parameter being evaluated.
+
+`PivotalStatistics` gives the explicit common-law definition and generic
+confidence-region inversion. Arbitrary measurable acceptance regions transfer
+exact probabilities, including discrete laws; quantile intervals additionally
+require an atomless probability law. Independent review passed these scopes.
+
+`NormalPowerMonotonicity` retains both rejection tails. Its strict power
+comparison requires a positive cutoff and increasing absolute effect;
+sample-size strictness additionally requires nonzero effect and positive
+standard deviation. Large-effect convergence allows changing signs. The
+actual IID normal sampling experiment supplies the power limit as sample
+size grows. Root review checked these qualifications and the actual Gaussian
+density/CDF connection.
+
+The final definition review added `ConfidenceLevel`: the actual real infimum
+of coverage, its equivalence with the existing lower-bound predicate, bounds
+in [0,1], and exact level for constant coverage. Nonempty parameter spaces
+are explicit where needed; attainment of the infimum is not assumed. This
+closes the numerical part of L11 Definition 2. Independent review passed.
+
+The 296-module checkpoint passed the complete source scan, 9003-job build
+and transitive dependency audit: 3945 declarations, including 3530 theorem
+declarations. All 303 proof/audit/dependency files matched the verification
+copy: 290 unchanged Git object hashes and 13 changed/new byte comparisons.
+Its 12 added modules contain 88 source theorems, 13 definitions and 2 instances.
+The subsequent confidence-level and final Monte Carlo applications are audited
+in the final verification summary below.
+
+`MonteCarloStudentizedIntervals` applies actual joint conditional-quantile
+convergence to bootstrap-t intervals, with each resample's own standard error.
+The main theorem derives both the sampling and conditional limits from IID
+finite fourth moments and positive variance; any B(n)→∞ suffices. Rare
+nonpositive observed scales are controlled separately from zero resample
+scales. The denominator-N versus denominator-(N−1) variance conversion is
+an exact endpoint identity for N>1: positive scaling of each simulated error
+rescales its empirical quantile and cancels against the observed standard
+error. Zero variances are included. The source-convention theorem discards
+only the first N=1 index in taking the limit. Root and independent agent
+semantic reviews passed both the generic argument and the source application.
+
+`MonteCarloBiasExpectation` proves that every positive finite number of
+resampling replicates has the correct conditional expectation. It transports
+that identity to the actual uniform-index experiment, derives joint
+integrability from bounded observations and a continuous transform, and uses
+Fubini to identify the simulated correction's expected bias with that of the
+exact correction. The final o(1/n) bias result uses the established bounded-IID,
+C³ and bounded-second/third-derivative hypotheses. It needs neither Lipschitz
+continuity nor a growth condition on B. This does not weaken the separate
+replication conditions for bias-estimation precision or confidence coverage.
+Independent review checked the complete argument and quantifiers.
+
+## Final verification and source accounting (2026-10-02)
+
+The final combined project passed `scripts/check.sh`: **299 imported source
+modules**, a successful **9006-job build**, and **3978 audited declarations**,
+including **3559 theorem declarations** when private/compiler-generated
+declarations are counted. There were no forbidden source tokens or prohibited
+transitive logical dependencies. All **306** proof/audit/dependency files
+matched the verification copy: 290 unchanged Git object hashes and 16
+changed/new byte comparisons. Relative to the preceding pushed checkpoint,
+the 15 added modules contain 107 source theorem declarations, 16 definitions
+and 2 instances. The thirteen original PDFs remain unchanged.
+
+The source index was checked against the extracted numbered inventories:
+all **41 theorems**, **24 definitions** and **54 examples** are mapped exactly
+once, and both numbered lemmas are recorded. All 170 module links in the
+source index resolve. Independent mathematical review covered the new source
+applications, hypotheses, finite-sample conventions and limit quantifiers.
+The final review found no additional well-specified concrete example awaiting
+a proof. The source's incorrect assertions use corrected statements or
+checked counterexamples; unspecified general regularity, complete-class and
+MCMC remarks retain explicit scope qualifications. This does not assert
+unconditional versions of those remarks or a line-by-line copy of each
+informal proof.

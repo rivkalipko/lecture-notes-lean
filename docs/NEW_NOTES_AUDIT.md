@@ -64,10 +64,11 @@ source result has been proved. See the coverage ledger for proof status.
   non-strict MLR. Identical distributions for different parameter values give
   a counterexample. The valid conclusion is nonincreasing power.
 * Calibration is necessary: an exact deterministic size may not be available
-  in a discrete model, and randomization at ties may be needed. The MLR proof
-  explicitly assumes a calibrated cutoff, positive densities on common support,
-  and a cutoff in the statistic's image. It does not prove general cutoff
-  existence from the source's incomplete statement.
+  in a discrete model, and randomization at ties may be needed. `MLRExistence`
+  and `MLRNonnegative` now prove calibrated cutoff existence for interior
+  sizes, including cutoffs outside the statistic's image and nonnegative
+  densities with changing supports. Cross-product MLR and integrability
+  replace undefined ratios at zero-density points.
 * Likelihood suprema require nonempty domains and boundedness/attainment for
   finite real arithmetic. Ratio bounds require a positive full-model supremum.
 * Bootstrap validity is a conditional triangular-array claim, not an immediate
@@ -259,3 +260,11 @@ SHA-256 values for the added PDFs:
 - The standardized bivariate maximum in L11 retains both absolute values,
   checked against the PDF. Finite-grid inversion covers only included grid
   parameters; interpolation needs a separate mathematical argument.
+
+## Checked nondegeneracy counterexample
+
+`DegenerateInfluence` makes the L8 nonlinear-test caveat explicit: under equal
+probabilities at −1 and 1, population variance is one and all fourth moments
+exist. The variance projection has a nonzero derivative, while its actual
+influence has variance zero. Nonzero gradient alone therefore does not
+justify division by a purported standard error or standard-normal calibration.

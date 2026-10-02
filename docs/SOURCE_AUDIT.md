@@ -24,9 +24,10 @@ the source. The coverage ledger separately records that obligation.
 * Conditional expectations are defined up to almost-everywhere equality.
   Equalities of random variables inferred from moments hold almost surely,
   not necessarily at every outcome.
-* Infinite losses require an extended nonnegative integral. Real-valued squared
-  loss comparisons in this project explicitly impose square integrability on
-  both the response and competing predictor.
+* Infinite losses require an extended nonnegative integral. The real-valued
+  squared-loss comparison imposes square integrability on both predictors.
+  `ConditionalPrediction` proves L1 Theorem 6 for all measurable competing
+  predictors using extended risks, including infinite competing loss.
 
 ## Specific issues and qualifications
 
