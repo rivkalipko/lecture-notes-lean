@@ -9,7 +9,7 @@ in the PDFs.
 The [coverage ledger](docs/COVERAGE.md) lists every numbered theorem and
 distinguishes proved, restricted, and missing results. Major remaining work
 includes Lindeberg–Feller, Glivenko–Cantelli and DKW, and sufficiency for general
-dominated continuous models, constrained vector MLE/Wilks asymptotics,
+dominated continuous models, vector MLE and constrained vector Wilks asymptotics,
 general/vector Bernstein–von Mises, model-specific bootstrap validity, and several examples. A scalar IID MLE normality theorem and scalar Wilks theorem are proved under explicit
 derivative, moment, consistency, and interior-maximization conditions. A scalar
 posterior approximation theorem is proved under explicit local quadraticity
@@ -41,6 +41,20 @@ consistent covariance estimates; covariance inversion, plug-in information,
 sandwich consistency, and both bivariate ellipse projections are proved. The
 constrained normal-mean example includes its actual likelihood maximum and
 the nonnormal boundary limit derived from IID normal observations.
+
+The scalar pseudo-MLE theorem permits distinct score variance and mean curvature,
+yielding the sandwich variance under explicit regularity and consistency assumptions.
+Observed-curvature consistency is proved with an integrable derivative envelope.
+The Neyman–Scott example includes actual likelihood maximization and the inconsistent
+variance limit, along with a consistent correction. Exact normal likelihood-ratio
+calibration and two-sided UMP nonexistence in the normal-observation experiment are
+proved. HPD existence now handles density plateaus on the real line, and quantile
+reparameterization covers continuous non-surjective increasing maps and decreasing
+maps under explicit distributional conditions.
+The uniform-endpoint example includes the exact maximum law and moments,
+consistency, and a zero square-root-scale limit. Estimated-information intervals
+have separate proved frequentist-coverage and posterior-content results under
+their stated sampling, approximation, and positivity conditions.
 
 The [source audit](docs/SOURCE_AUDIT.md) records mathematical corrections and
 extra hypotheses. The thirteen source PDFs are preserved unchanged. Compilation

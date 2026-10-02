@@ -81,3 +81,14 @@ import LectureNotes.LogisticMultivariate
 import LectureNotes.VectorWald
 import LectureNotes.EllipseProjection
 import LectureNotes.BoundaryNormalMLE
+import LectureNotes.QuantileReparameterization
+import LectureNotes.PseudoMLE
+import LectureNotes.InformationEstimation
+import LectureNotes.HighestDensityPlateaus
+import LectureNotes.NeymanScott
+import LectureNotes.NormalLikelihoodRatio
+import LectureNotes.NormalUMPNonexistence
+import LectureNotes.NormalHighestDensity
+import LectureNotes.EstimatedInformationIntervals
+import LectureNotes.PosteriorInformationIntervals
+import LectureNotes.UniformEndpoint

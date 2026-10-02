@@ -130,7 +130,14 @@ source result has been proved. See the coverage ledger for proof status.
 * A minimum-volume HPD statement needs a reference measure, existence of a
   suitable density cutoff, and appropriate treatment of ties. HPD sets need
   not be connected intervals. They are not invariant under nonlinear changes
-  of parameter.
+  of parameter. Exact calibration with density plateaus is now constructed by
+  selecting a measurable part of the equality set on an atomless real parameter
+  space; it cannot be assumed for arbitrary atomic parameter spaces.
+* Monotone reparameterization of equal-tailed intervals needs an endpoint
+  convention. Continuous increasing maps commute with lower generalized-inverse
+  quantiles, even with atoms and non-surjective ranges. Decreasing maps reverse
+  the tail levels; the proved endpoint identity assumes an atomless distribution
+  with a strictly increasing CDF, avoiding ambiguity at jumps and gaps.
 * Theorem 1 does not specify regularity conditions, a metric for normal
   approximation, or a sampling mode of convergence of the random posterior.
   General Bernstein–von Mises is substantially stronger than pointwise Taylor

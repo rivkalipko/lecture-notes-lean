@@ -293,9 +293,9 @@ HPD cutoff existence assumes that density values have an atomless law under
 the posterior. Positivity of the density almost surely under its own measure
 is derived even when it vanishes on part of the reference space. An interior
 quantile gives a positive cutoff, exact content, and minimum reference volume.
-Positive-mass density plateaus require a separate tie-breaking construction.
-Quantile reparameterization is proved for increasing bijections of the real
-line; decreasing and non-surjective maps are not silently included.
+The October 2 additions below supply the separate plateau construction on
+an atomless real parameter space and extend quantile reparameterization to
+non-surjective increasing maps and decreasing maps with explicit CDF conditions.
 
 ## Exponential MLE example
 
@@ -364,3 +364,108 @@ ellipse projection. Their precise scope is:
   at zero is proved positive, ruling out every Gaussian with positive variance.
   This does not claim that the positive-part law is a truncated and renormalized
   normal distribution: mass on negative outcomes is placed at zero.
+
+
+## Scalar misspecification, information estimation, and further examples
+
+The October 2 additions were checked against L7's information estimation,
+incidental-parameter and pseudo-MLE discussions, L9's normal testing examples,
+and L12's HPD and quantile statements. Independent review checked the formal
+hypotheses and conclusions in addition to compilation.
+
+- `PseudoMLE` separates score variance `J` from negative mean curvature `H`.
+  It derives the score CLT, curvature and envelope LLNs, and the interior
+  first-order equation, obtaining limiting variance `J/H²`. Positive `H`,
+  zero mean score, moments, derivatives, consistency, and measurable interior
+  maximizers are explicit. It is scalar, and does not prove consistency for an
+  arbitrary misspecified model. The log-ratio identity requires positive
+  densities almost everywhere and integrable logarithms under the true law;
+  it does not assert a general identity for infinite relative entropies.
+- `InformationEstimation` proves convergence of an average evaluated at a
+  consistent random parameter from a local Lipschitz bound with an integrable
+  envelope. Joint measurability and a separate composition theorem ensure that
+  the estimated statistic is measurable, beyond the outer-measure bounds used
+  in the convergence proof. Applying the mean-value bound to a third derivative
+  gives observed negative-curvature consistency. Its limit is the negative
+  expected curvature; equality with score variance is not assumed under
+  misspecification. Verification of the envelope remains model specific.
+- `NeymanScott` uses independent normal pairs, independent coordinates within
+  each pair, a common variance, and unrestricted means that may vary with the
+  pair index. Differences eliminate the nuisance means and have a common
+  centered Gaussian law. The likelihood variance estimate is the sum of
+  squared differences divided by `4n`, converges to `v/2`, and is inconsistent
+  for positive `v`; doubling it is consistent. The actual joint product
+  density is maximized by the pair means and this variance when the residual
+  is positive, which occurs almost surely for a nonempty nondegenerate sample.
+  At zero residual no positive variance maximizes the likelihood.
+- `HighestDensityPlateaus` includes all points strictly above the cutoff and
+  enough of the equality region to attain exact content. An atomless finite
+  real measure can split a measurable set to any mass; this is proved using a
+  quantile of its normalized restriction. The posterior cutoff is positive at
+  interior levels, and minimum reference volume holds even against competitors
+  of infinite volume. Neither uniqueness nor an interval shape is claimed.
+  Exact set existence is restricted to real parameters with an atomless
+  reference measure, since arbitrary atomic parameter spaces cannot generally
+  realize a prescribed mass without randomization.
+- `QuantileReparameterization` fixes the lower generalized-inverse convention.
+  Continuous strictly increasing maps preserve the quantile and interval
+  endpoints, including for atoms and non-surjective maps such as exponentiation.
+  Decreasing maps exchange the tail levels and endpoint order. The proved
+  decreasing result assumes an atomless input law with a globally strictly
+  increasing CDF. This sufficient condition excludes bounded-support laws and
+  avoids ambiguity from CDF plateaus. The source's unqualified monotone
+  invariance statement is not silently asserted for every discrete distribution
+  or arbitrary choice of generalized-inverse endpoints.
+- `NormalLikelihoodRatio` uses the ratio of suprema of the actual unit-variance
+  Gaussian product density. For positive sample size its unique unrestricted
+  maximizer is the sample mean and `-2 log LR = n (mean - null)²`; the chi-square
+  null law and quantile calibration are exact. The empty sample has ratio one.
+  `NormalUMPNonexistence` treats every measurable randomized test of one normal
+  observation with positive known variance. Neyman–Pearson equality forces the
+  lower-tail rule against a smaller mean. Against a larger mean this rule has
+  power below its null size and is beaten by constant randomization, proving
+  nonexistence of a two-sided UMP rule. The single-observation experiment also
+  describes tests observing only a normal sample mean; no reduction of all
+  full-sample tests to that experiment is claimed.
+
+- `NormalHighestDensity` proves Gaussian quantile symmetry and identifies a
+  central interval as an actual density superlevel set. Its equal-tailed interval
+  has exact posterior content and minimizes Lebesgue volume among all measurable
+  competitors, including disconnected sets, with no uniqueness assertion.
+- `EstimatedInformationIntervals` proves pointwise frequentist coverage from a
+  Gaussian sampling limit with variance `I⁻¹` and a consistent estimated
+  information `J`. Each finite-sample `J` must be positive almost surely; this is
+  an extra hypothesis, not a consequence of consistency alone. Index `n`
+  represents sample size `n+1`, so the endpoints use `sqrt(1/((n+1)J))`.
+  The studentized limit and interval inversion are derived, with no independence
+  assumption. The unequal-tail result specializes to the displayed equal-tailed
+  interval by proved normal quantile symmetry. Sampling coverage is separate
+  from posterior probability, and the inverse-information sampling variance
+  must be established; misspecified models do not automatically satisfy it.
+
+- `PosteriorInformationIntervals` controls moving events using the existing
+  uniform posterior approximation, then proves Gaussian probability convergence
+  for the changing width. This yields posterior content `1−α` for the same
+  estimated-information interval and an almost-sure pathwise version. It
+  requires positive estimated information at each sample size. The normal-mean
+  kernel corollary derives posterior approximation from bounded continuous
+  integrable priors positive at the truth and supplied center consistency;
+  it does not assume the posterior approximation itself, nor does this module
+  derive center consistency from IID observations. This transfer step is not a
+  general vector or misspecified-model Bernstein–von Mises theorem.
+
+- `UniformEndpoint` fixes the density version `1_[0,θ]/θ` for `θ>0`;
+  including the upper endpoint makes a positive observed maximum attain the
+  likelihood. The normalized Lebesgue restriction and this density are proved
+  to define the same law. With `N=n+1` independent observations, the maximum
+  divided by `θ` has the actual `Beta(N,1)` law. Its mean is `θN/(N+1)`,
+  variance is `θ²N/((N+1)²(N+2))`, and mean squared error is
+  `2θ²/((N+1)(N+2))`. These formulas yield consistency and convergence of
+  `sqrt(N)(maximum−θ)` to zero in probability. The last result is a degenerate
+  centered Gaussian limit; the source's informal exclusion of a mean-zero
+  Gaussian must be understood as excluding a nondegenerate one. The likelihood
+  for an empty sample is constant one. A positive maximum is required for the
+  positive-parameter maximizer statement; support and positivity hold almost
+  surely under the uniform model, and the theorem is applied on that event.
+  For a nonempty all-zero sample, halving any positive endpoint strictly
+  improves its likelihood, so no positive endpoint maximizes it.
