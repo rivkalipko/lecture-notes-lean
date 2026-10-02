@@ -8,8 +8,8 @@ in the PDFs.
 
 The [coverage ledger](docs/COVERAGE.md) lists every numbered theorem and
 distinguishes proved, restricted, and missing results. Major remaining work
-includes the unrestricted minimal-sufficiency criterion, curved-restriction
-Wilks asymptotics, general IID posterior regularity beyond the explicit
+includes the unrestricted minimal-sufficiency criterion, general IID
+posterior regularity beyond the explicit
 sufficient conditions, and several examples. The sharp two-sided DKW bound
 is proved for arbitrary IID real laws, including atoms. Lindeberg–Feller, Lyapunov, and Glivenko–Cantelli are now
 proved, including non-identically distributed observations for the CLT and
@@ -38,7 +38,7 @@ positive-part dominance and minimaxity are also proved among measurable rules.
 Randomized Neyman–Pearson threshold existence and calibration are proved,
 including alternatives with mass where the null density is zero. The MLR
 existence theorem permits discrete statistics and cutoffs outside their range,
-under a common strictly positive density assumption. Exact normal, Student,
+for nonnegative integrable densities with cross-product MLR, including changing supports. Exact normal, Student,
 and chi-square confidence intervals, normal test power, and Gaussian credible
 intervals are proved using a generalized-inverse quantile. Bootstrap critical
 values and interval coverage are proved conditional on convergence of the
@@ -66,8 +66,9 @@ yielding the sandwich variance under explicit regularity and consistency assumpt
 Observed-curvature consistency is proved with an integrable derivative envelope.
 The Neyman–Scott example includes actual likelihood maximization and the inconsistent
 variance limit, along with a consistent correction. Exact normal likelihood-ratio
-calibration and two-sided UMP nonexistence in the normal-observation experiment are
-proved. HPD existence now handles density plateaus on the real line, and quantile
+calibration, one-sided UMP, two-sided UMP nonexistence, and two-sided UMPU optimality are
+proved for every measurable randomized test of the full IID normal sample. Curved
+Wilks asymptotics follow under explicit smooth-chart and derivative conditions. HPD existence now handles density plateaus on the real line, and quantile
 reparameterization covers continuous non-surjective increasing maps and decreasing
 maps under explicit distributional conditions.
 The uniform-endpoint example includes the exact maximum law and moments,

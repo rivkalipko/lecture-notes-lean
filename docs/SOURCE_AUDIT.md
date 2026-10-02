@@ -149,3 +149,37 @@ zero. `EmpiricalQuantiles.lean` proves the ceiling formula for 0<q<1,
 including tied observations. Consistency of the simulated quantile needs
 a crossing condition at the chosen population quantile; it is not automatic
 for every probability level of an arbitrary discrete law.
+
+## Further moment, estimation and testing qualifications
+
+The Student-t table's mean formula requires degrees of freedom n>1; its
+variance formula requires n>2. `StudentTIntegrability` proves both exact
+thresholds, including divergence of the appropriate extended moments.
+A continuously differentiable strictly monotone transformation can have zero
+derivative. The reciprocal-derivative density formula in `DensityTransform`
+therefore explicitly requires a nonzero derivative; its inverse-derivative
+version states the alternative assumptions directly.
+
+The weighted-estimator example's unit-sum characterization of unbiasedness
+needs a nonzero fixed mean or quantification over all means. At mean zero,
+every deterministic weighted sum is unbiased. The oracle shrinkage coefficient
+can equal one at zero mean. Strict variance/risk comparisons require positive
+variance. `WeightedEstimators` and `ShrinkageImprovement` state these cases
+explicitly and do not present an unknown-parameter oracle as an implementable
+estimator.
+
+The causal identification remark needs overlap and observed/potential-outcome
+consistency in addition to conditional unconfoundedness. `CausalIdentification`
+proves the printed ATE formula with these assumptions and integrable potential
+outcomes. The normal sample-size expression is a sufficient bound derived by
+dropping a nonnegative tail from exact two-sided power; it is not the exact
+minimum sample size for a requested power. Curved Wilks asymptotics require
+local smoothness and full derivative rank, beyond set-theoretic nonredundancy
+of the restriction equations.
+
+The alternating-uniform counterexample in L3 is valid, but its positive-x
+CDF description needs correction: on 0<x<1 the two CDFs are x and 1,
+not zero and a positive value. `AlternatingUniform` proves the correct
+piecewise CDF and the nonconvergence result. `BootstrapMaximum` makes L4's
+maximum warning precise: the bootstrap endpoint-gap CDF differs by at least
+one half at zero from the actual uniform endpoint-gap CDF at every sample size.

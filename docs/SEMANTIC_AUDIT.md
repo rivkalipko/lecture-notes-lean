@@ -740,3 +740,101 @@ hypotheses and conclusions in addition to compilation.
   law, as a regular conditional-distribution formula should. Independent
   review checked the affine mean, variance subtraction and conditional-law
   orientation.
+
+## Further source-to-statement review on October 2
+
+The following modules were reviewed independently of their implementation.
+
+- `GaussianBlockConditioning` uses the rectangular cross-covariance and the
+  actual Schur complement. The conditioning covariance is positive definite;
+  the residual covariance may be singular. Conditional-law equalities are
+  marginal-almost-everywhere. `GaussianRadialMoments`, `StudentTMoments` and
+  `StudentTIntegrability` prove that Student-t is integrable exactly for n>1
+  and square-integrable exactly for n>2. Its mean is zero for n>1 and variance
+  n/(n−2) for n>2. For the other positive degrees of freedom, divergence is
+  stated using the nonnegative extended integral, not an infinite real variance.
+- `BernoulliBinomialMoments` and `PoissonMoments` connect MGFs and moments to
+  their actual probability laws, including p=0, p=1, zero binomial size and
+  zero Poisson rate. `UniformSquare` proves the actual square pushforward of
+  Uniform[0,1], its clipped-square-root CDF, Beta(1/2,1) law and density.
+  `DensityTransform` proves equality of actual pushforward density measures.
+  The reciprocal Jacobian version requires nonzero derivative, with a separate
+  source/target-set formulation for transformations with proper ranges.
+- `BinomialSample`, `BinomialConditioning`, `BinomialRaoBlackwell` and
+  `BinomialMinimal` cover L5 Example 19 for general Binomial(k,p) observations.
+  The estimator of P(X=1) is parameter independent. Conditional formulas are
+  asserted at positive-mass totals, and the estimator is zero beyond feasible
+  totals. Its factorial expression is restricted to its valid factorial range.
+  Risk reduction, unbiasedness, sufficiency and minimality use the actual
+  finite product model, retaining p=0 and p=1.
+- `WeightedEstimators` derives the actual weighted-estimator MSE before
+  optimizing it. Unbiasedness at a fixed zero mean does not require unit-sum
+  weights; unique minimum variance requires positive variance. The unrestricted
+  MSE minimizer is an oracle depending on the unknown mean and variance. At
+  mean zero its shrinkage coefficient equals one, rather than lying strictly
+  inside (0,1). `ShrinkageImprovement` proves the exact pointwise improving
+  interval and retains the variance positivity needed for strict improvement.
+- `RandomizedExperiment` uses one actual uniform fixed-size assignment and
+  its complementary control group. Observed-outcome equivalence and exact
+  design-unbiasedness of the difference in means are proved without asserting
+  independence between the two group averages. `Skewness` uses the source's
+  n−1 sample variance in its denominator and includes the resulting n/(n−1)
+  factor in the raw-moment formula.
+- `CausalIdentification` derives the conditional-product identity from actual
+  conditional independence through Mathlib's conditional distribution kernel.
+  Conditional group means are observable ratios E[Y I(D=b)|X]/P(D=b|X).
+  Positive overlap and observed/potential-outcome consistency are explicit;
+  integrability of the final contrast and the total-expectation step are proved.
+  `VectorDeltaMethod` and `VectorMethodOfMoments` derive the vector inverse-
+  moment Gaussian limit from actual IID observations and a differentiable
+  continuous inverse, with covariance AΣAᵀ and singular limits allowed.
+- `PowerAnalysis` and `NormalSamplePower` retain both normal tails. The
+  quantile sample-size/MDE expression is a sufficient power guarantee,
+  not an exact inversion of the two-sided power function. The normal sample
+  statistic's alternative law is derived from the actual IID Gaussian model.
+- `SufficientTests` preserves power at every parameter when averaging any
+  randomized test through the common sufficient kernel. `NormalFullSampleUMP`
+  therefore proves one-sided UMP and two-sided UMP nonexistence for the full
+  sample. `NormalPowerDerivative` derives the derivative under the Gaussian
+  integral for every measurable [0,1]-valued test. `NormalUnbiasedNP` and
+  `NormalUMPU` use its zero-score implication and a generalized NP comparison
+  to prove the two-sided UMPU result against all unbiased randomized tests.
+- `MLRNonnegative` removes the earlier common-positive-support restriction.
+  Pointwise cross-product MLR, nonnegative integrable normalized densities and
+  interior test size suffice for exact lower-tail randomization and UMP.
+  Power is nonincreasing, including changing supports; strictness is not claimed.
+- `CurvedWilks` uses the actual adjoint derivative of the chart to form the
+  restricted likelihood score. The common score CLT and derivative envelopes
+  yield both the joint estimator limit and LR expansion. The local chart is
+  supplied, and information has been standardized to identity coordinates.
+  Full rank of the restriction derivative determines the codimension; mere
+  set-theoretic nonredundancy does not establish that rank or chart existence.
+- `StochasticPowers` uses n+1 to match the lecture's indexing from one. Its
+  positive-variance qualification is needed for nonzero SD normalization.
+  Chebyshev's explicit constant gives ε/2<ε uniformly in n. Gaussian
+  growing-variance examples concern marginal laws and assume no independence
+  between different sample sizes.
+
+- `BootstrapMaximum` proves that the conditional bootstrap maximum has an
+  atom of at least one half at the observed maximum, uniformly in sample
+  size and even with ties. The actual uniform endpoint error is strictly
+  positive almost surely. Their gap-root CDFs therefore differ by at least
+  one half at zero for every nonempty sample, a direct failure of bootstrap
+  CDF approximation. Independent review checked both the resampling event
+  and the actual uniform sampling measure.
+- `AlternatingUniform` uses an actual Uniform[0,1] observation and its shift
+  by −1 on odd indices. It proves uniform stochastic boundedness and rules
+  out any weak limit by incompatible even/odd subsequences. On (0,1), the
+  two CDF values are x and 1; the source's claim that they alternate between
+  zero and a positive value is only correct on (−1,0).
+
+- `StochasticSampleMean` proves the n+1 sample-mean stochastic rate from actual
+  common moments and within-row pairwise independence. Its Chebyshev constant
+  remains positive when population variance is zero; no across-row independence
+  or additional distributional assumption is imposed. Independent review passed.
+
+The complete 199-module snapshot passed the source scan, 8906-job build and
+transitive proof audit: 2656 declarations, including 2347 theorem declarations,
+with no prohibited axiom dependencies. Verification-copy parity covered 206
+proof/audit/dependency files (173 unchanged Git hashes and 33 changed/new byte
+comparisons). These figures certify the included snapshot, not full coverage.
