@@ -63,7 +63,7 @@ the source. The coverage ledger separately records that obligation.
 | L5 pp5–6, weights | The unbiasedness "iff" is a statement over all possible means, not at a fixed zero mean. Strict convexity and the displayed strict shrinkage claims require positive variance, with an endpoint case when the mean is zero. |
 | L5 p7, variance asymptotic normality | Requires a finite fourth central moment, stronger than merely finite variance. |
 | L5 pp8–9, factorization proof | For continuous data, the conditional law on a statistic's fiber is generally singular with respect to ambient Lebesgue measure. The ratio `f_X(x)/f_T(T(x))` and an ambient integral over a null fiber are not a general valid proof. Use disintegration/dominated statistical models, or state an explicitly discrete theorem. Visually verified. |
-| L5 pp11–12, minimal sufficiency | Ratios must handle zero likelihoods/common null sets. A positive common-support version avoids zero denominators; it does not cover the uniform examples. |
+| L5 pp11–12, minimal sufficiency | Ratios must handle zero likelihoods/common null sets. In the translated uniform family, any sample with range greater than one has zero likelihood for every parameter; distinct extremes there cannot obey an unrestricted pointwise ratio iff with totalized 0/0. Restrict to feasible samples or formulate the criterion model-almost-surely. A positive common-support version avoids zero denominators but does not cover these uniform examples. |
 | L5 pp14–15, Rao–Blackwell example | The factorial formula is valid only in its admissible range. Outside `1 <= t <= k(n-1)+1`, the probability of one success is zero. Use a binomial-coefficient formula with explicit boundary cases. |
 | L6 p1, causal identification | Conditional unconfoundedness also needs overlap/positivity and consistency of observed and potential outcomes. |
 | L6 pp3–4, MLE first-order condition | Differentiability alone does not imply a zero score at a constrained/boundary maximum. Require an interior local maximum. Log-likelihood comparison requires positive likelihood or an extended logarithm convention. |
@@ -115,8 +115,13 @@ existence of the measurable estimator before the universal parameter
 quantifier. It derives the conditional-expectation identity, square
 integrability, mean preservation, MSE reduction, and the unbiased variance
 comparison. `sufficientKernel_of_disintegration` gives a measure-level
-criterion for the common conditional law. The general density factorization
-and minimal-sufficiency theorems remain separate unfinished work.
+criterion for the common conditional law. The general sigma-finitely dominated density factorization theorem is now
+proved in `FisherNeymanGeneral.lean`, using a countable dominating mixture and
+disintegration. Density equalities are with respect to the original dominating
+measure, and varying supports and nonintegrable carrier factors are allowed.
+General minimality follows from an explicit countable likelihood-ratio recovery
+criterion; the full normal sample mean example verifies this recovery. The
+unrestricted pointwise minimal-sufficiency ratio criterion remains unfinished.
 
 ## Follow-up semantic audit
 
@@ -124,3 +129,12 @@ and minimal-sufficiency theorems remain separate unfinished work.
 module, corrections to project definitions, and a concrete Bernoulli model
 checking the strengthened exponential-family and regular-density definitions.
 L5 p10 and L6 pp4 and 6 were additionally checked against rendered PDF pages.
+
+## Further example distinctions checked on October 2
+
+L5 Example 13 proves sufficiency for the translated interval U[θ,θ+1];
+Example 14 asserts its minimality. L5 Example 16 instead uses the increasing
+triangular density 2x/θ² on (0,θ). The positive-endpoint uniform experiment
+formalized for L6/L7 is a distinct model and is not counted as that triangular
+example. The Cauchy and Gumbel minimal-statistic examples also remain separate
+model-verification obligations.

@@ -469,3 +469,125 @@ hypotheses and conclusions in addition to compilation.
   surely under the uniform model, and the theorem is applied on that event.
   For a nonempty all-zero sample, halving any positive endpoint strictly
   improves its likelihood, so no positive endpoint maximizes it.
+
+## October 2 continuation: probability foundations
+
+- `VectorScoreCLT` constructs the covariance matrix from actual coordinate
+  covariances, proves positive semidefiniteness, and matches all scalar
+  projection variances of its Gaussian law. The CLT now has a canonical target
+  without an extra existence assumption. Singular covariance and dimension
+  zero are allowed; the linear transformation law uses `A S Aᵀ`. Its score
+  specialization uses the actual square-root-times-average statistic, and
+  centering is justified by an explicit zero-mean hypothesis.
+- `CDFConvergence` proves both directions of the lecture's CDF definition of
+  convergence in distribution. Only continuity points of the limiting CDF
+  are needed. Continuity at a point implies zero singleton mass, and half-open
+  intervals with continuity-point endpoints form a convergence-determining
+  family. The random-variable statement concerns the actual pushforward laws
+  and probabilities, allowing different sample spaces and atoms.
+- `EmpiricalUniform` proves all-real uniform empirical-CDF convergence for
+  arbitrary IID observation laws. Its countable common probability-one event
+  contains convergence of both strict and weak lower-tail empirical counts at
+  quantile partition points. This is essential for atoms. The resulting
+  uniform and supremum conclusions are stronger than the earlier pointwise
+  theorem. The partition bound has a mesh error and is not presented as the
+  sharp DKW inequality.
+- `EmpiricalSupMeasurable` reduces the real supremum to rational thresholds
+  using right continuity, approaching from above so atoms cause no gap.
+  The supremum is bounded by one and measurable. The empty-sample case is
+  separately justified before applying the empirical probability law.
+- `LindebergAnalytic`, `LindebergBounds`, and `LindebergFeller` prove the
+  non-identically distributed CLT. The characteristic-function remainder has
+  a cubic bound on small observations and a quadratic bound on the tail;
+  only second moments and the actual Lindeberg tail condition are required.
+  Replacement by Gaussian factors proves convergence of the whole product.
+  Individual normalized variances vanish and their squared sum tends to zero.
+  The source sequence theorem centers at each actual expectation, takes
+  `c_n² = sum variance`, and explicitly requires eventual `c_n > 0`.
+  `Lyapunov` proves both the normalized-row and original-sequence sufficient
+  conditions, for every positive real exponent increment, then derives their
+  CLTs. Higher-moment integrability is explicit.
+
+## October 2 continuation: statistical experiments and vector limits
+
+- `DominatedSufficiency` relates the common conditional-law kernel to
+  Radon–Nikodym factorization. `MixtureSufficiency` preserves that kernel under
+  countable mixtures. `DominatingMixture` constructs a finite dominating
+  mixture of model members from sigma-finite domination, rather than assuming
+  a dominating member exists. `FisherNeymanGeneral` proves the full density
+  factorization equivalence on nonempty standard Borel sample spaces. Density
+  equality is reference-almost-everywhere for every parameter. The carrier
+  can vanish and need not have a finite integral. The intermediate finite
+  carrier theorem is a useful normal form, not a restriction of the final
+  theorem. An infinite-valued carrier is trimmed only where every model
+  density vanishes almost everywhere, as justified in the proof.
+- `ExponentialFamilySufficiency` starts with normalized single-observation
+  densities and proves the actual product law has their product density.
+  It factors through all canonical sums and derives sufficiency; there is no
+  finite-support assumption or unproved conditional-density-on-a-fiber step.
+- `IsMinimalSufficientStatistic` means that every sufficient standard Borel
+  reduction determines the proposed statistic through one measurable map,
+  valid almost surely under each model law. Finite or countable likelihood
+  ratios plus an explicit measurable decoder prove this property. A finite
+  dominating mixture handles varying supports. This is not yet the source's
+  completely general pointwise ratio-equivalence criterion.
+- `NormalSufficiency` treats the entire product experiment, not merely the
+  experiment observing the mean. The Gaussian density ratio factors through
+  the sum; a nonzero mean contrast recovers the mean, proving minimality.
+  Known variance and sample size are positive. `UniformSufficiency` allows
+  parameter-dependent support: the maximum is sufficient for the unbounded
+  positive endpoint family, and both extremes are sufficient for the location
+  of a unit interval. These statements use actual product measures.
+- `VectorScoreAsymptotics` derives an exact linear score identity using a
+  measurable rank-one correction and bounds it by the derivative envelope.
+  It avoids selecting random mean-value points. Consistency and the curvature
+  LLN make that operator converge to the limiting curvature. Inverses only
+  need to exist with probability tending to one; singular finite-sample
+  operators are controlled through the shrinking exceptional event.
+- `VectorMLE` derives the score CLT, derivative and envelope LLNs, and interior
+  first-order equation from IID observations. Separate score covariance and
+  negative expected curvature produce the sandwich covariance. Equating the
+  covariance operator with the curvature gives the inverse-information limit.
+  Consistency and measurable interior maximization remain explicit hypotheses;
+  normalization and information identities are model obligations.
+- `BootstrapMoments` identifies all integrals against the empirical law as
+  finite sample averages. Under the actual IID resampling law, the bootstrap
+  mean has mean equal to the observed mean and variance equal to the empirical
+  variance divided by sample size. The empirical variance uses denominator n.
+  Strong consistency follows from LLNs for X and X²; no fourth moment is
+  imposed. These moment results do not assert a conditional bootstrap CLT.
+- `NormalUnknownVarianceMLE` proves global maximization of the actual normal
+  product density at the sample mean and empirical variance when that variance
+  is positive. At zero empirical variance, fitting the mean and halving any
+  positive candidate variance strictly improves the likelihood. For more than
+  one independent normal observation with positive population variance, the
+  exceptional zero-variance sample is proved null.
+
+- `DKWAnalytic` proves the Bernoulli relative-entropy bound
+  `D(p‖q) ≥ 2(p−q)²`, including p=0 and p=1 by continuity, with
+  q strictly between zero and one. This is an analytic component of a DKW
+  proof; the reverse-martingale maximal estimate and final empirical-process
+  argument are still required and are not assumed by an exported DKW theorem.
+
+- `VectorWilks` proves a deterministic quadratic remainder bound from actual
+  criterion/score derivatives and a Lipschitz derivative envelope. Tightness
+  of the normalized error and vanishing curvature error make the scaled
+  remainder negligible. Both fixed and random null points are treated.
+  `ConstrainedVectorMLE` derives the full/restricted joint root limit from the
+  same score process, retaining their dependence. Its final linear-subspace
+  theorem uses the actual projected full gradient at every subspace point,
+  derives curvature control at the moving restricted estimate, and proves
+  the chi-square law with degrees of freedom equal to codimension. Neither
+  a joint estimator limit nor a likelihood expansion is a premise of that
+  final theorem. The coordinates have identity limiting information, the
+  true parameter is zero, and both roots are consistent and stationary.
+  This does not yet prove the source's general nonlinear-restriction claim.
+
+- `LikelihoodRatioSupport` identifies the zero sets of model densities with
+  the zero sets of their Radon–Nikodym ratios under a dominating reference.
+  `UniformEndpointMinimal` then recovers the maximum from the countable
+  positive rational upper cut, using a proved measurable extended-real
+  infimum decoder. All observations and the maximum are positive almost
+  surely under the experiment and under its dominating mixture. The result
+  covers the whole unbounded positive endpoint family, without supposing
+  that one model member dominates every other member.

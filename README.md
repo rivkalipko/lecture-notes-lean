@@ -8,17 +8,31 @@ in the PDFs.
 
 The [coverage ledger](docs/COVERAGE.md) lists every numbered theorem and
 distinguishes proved, restricted, and missing results. Major remaining work
-includes Lindeberg–Feller, Glivenko–Cantelli and DKW, and sufficiency for general
-dominated continuous models, vector MLE and constrained vector Wilks asymptotics,
-general/vector Bernstein–von Mises, model-specific bootstrap validity, and several examples. A scalar IID MLE normality theorem and scalar Wilks theorem are proved under explicit
-derivative, moment, consistency, and interior-maximization conditions. A scalar
+includes the sharp DKW inequality, the unrestricted minimal-sufficiency
+criterion, curved-restriction Wilks asymptotics, general/vector
+Bernstein–von Mises, model-specific bootstrap distributional validity, and
+several examples. Lindeberg–Feller, Lyapunov, and Glivenko–Cantelli are now
+proved, including non-identically distributed observations for the CLT and
+distributions with atoms for uniform CDF convergence. The CDF characterization
+of weak convergence and measurability of the empirical supremum error are proved.
+
+General Fisher–Neyman factorization is proved for sigma-finitely dominated
+standard Borel experiments, with parameter-dependent supports and arbitrary
+measurable carriers. Exponential-family canonical sums are sufficient in the
+actual IID product experiment, and the normal sample mean is minimal sufficient
+with known positive variance. Likelihood-ratio recovery also gives a general
+minimality criterion relative to a countable dominating mixture.
+
+Scalar and vector IID MLE normality are proved under explicit derivative,
+moment, consistency, and interior-maximization conditions. The vector theorem
+keeps score covariance separate from mean curvature, gives the sandwich limit,
+and specializes to inverse information under the information identity. A scalar
 posterior approximation theorem is proved under explicit local quadraticity
 and domination conditions, verified for normal-mean kernels and bounded
 continuous priors. The James–Stein exact risk and strict dominance theorem is
 proved, including inverse-square integrability and the singular limit. The normal
 minimax lower bound, minimaxity of the identity and James–Stein rules, and
-positive-part dominance and minimaxity are also proved among measurable rules. A finite
-positive-support sufficiency theorem is proved and labeled with that restriction.
+positive-part dominance and minimaxity are also proved among measurable rules.
 
 Randomized Neyman–Pearson threshold existence and calibration are proved,
 including alternatives with mass where the null density is zero. The MLR
@@ -105,15 +119,23 @@ proofs** passed; it does not turn a missing coverage entry into a proved result.
   `FinitePopulation`.
 * Inequalities and limits: `Inequalities`, `Concentration`, `LargeSample`,
   `Convergence`, `WeakLaw`, `CramerWold`, `MultivariateCLT`, `DeltaMethod`,
-  `StochasticOrder`.
+  `StochasticOrder`, `CDFConvergence`, `VectorScoreCLT`,
+  `LindebergAnalytic`, `LindebergBounds`, `LindebergFeller`, `Lyapunov`.
 * Empirical distributions: `EmpiricalDistribution`, `Bootstrap`,
+  `EmpiricalUniform`, `EmpiricalSupMeasurable`, `BootstrapMoments`,
   `QuantileConvergence`, `BootstrapIntervals`.
 * Estimation: `Estimation`, `Sufficiency`, `EstimationTheory`, `Information`,
-  `RegularDensity`, `RegularCramerRao`, `RaoBlackwell`, `BernoulliModel`.
+  `RegularDensity`, `RegularCramerRao`, `RaoBlackwell`, `BernoulliModel`;
+  dominated sufficiency: `DominatedSufficiency`, `DominatingMixture`,
+  `MixtureSufficiency`, `FisherNeyman`, `SigmaFiniteFactorization`,
+  `FisherNeymanGeneral`, `ExponentialFamilySufficiency`, `MinimalSufficiency`,
+  `MixtureMinimalSufficiency`, `NormalSufficiency`, `UniformSufficiency`.
 * MLE and testing: `MLEConsistency`, `Testing`, `NeymanPearson`,
   `MonotoneLikelihoodRatio`, `LikelihoodRatio`, `AsymptoticTests`,
   `LogisticRegression`, `MLEAsymptotics`, `IIDScoreAsymptotics`, `WilksAnalytic`,
-  `ExponentialMLE`, `LogisticMultivariate`, `BoundaryNormalMLE`, `VectorWald`.
+  `ExponentialMLE`, `LogisticMultivariate`, `BoundaryNormalMLE`, `VectorWald`,
+  `VectorScoreAsymptotics`, `VectorMLE`, `VectorWilks`, `ConstrainedVectorMLE`,
+  `NormalUnknownVarianceMLE`.
   Threshold existence and exact power: `Quantiles`, `NeymanPearsonExistence`,
   `MLRExistence`, `NormalTestPower`.
 * Confidence and Bayesian inference: `ConfidenceSets`, `WilsonInterval`, `EllipseProjection`,
