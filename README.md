@@ -8,10 +8,10 @@ in the PDFs.
 
 The [coverage ledger](docs/COVERAGE.md) lists every numbered theorem and
 distinguishes proved, restricted, and missing results. Major remaining work
-includes the sharp DKW inequality, the unrestricted minimal-sufficiency
-criterion, curved-restriction Wilks asymptotics, general/vector
-Bernstein–von Mises, model-specific bootstrap distributional validity, and
-several examples. Lindeberg–Feller, Lyapunov, and Glivenko–Cantelli are now
+includes the unrestricted minimal-sufficiency criterion, curved-restriction
+Wilks asymptotics, general IID posterior regularity beyond the explicit
+sufficient conditions, and several examples. The sharp two-sided DKW bound
+is proved for arbitrary IID real laws, including atoms. Lindeberg–Feller, Lyapunov, and Glivenko–Cantelli are now
 proved, including non-identically distributed observations for the CLT and
 distributions with atoms for uniform CDF convergence. The CDF characterization
 of weak convergence and measurability of the empirical supremum error are proved.
@@ -26,10 +26,11 @@ minimality criterion relative to a countable dominating mixture.
 Scalar and vector IID MLE normality are proved under explicit derivative,
 moment, consistency, and interior-maximization conditions. The vector theorem
 keeps score covariance separate from mean curvature, gives the sandwich limit,
-and specializes to inverse information under the information identity. A scalar
-posterior approximation theorem is proved under explicit local quadraticity
-and domination conditions, verified for normal-mean kernels and bounded
-continuous priors. The James–Stein exact risk and strict dominance theorem is
+and specializes to inverse information under the information identity. Scalar and vector
+posterior approximation theorems are proved under explicit local quadraticity
+and domination conditions. The vector normal-mean experiment verifies these
+conditions and derives center consistency from IID sampling, for bounded
+continuous proper priors positive at the true mean. The James–Stein exact risk and strict dominance theorem is
 proved, including inverse-square integrability and the singular limit. The normal
 minimax lower bound, minimaxity of the identity and James–Stein rules, and
 positive-part dominance and minimaxity are also proved among measurable rules.
@@ -41,8 +42,12 @@ under a common strictly positive density assumption. Exact normal, Student,
 and chi-square confidence intervals, normal test power, and Gaussian credible
 intervals are proved using a generalized-inverse quantile. Bootstrap critical
 values and interval coverage are proved conditional on convergence of the
-conditional CDFs to an atomless strictly increasing limiting CDF. The
-model-specific conditional limit is still required.
+conditional CDFs to an atomless strictly increasing limiting CDF. For the
+IID sample mean, that conditional limit and the resulting basic interval
+coverage are derived under finite second moments and positive variance.
+The bootstrap-t interval is also derived under finite fourth moments, including
+rare zero-variance samples. Exact conditional quantiles are used; a separate
+Monte Carlo theorem gives simulation consistency at crossing quantiles.
 
 The exponential-rate example includes the global likelihood maximum, the
 information identities, consistency from the IID law, asymptotic normality
@@ -111,9 +116,9 @@ proofs** passed; it does not turn a missing coverage entry into a proved result.
 ## Organization
 
 * Probability and moments: `Foundations`, `ProbabilityLaws`,
-  `ConditionalExpectation`.
+  `ConditionalExpectation`, `Correlation`.
 * Gaussian distributions: `GaussianQuadraticForms`, `GaussianMahalanobis`,
-  `ChiSquaredMoments`.
+  `ChiSquaredMoments`, `GaussianConditioning`.
 * Sampling: `Sampling`, `SamplingMoments`, `NormalSampling`,
   `NormalSamplingDistribution`, `NormalFStatistic`, `NormalVarianceRisk`,
   `FinitePopulation`.
@@ -123,13 +128,17 @@ proofs** passed; it does not turn a missing coverage entry into a proved result.
   `LindebergAnalytic`, `LindebergBounds`, `LindebergFeller`, `Lyapunov`.
 * Empirical distributions: `EmpiricalDistribution`, `Bootstrap`,
   `EmpiricalUniform`, `EmpiricalSupMeasurable`, `BootstrapMoments`,
-  `QuantileConvergence`, `BootstrapIntervals`.
+  `QuantileConvergence`, `BootstrapIntervals`, `DKW`, `EmpiricalQuantiles`,
+  `MonteCarlo`, `BootstrapConditionalCLT`, `BootstrapMeanIntervals`,
+  `BootstrapStudentizedAsymptotics`, `BootstrapStudentizedIntervals`.
 * Estimation: `Estimation`, `Sufficiency`, `EstimationTheory`, `Information`,
   `RegularDensity`, `RegularCramerRao`, `RaoBlackwell`, `BernoulliModel`;
   dominated sufficiency: `DominatedSufficiency`, `DominatingMixture`,
   `MixtureSufficiency`, `FisherNeyman`, `SigmaFiniteFactorization`,
   `FisherNeymanGeneral`, `ExponentialFamilySufficiency`, `MinimalSufficiency`,
-  `MixtureMinimalSufficiency`, `NormalSufficiency`, `UniformSufficiency`.
+  `MixtureMinimalSufficiency`, `NormalSufficiency`, `UniformSufficiency`,
+  `TriangularSufficiency`, `GumbelSufficiency`, `CauchySufficiency`,
+  `BinomialTwoSufficiency`, `MethodOfMoments`, `InstrumentalVariables`.
 * MLE and testing: `MLEConsistency`, `Testing`, `NeymanPearson`,
   `MonotoneLikelihoodRatio`, `LikelihoodRatio`, `AsymptoticTests`,
   `LogisticRegression`, `MLEAsymptotics`, `IIDScoreAsymptotics`, `WilksAnalytic`,
@@ -142,7 +151,8 @@ proofs** passed; it does not turn a missing coverage entry into a proved result.
   `QuantileIntervals`, `SamplingAtomlessness`, `NormalConfidenceIntervals`, `BayesianUpdating`,
   `NormalConjugacy`, `BetaConjugacy`, `GammaConjugacy`, `ExponentialConjugacy`,
   `PosteriorAsymptotics`, `NormalPosteriorLimit`, `HighestDensity`, `HighestDensityExistence`,
-  `BayesianDecision`, `BayesianTesting`.
+  `BayesianDecision`, `BayesianTesting`, `VectorPosteriorAsymptotics`,
+  `VectorNormalSamplePosterior`.
 * Decision theory: `DecisionTheory`, `NormalMeansDecision`, `GaussianStein`,
   `NormalSteinRisk`, `RegularizedStein`, `JamesSteinRisk`, `JamesStein`,
   `SteinDecision`, `EmpiricalBayesStein`, `NormalDecisionExamples`,

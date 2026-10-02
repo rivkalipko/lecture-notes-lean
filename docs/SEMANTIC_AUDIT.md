@@ -565,9 +565,7 @@ hypotheses and conclusions in addition to compilation.
 
 - `DKWAnalytic` proves the Bernoulli relative-entropy bound
   `D(p‖q) ≥ 2(p−q)²`, including p=0 and p=1 by continuity, with
-  q strictly between zero and one. This is an analytic component of a DKW
-  proof; the reverse-martingale maximal estimate and final empirical-process
-  argument are still required and are not assumed by an exported DKW theorem.
+  q strictly between zero and one. This analytic component is used in the completed DKW proof described below.
 
 - `VectorWilks` proves a deterministic quadratic remainder bound from actual
   criterion/score derivatives and a Lipschitz derivative envelope. Tightness
@@ -591,3 +589,154 @@ hypotheses and conclusions in addition to compilation.
   surely under the experiment and under its dominating mixture. The result
   covers the whole unbounded positive endpoint family, without supposing
   that one model member dominates every other member.
+
+
+## October 2 continuation: sample variance and further posterior/examples
+
+- `VarianceAsymptotics` proves L5 Examples 7 and 8 for the actual sample
+  variance with denominator n−1. Its exact finite-sample decomposition reduces
+  the centered empirical variance to an average of squared centered observations
+  and a negligible squared sample-mean error. Second moments suffice for strong
+  consistency; the CLT explicitly requires a finite fourth central moment.
+  Its target variance is proved equal to the fourth central moment minus squared
+  population variance, including a zero limiting variance. The deterministic
+  correction for denominator n−1 is derived, and n=0/1 are excluded only
+  eventually. Independent review against both source examples found no
+  normalization or hypothesis gap.
+- `RationalIntervalDecode` supplies a common measurable decoder of an interval
+  from countably many rational membership indicators. `UniformLocationMinimal`
+  uses it to recover both sample extremes from likelihood-support information.
+  The sample range is strictly less than one almost surely under every
+  translated-uniform model and under the dominating mixture. This avoids the
+  source's undefined all-zero likelihood ratios for impossible samples.
+- `TriangularSufficiency` constructs the normalized strict-support density
+  2x/θ² on (0,θ), proves its IID product factorization, and establishes maximum
+  sufficiency. `TriangularEndpointMinimal` uses strict rational upper cuts to
+  prove minimality for this same experiment; it does not substitute a uniform
+  density or change the source's endpoint convention.
+- `VectorGaussianKernel`, `VectorPosteriorAsymptotics`, and
+  `VectorNormalPosteriorLimit` extend the scalar posterior argument to Euclidean
+  parameters. The target Gaussian has covariance A Aᵀ for any invertible scale
+  factor A, without assuming A is symmetric. The dimension-power scaling and
+  absolute determinant in the affine Jacobian are proved for the actual
+  posterior pushforward. Local quadratic convergence, prior continuity and
+  positivity, and a global integrable envelope imply a uniform bound over all
+  measurable events tending to zero. The normal-mean model verifies the
+  envelope and evidence conditions for bounded continuous integrable priors.
+  Independent review checked covariance orientation, Jacobians, normalization,
+  and that the target posterior approximation is derived rather than assumed.
+
+- `VectorNormalSamplePosterior` connects the quadratic kernel to the actual
+  normalized multivariate Gaussian density, proves the product-likelihood
+  centering identity, and derives almost-sure posterior approximation under
+  IID sampling. The strong law supplies center consistency; it is not a
+  premise of the final IID theorem. Its scaling is √(n+1) for samples of size
+  n+1. The sample average also globally maximizes the actual density product.
+  A second reviewer checked this connection independently.
+- `LindebergRows` allows each triangular-array row its own measurable sample
+  space and probability law. The proof remains row-local: characteristic
+  functions factor within a row, and only the stated variance normalization
+  and Lindeberg tails connect the rows. The conclusion uses Mathlib's actual
+  dependent-space distributional convergence. This permits the empirical
+  resampling law to change with sample size without a fictitious fixed law.
+
+- The completed sharp DKW proof now spans `DKWCensorBridge`, `DKWMaximal`,
+  `DKWGrid`, `DKWQuasiconcavity`, `DKWEvents`, `DKWUniform`,
+  `DKWQuantileCoupling`, and `DKW`. The conditional-expectation identity is
+  proved for actual IID uniform observations by finite tilted measures and
+  censoring; reversing threshold order gives the filtration. Doob's inequality
+  controls all finite-grid crossings at once. Quasiconcavity, quasiconvexity,
+  the Bernoulli entropy bound, and Sion's theorem provide a common tilt with
+  an arbitrarily small slack; taking the slack to zero gives the exact rate.
+  Integer count witnesses replace the continuum by finitely many thresholds.
+  Reflection handles lower tails without discarding ties. The generalized
+  inverse transports the entire product law and bounds the actual supremum
+  event for arbitrary laws, with no atomlessness assumption on the data.
+  Independent review checked the full assembled statements and rate. The
+  PDF's absolute-value bars are present: the extracted text loses them, as
+  recorded by the earlier visual source audit. The lower-deviation theorem
+  is an additional corollary of the main two-sided source statement.
+
+- `MethodOfMoments` derives scalar inverse-moment consistency from the IID
+  strong law and its asymptotic law from the actual IID CLT and delta method.
+  The inverse is continuous and differentiable as explicitly stated, and
+  identification at the population moment is required. A zero inverse
+  derivative is allowed. The normal moment equations yield the empirical
+  variance with denominator n; exponential alternatives identify positive
+  rates from their actual first and second moments. These do not assert
+  generic multivariate inverse-moment asymptotics.
+- `InstrumentalVariables` starts from the residual Y−α−βD, zero mean, zero
+  instrument covariance, and nonzero covariance between instrument and D.
+  It derives the displayed population ratios and proves that their empirical
+  counterparts uniquely solve the sample equations. Strong covariance and
+  slope consistency use L² coordinates, allowing dependence within a draw.
+  No causal interpretation is inferred beyond the supplied moment conditions.
+- `UnbiasedNonexistence` proves L5 Example 2 for the actual product Bernoulli
+  experiment, allowing every real-valued estimator on the finite sample
+  space. The expectation is bounded uniformly across parameter values,
+  whereas 1/p is unbounded near zero. This is a different valid proof from
+  the source's polynomial argument. Independent review matched all three
+  modules above to the directly read L5/L6 source passages.
+
+- `GumbelSufficiency` normalizes the actual Gumbel location density and derives
+  sufficiency and minimality of the sum of exp(−X). `CauchyPolynomial` and
+  `CauchySufficiency` recover the full sorted Cauchy location sample from a
+  countable likelihood-ratio representation. Complex roots retain repeated
+  observations and their multiplicities. `BinomialTwoSufficiency` uses the
+  actual three-point Binomial(2,p) law on the full closed parameter interval;
+  the endpoints are not removed by the positive-density reference used for
+  minimality. Its normalizer and finite-product factorization are proved.
+- `UniformCDFConvergence` proves uniform convergence of real-line CDFs from
+  pointwise convergence to an atomless limiting law. The approximating laws
+  may have atoms, and the limit may have flat portions. `RowStudentization`
+  proves CDF convergence after division by a scale tending to one in its
+  row probability, with sample spaces and laws allowed to vary by row.
+  Zero or negative scales lie in a vanishing bad event. An independent
+  review checked the signs of both CDF bounds and these scope conditions.
+- `Correlation` proves the covariance equality characterization by almost-sure
+  affine dependence and the absolute-correlation characterization under
+  positive variances. Its finite-second-moment and nondegeneracy assumptions
+  are explicit. Independent review matched the statement to L1.
+- `BootstrapLindeberg` derives the actual centered empirical Lindeberg tails
+  from a finite second moment, using truncated strong laws.
+  `BootstrapConditionalCLT` then obtains the conditional sample-mean CLT
+  under the actual resampling law, with a law that changes with sample size.
+  `BootstrapMeanIntervals` derives basic interval coverage with reversed
+  conditional-quantile endpoints and no independence of endpoints and data.
+  Positive population variance is required; the conditional quantile limit
+  and its measurability are proved. Independent review checked this entire
+  composition against the bootstrap and confidence-interval passages.
+
+- `BootstrapVarianceMoments` and `BootstrapVarianceConsistency` derive the
+  resampled variance and scale consistency from actual conditional moment
+  bounds and the original-sample strong law. `BootstrapStudentizedLaw`,
+  `BootstrapStudentizedAsymptotics`, and `BootstrapStudentizedIntervals`
+  retain the actual statistic and quantiles even when finite-sample variances
+  vanish. Such cases lie in events proved to have probability tending to zero.
+  The final bootstrap-t interval theorem uses finite fourth moments, positive
+  population variance and exact conditional quantiles; it derives nominal
+  coverage b−a. Independent review checked tail orientation, the n+1 scaling,
+  both zero-variance exceptions, and that no limit conclusion is a premise.
+- `EmpiricalQuantiles` proves sorting preserves empirical laws and identifies
+  the exact ceiling-rank quantile, retaining observation multiplicities.
+  `BinaryInstrument` proves covariance factorization by the two empirical
+  group proportions and derives the group-means ratio and relevance criterion.
+  Independent review checked both modules against L2/L4 and L6 respectively.
+  The ratio equality alone uses total real division; its statistical use
+  additionally requires the separately characterized nonzero first stage.
+
+- `MonteCarlo` derives the IID pushforward law of a separately applied
+  statistic, then proves simulation consistency for integrable means, fixed
+  measurable-event probabilities, square-integrable sample variances, and
+  empirical quantiles under the stated crossing condition. Atoms and bounded
+  supports are allowed; a flat CDF at the selected level may prevent quantile
+  convergence. Independent review checked these conditions and the nonempty
+  empirical-law indexing. Simulation error is distinct from replacing the
+  unknown population by an estimated law.
+- `GaussianConditioning` derives an actual regular conditional law from an
+  independent Gaussian regression residual. Its scalar conditioning variance
+  is positive, while the Schur-complement residual variance may vanish. The
+  formula holds almost everywhere under the conditioning variable's marginal
+  law, as a regular conditional-distribution formula should. Independent
+  review checked the affine mean, variance subtraction and conditional-law
+  orientation.

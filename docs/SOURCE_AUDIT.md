@@ -136,5 +136,16 @@ L5 Example 13 proves sufficiency for the translated interval U[θ,θ+1];
 Example 14 asserts its minimality. L5 Example 16 instead uses the increasing
 triangular density 2x/θ² on (0,θ). The positive-endpoint uniform experiment
 formalized for L6/L7 is a distinct model and is not counted as that triangular
-example. The Cauchy and Gumbel minimal-statistic examples also remain separate
-model-verification obligations.
+example. The Cauchy and Gumbel minimal-statistic examples are now proved separately
+for their actual normalized location families in `CauchySufficiency.lean` and
+`GumbelSufficiency.lean`. The full sorted Cauchy sample retains multiplicities.
+
+## Simulation quantile convention
+
+L2 §2.2 and L4's bootstrap algorithm display a floor(B*q) order-statistic
+index. With the notes' generalized-inverse definition `inf{x : F(x) ≥ q}`,
+the exact one-based empirical rank is ceiling(B*q); floor(B*q) can even be
+zero. `EmpiricalQuantiles.lean` proves the ceiling formula for 0<q<1,
+including tied observations. Consistency of the simulated quantile needs
+a crossing condition at the chosen population quantile; it is not automatic
+for every probability level of an arbitrary discrete law.
