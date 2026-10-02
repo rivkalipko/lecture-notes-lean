@@ -9,7 +9,9 @@ in the PDFs.
 The [coverage ledger](docs/COVERAGE.md) lists every numbered theorem and
 distinguishes proved, restricted, and missing results. Major remaining work
 includes general IID posterior regularity beyond the explicit sufficient
-conditions, bootstrap bias correction, and several examples. The literal
+conditions and some generality and numerical-law identifications recorded
+in the ledgers. Bootstrap bias correction now has separate expectation-level,
+conditional and simulation proofs under their stated sufficient conditions. The literal
 pointwise minimal-sufficiency criterion in the source is false; a checked
 null-point counterexample explains the almost-sure formulation used here. The sharp two-sided DKW bound
 is proved for arbitrary IID real laws, including atoms. Lindeberg–Feller, Lyapunov, and Glivenko–Cantelli are now
@@ -97,7 +99,20 @@ variance. Linear and curved constrained score tests have chi-square limits
 with codimension as degrees of freedom under explicit derivative and chart
 conditions. ROC frontiers include the endpoint budgets, and targeting uses
 the actual population-mixture budget. The Poisson example has certified
-statistic bounds, test decisions, and p-value ordering.
+statistic bounds, test decisions, p-value ordering, and actual-model MLE,
+information, LR/score/Wald limits and null calibration, including boundary samples.
+Bernoulli odds and likelihood-ratio inversion, Gamma–Poisson posterior
+concentration, finite-grid confidence inversion and simultaneous rectangles
+are also formalized. Fitted-normal mean bootstrap limits and an exact
+fitted-uniform endpoint pivot distinguish the two parametric resampling models.
+
+Bootstrap bias proofs control actual expected Taylor remainders using finite
+fourth moments. Exact quadratic correction has an explicit residual bias;
+the general corrected-expectation theorem uses bounded observations and bounded
+second/third derivatives. Simulated bias has an actual joint data/index error
+bound with n/B→0 under the stated smoothness and Lipschitz assumptions.
+The classifier sample-size example is numerically certified, and Bernstein's
+variance-sensitive bound is proved from its exponential-series argument.
 
 The [source audit](docs/SOURCE_AUDIT.md) records mathematical corrections and
 extra hypotheses. The thirteen source PDFs are preserved unchanged. Compilation

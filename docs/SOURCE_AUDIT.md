@@ -121,7 +121,9 @@ disintegration. Density equalities are with respect to the original dominating
 measure, and varying supports and nonintegrable carrier factors are allowed.
 General minimality follows from an explicit countable likelihood-ratio recovery
 criterion; the full normal sample mean example verifies this recovery. The
-unrestricted pointwise minimal-sufficiency ratio criterion remains unfinished.
+unrestricted pointwise minimal-sufficiency ratio criterion is false as stated,
+as proved in `PointwiseMinimalityCounterexample.lean`. The coverage ledger
+records the valid almost-everywhere formulation and its recovery hypothesis.
 
 ## Follow-up semantic audit
 
@@ -220,3 +222,28 @@ review against the notes before the complete 224-module audit.
   generally has fluctuation of order (nB)^(-1/2); making this negligible
   relative to 1/n requires a stronger growth condition such as B/n→∞.
   The separate first-order interval-coverage theorem only needs B→∞.
+
+
+## Additional checked examples and qualifications
+
+- L3's 26,492-observation classifier guarantee is certified by a finite
+  rational exponential-series bound. The simultaneous guarantee allows
+  dependent classifier errors on a common test set; each classifier still
+  needs independent test observations, excluding adaptive reuse without
+  further conditions.
+- Bernstein's bound is variance-sensitive, but its comparison with Hoeffding
+  also depends on the deviation ε. The checked sufficient comparison is
+  2v+(2/3)(b−a)ε ≤ (b−a)²/2; small variance alone is not an ordering for all ε.
+- L6's uniform-endpoint log-density derivatives hold away from the moving
+  boundary x=θ and therefore sampling-almost everywhere. The actual score
+  has mean −1/θ, so both regular information identities fail. For N
+  observations the genuine squared-score information is N²/θ², not N times
+  the one-observation value. The formal source bound based on N/θ² is
+  explicitly distinguished from this actual information.
+- The corrected-estimator bias conclusion uses expectation-level estimates.
+  `BootstrapBiasCorrection` proves the expectation result under bounded data
+  and bounded second/third derivatives. `BootstrapBiasAsymptotics` proves
+  finite-fourth-moment accuracy of the exact conditional bias estimate, and
+  `BootstrapBiasMonteCarloAsymptotics` adds actual simulation error under a
+  Lipschitz condition and n/B→0. These are separate results with separate
+  hypotheses.

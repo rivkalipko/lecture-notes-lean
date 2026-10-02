@@ -79,8 +79,8 @@ statistical theorems.
 | `Sampling`, `SamplingMoments`, `FinitePopulation` | Mean denominator `n`, sample-variance denominator `(n : Real) - 1`; positivity of sample/population sizes; off-diagonal and diagonal covariance terms; HT population-mean normalization `1/N`; actual uniform-subset design and inclusion probabilities; finite-population correction, including one draw and the census case. |
 | `NormalSampling`, `NormalSamplingDistribution`, `GaussianQuadraticForms`, `GaussianMahalanobis`, `NormalFStatistic`, `ChiSquaredMoments`, `NormalVarianceRisk` | Independence is joint where needed; mean variance is `v/n`; residual rank and t degrees of freedom are `n-1`; nonzero random denominators follow almost surely; F statistic includes the population-variance ratio; matrix projections require symmetry and idempotence; Mahalanobis covariance is positive definite; fourth normal moment is proved, not assumed; `v^2` denotes the notes' fourth power of the standard deviation. |
 | `Inequalities`, `Concentration` | Hölder absolute values and conjugate exponents; Markov/Chebyshev thresholds; Hoeffding exponent and interval width; independent bounded observations. The subgaussian auxiliary bound at zero variance proxy is only its totalized, possibly uninformative extension; the statistical Hoeffding formulas require positive interval width and sample size. |
-| `LargeSample`, `Convergence`, `WeakLaw`, `CramerWold`, `MultivariateCLT`, `DeltaMethod`, `StochasticOrder` | Centering, square-root scaling, finite moments, common versus separate probability spaces, all five convergence implications, Slutsky division limit, every linear projection in Cramér–Wold, transformed delta-method variance, measurability of the divided difference, and uniform-in-n stochastic-order quantifiers. The multivariate CLT specifies the target through Gaussian projection laws; it does not construct a target from a covariance matrix. The source CDF characterization of weak convergence still lacks a formal equivalence bridge. |
-| `EmpiricalDistribution`, `Bootstrap` | The CDF uses `<=`; indicator expectation and variance are actual probabilities; consistency and concentration quantify over a fixed threshold. They do not imply the still-missing uniform DKW result. Bootstrap samples use independent indices drawn with replacement from the uniform index law. |
+| `LargeSample`, `Convergence`, `WeakLaw`, `CramerWold`, `MultivariateCLT`, `DeltaMethod`, `StochasticOrder` | Centering, square-root scaling, finite moments, common versus separate probability spaces, all five convergence implications, Slutsky division limit, every linear projection in Cramér–Wold, transformed delta-method variance, measurability of the divided difference, and uniform-in-n stochastic-order quantifiers. The multivariate CLT specifies the target through Gaussian projection laws; it does not construct a target from a covariance matrix. The CDF equivalence bridge was subsequently completed in `WeakCDF`. |
+| `EmpiricalDistribution`, `Bootstrap` | The CDF uses `<=`; indicator expectation and variance are actual probabilities; consistency and concentration quantify over a fixed threshold. The separate uniform DKW and Glivenko–Cantelli results were subsequently completed; see the coverage ledger. Bootstrap samples use independent indices drawn with replacement from the uniform index law. |
 | `Estimation`, `EstimationTheory`, `Sufficiency`, `RaoBlackwell` | Measurable statistics, integrable unbiasedness, parameter independence of factors and estimators, correct shrinkage bias and variance coefficients, and nonzero likelihood ratios. Finite sufficiency concerns conditional masses on positive common support; minimality is the fiber reduction criterion. General sufficiency uses one conditional kernel for the model, with parameter-specific exceptional null sets. The Rao–Blackwell conclusion is `exists g, for all theta`, so it gives one estimator for the entire model. |
 | `Information`, `RegularDensity`, `RegularCramerRao` | The covariance bound includes zero variance. Positive finite information and score second moments are explicit. Density normalization is differentiated under integrable bounds twice. The estimator's mean derivative is derived using an integrable bound on the estimator times the density derivative. An open domain and a parameter in that domain appear in the results. These assumptions are stronger and more explicit than the insufficient log-Hessian domination condition printed in the notes. |
 
@@ -111,11 +111,14 @@ built, the source scan rejects proof placeholders and forbidden shortcuts,
 and the transitive dependency audit rejects all axioms except Lean's standard
 `propext`, `Classical.choice`, and `Quot.sound`.
 
-Full lecture coverage remains incomplete, particularly Lindeberg–Feller,
-Glivenko–Cantelli/DKW, general density factorization and minimal sufficiency,
-distribution transformations, and several examples and algorithms. Some
-included proofs apply Mathlib results instead of reproducing the lecture proof
-line by line. No claim of complete transcription follows from this audit.
+At this initial audit snapshot, Lindeberg–Feller, Glivenko–Cantelli/DKW,
+general density factorization, distribution transformations and several
+examples were still pending. They were subsequently completed as detailed
+in the dated additions below and the current coverage ledger. The unrestricted
+pointwise minimal-sufficiency criterion is false; its counterexample and valid
+almost-everywhere scope are recorded there. Some included proofs apply Mathlib
+results instead of reproducing the lecture proof line by line. No claim of
+complete transcription follows from this historical audit.
 # September 29 additions
 
 The new Lectures 7–13 were compared against the supplied PDFs, using both
@@ -946,3 +949,60 @@ with no prohibited dependencies. Verification-copy parity covered 257 files:
 230 unchanged Git object hashes and 27 changed/new byte comparisons. The
 26 added modules contain 161 source theorem declarations, 31 definitions and
 7 instances. These checks certify this snapshot, not all remaining material.
+
+
+## Model-specific inference and bias review (2026-10-02)
+
+Independent review checked the fitted-normal and fitted-uniform resampling
+laws, actual refitted maxima, finite-sample laws, conditional moment/CDF limits
+and simulation variance statements. Zero fitted variance is a point mass;
+interior normal likelihood maximization is only claimed with positive empirical
+variance. Uniform endpoint normalization uses the fitted endpoint conditionally
+and the true endpoint for the original sampling pivot.
+
+The seven Poisson modules were reviewed in full against their model and source:
+normalized product masses, all-zero likelihood boundary, open-domain suprema,
+actual derivatives and information, two verified L’Hôpital steps, same-sample
+Slutsky equivalence, and exact/asymptotic calibration. The Bernoulli odds and
+likelihood-ratio modules were independently reviewed, including their different
+finite-boundary conventions. Gamma–Poisson concentration uses actual conjugate
+posterior moments and IID sampling consistency. Rectangle inversion retains
+absolute errors and positive scales.
+
+The exact quadratic bootstrap-bias formulas and central fourth-moment sum
+expansion were reviewed independently. Taylor expectation bounds explicitly
+establish integrability. Monte Carlo error is measured on the actual product
+of complete resamples, then transferred to the actual joint data/index law.
+Finite-variance Lipschitz simulation control uses n/B→0 for the 1/n bias scale.
+This statement is distinct from both first-order interval coverage and a claim
+about the expectation of the corrected estimator.
+
+The classifier guarantee uses the actual bounded-observation Hoeffding bound,
+a finite union bound and a rational exponential-series calculation; no
+independence between classifiers is assumed. The probability examples preserve
+the strict thirty-percent threshold and both endpoints of the income band.
+
+The additional semantic review checked actual expected bootstrap-corrected
+bias separately from bias-estimation consistency. The former uses bounded IID
+observations, C³ regularity, bounded second and third derivatives, and explicit
+domination; the simulation theorem instead proves convergence in probability
+under joint data/index laws. Bernstein's exact constants, the zero-variance
+case, and its conditional comparison with Hoeffding were checked. The uniform
+endpoint counterexample uses the actual full-sample information N²/θ², so it
+does not incorrectly invoke the regular information-additivity identity.
+
+Independent review also passed the ordinary finite-second-moment mean
+intervals, grid confidence sets (including zero coverage off the grid), the
+squared-mean delta limit, and both known-variance normal information identities.
+The Edgeworth cancellation theorem concerns a fixed argument and explicitly
+assumes the actual CDF expansions; it does not establish their existence.
+The Erlang CDF proof integrates the actual Gamma density and checks rational
+numerical bounds. Its Gaussian-square interpretation is a separate next step.
+
+The complete 284-module snapshot passed the source scan, 8991-job build and
+transitive proof audit: 3760 declarations, including 3358 theorem declarations,
+with no prohibited dependencies. Verification-copy parity covered 291 files:
+256 unchanged Git object hashes and 35 changed/new byte comparisons. The
+34 added modules contain 230 source theorem declarations, 34 definitions and
+4 instances. This certifies the included statements with their recorded
+hypotheses; the remaining scope qualifications still apply.

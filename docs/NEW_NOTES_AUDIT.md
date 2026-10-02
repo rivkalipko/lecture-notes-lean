@@ -239,3 +239,23 @@ SHA-256 values for the added PDFs:
   negative curvature give W=1/8 and LM=1/2, while the actual density likelihood
   ratio gives LR=1−log2, strictly between them. Thus a blanket normal-family
   LM≤LR≤W assertion is false, even at an interior variance estimate.
+
+
+## Boundary and simulation checks in the model-specific completion
+
+- Positive-rate Poisson likelihood has no maximizer for an all-zero sample,
+  although its supremum equals the maximum in the nonnegative-rate extension.
+  The event has probability exp(−n·r), positive at every finite n when r>0,
+  and tending to zero. No finite-sample score equation is asserted there.
+  The Wald formula at a zero estimate is totalized to zero; its regular
+  asymptotic calibration is only claimed at a positive true rate.
+- Bernoulli odds require an interior population parameter. Empirical boundary
+  samples occur with positive probability at finite n and cannot simply be
+  excluded almost surely. Local measurable delta-method arguments permit
+  their explicitly totalized values and establish the stated limits.
+- Correctly specified uniform parametric resampling reproduces the normalized
+  endpoint-gap pivot exactly. This is a formal positive result alongside the
+  empirical-resampling failure example, not a general bootstrap guarantee.
+- The standardized bivariate maximum in L11 retains both absolute values,
+  checked against the PDF. Finite-grid inversion covers only included grid
+  parameters; interpolation needs a separate mathematical argument.
