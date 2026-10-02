@@ -838,3 +838,54 @@ transitive proof audit: 2656 declarations, including 2347 theorem declarations,
 with no prohibited axiom dependencies. Verification-copy parity covered 206
 proof/audit/dependency files (173 unchanged Git hashes and 33 changed/new byte
 comparisons). These figures certify the included snapshot, not full coverage.
+
+
+## Further distribution and inference review (2026-10-02)
+
+- `JointDistributions`, `ConditionalDensities`, `ConditionalDensityLaws`, and
+  `DensityDerivatives` connect joint CDFs, marginals, density ratios and mixed
+  derivatives to actual measures. Conditional density identities hold under
+  the actual conditioning marginal almost everywhere; positive finite marginal
+  density is derived there. The mixed derivative has sufficient continuity and
+  integrable domination assumptions, rather than relying on CDF continuity.
+- `PValues` and `PValueAsymptotics` prove exact upper-tail calibration for
+  atomless laws, allowing flat CDF portions. The normal two-sided formula has
+  the actual uniform law, including endpoints; its asymptotic calibration is
+  tied to the finite-second-moment sample t statistic in `MeanTests`.
+- `TwoSampleLindeberg`, `TwoSampleMeanCLT`, and `TwoSampleWelch` derive the
+  unequal-variance two-sample pivot under finite second moments, with both
+  sample sizes diverging and no assumed limit for their ratio. The estimated
+  standard error uses denominator n−1 variances. Finite zero estimated standard
+  errors do not invalidate the proved asymptotic result.
+- `GaussianVarianceTests` uses the actual normal variance pivot with n−1
+  degrees of freedom, an unrestricted unknown mean, and the correct lower-tail
+  rejection direction. Its power is antitone in the true positive variance.
+- `BootstrapVarianceLaw`, `RowPerturbation`, `BootstrapVarianceAsymptotics`, and
+  `BootstrapVarianceIntervals` derive the actual conditional sample-variance
+  law, uniform CDF and quantile convergence, and basic interval/test calibration.
+  Finite fourth moments and positive variance of squared centered observations
+  suffice. A second-moment resampling remainder estimate avoids imposing an
+  eighth moment. The n−1 correction, measurable quantiles and exact cancellation
+  of the unknown positive scale are proved. These are exact conditional
+  quantiles; a fixed Monte Carlo budget is not treated as exact.
+- `LinearContrasts` and `PretrendTests` derive rectangular covariance AΣAᵀ,
+  the transformed Gaussian law, the exact placebo difference-in-differences
+  formula and null equivalence, and the joint Wald calibration from a joint
+  mean-vector CLT. No independence between periods is assumed. Only the final
+  contrast covariance must be positive definite for ordinary inverse Wald
+  calibration; singular input covariance is allowed.
+- `HighestDensityNoninvariance` gives an actual Beta(2,1) posterior and a
+  strictly increasing cube reparameterization. Its original HPD region has
+  minimum volume and content 16/25. The transformed region has length 98/125,
+  while a competing region with the same transformed content has length 64/125.
+
+The complete 224-module snapshot passed the source scan, 8931-job build and
+transitive proof audit: 2918 declarations, including 2588 theorem declarations,
+with no prohibited dependencies. Verification-copy parity covered 231 files:
+205 unchanged Git object hashes and 26 changed/new byte comparisons.
+Independent review also passed for `IndependentLimits`,
+`GaussianIndependentContrasts`, `VectorSampleMeans`, `TwoSampleVectorCLT`,
+`CovariateBalance` and `MeanVarianceAsymptotics`. The actual allocation covariance,
+total-sample-size Wald scaling, singular joint mean/variance limit, and positive
+influence variance qualification for standardization were checked explicitly.
+These checks certify the included snapshot, not all remaining source material.

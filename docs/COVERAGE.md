@@ -76,3 +76,22 @@ The Gaussian sampling proofs use the notes' centering projection. Its rank,
 Gaussian image law, and independence from the sample mean are all proved.
 The fourth standard-normal moment is derived by differentiating the known
 moment-generating function; it is not supplied as a hypothesis of the risk results.
+
+
+## Further completed definitions and examples
+
+[JointDistributions](../LectureNotes/JointDistributions.lean),
+[ConditionalDensities](../LectureNotes/ConditionalDensities.lean), and
+[ConditionalDensityLaws](../LectureNotes/ConditionalDensityLaws.lean) prove L1's
+joint CDF, marginal CDF limits, density marginalization, discrete marginal sums,
+positive-atom conditioning, and actual conditional density ratios marginal-almost
+everywhere. [DensityDerivatives](../LectureNotes/DensityDerivatives.lean) proves
+the univariate and mixed CDF derivative formulas under sufficient continuity and
+domination. [BinomialSum](../LectureNotes/BinomialSum.lean) identifies the actual
+IID Bernoulli sum with the binomial law, including empty sums and boundary
+parameters, and connects the finite count-space model to Mathlib's law.
+
+The actual one-sample and two-sample t asymptotics, nonlinear mean/variance
+sampling CLT, and conditional variance bootstrap are tracked in the new-notes
+ledger. General convolution/sample-mean density formulas, shifted-lognormal
+sampling, and the remaining unequal-inclusion sampling examples are still open.

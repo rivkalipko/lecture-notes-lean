@@ -76,6 +76,16 @@ consistency, and a zero square-root-scale limit. Estimated-information intervals
 have separate proved frequentist-coverage and posterior-content results under
 their stated sampling, approximation, and positivity conditions.
 
+The density formulas now identify actual joint, marginal and conditional laws,
+with the analytic conditions needed for CDF differentiation. Exact and asymptotic
+p-value calibration, finite-second-moment one-sample t tests, and unequal-variance
+Welch tests are proved. Two independent vector samples give the balance-test CLT
+and Wald calibration; pre-trend contrasts retain the full covariance from shared
+baseline periods. Bootstrap sample-variance intervals and tests use the actual
+conditional resampling law under finite fourth moments. The nonlinear function
+of mean and variance has its joint influence-function CLT and delta-method limit;
+its conditional bootstrap extension is still being completed.
+
 The [source audit](docs/SOURCE_AUDIT.md) records mathematical corrections and
 extra hypotheses. The thirteen source PDFs are preserved unchanged. Compilation
 certifies the formal statements; it does not establish complete coverage or

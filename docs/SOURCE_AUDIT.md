@@ -183,3 +183,16 @@ not zero and a positive value. `AlternatingUniform` proves the correct
 piecewise CDF and the nonconvergence result. `BootstrapMaximum` makes L4's
 maximum warning precise: the bootstrap endpoint-gap CDF differs by at least
 one half at zero from the actual uniform endpoint-gap CDF at every sample size.
+
+
+### Additional density and sampling checks (2026-10-02)
+
+Continuity of a joint CDF does not imply the existence of a joint Lebesgue
+PDF or the mixed derivative formula. `DensityDerivatives` proves the formula
+for a continuous actual joint density with an integrable section bound;
+`ConditionalDensityLaws` identifies density ratios marginal-almost everywhere,
+not at every conditioning value. Discrete ratios require a positive-mass
+conditioning atom. The count-space and real Bernoulli/binomial laws, including
+boundary parameters and empty sums, agree with the corresponding Mathlib laws.
+The new density and binomial-sum modules passed direct builds and an independent
+review against the notes before the complete 224-module audit.

@@ -5,6 +5,17 @@ sources. Lectures 7–13 are new. All thirteen PDFs are preserved unchanged.
 This document records mathematical corrections; it is not a claim that every
 source result has been proved. See the coverage ledger for proof status.
 
+* The targeting remark conflates a cap on the total fraction audited with a
+  cap on the audit rate among compliant firms. Neyman–Pearson size controls
+  the latter. A population audit budget must use the mixture distribution
+  of compliant and non-compliant firms, with their prevalence specified.
+
+* A nonzero gradient of h(mean, variance) does not itself ensure positive
+  asymptotic variance. For symmetric observations taking values −1 and 1,
+  h(mean, variance)=variance has nonzero gradient but a constant squared
+  centered observation. Standardized tests and continuous bootstrap-quantile
+  calibration require positive variance of the influence function.
+
 ## Lecture 7: MLE theory
 
 * The three assumptions printed in Theorem 1 (identification, common support,
@@ -83,6 +94,17 @@ source result has been proved. See the coverage ledger for proof status.
   hypothesis specified. Reparameterization can change Wald statistics.
 * The Poisson example has `W=20`, `LM=100/6`, and
   `LR=200*(5*log(5/6)+1)`. A χ² approximation does not give exact finite-sample size.
+
+* Shared baseline estimates generally contribute off-diagonal terms to the
+  pre-trend covariance, but do not force it to be nondiagonal. Zero baseline
+  variance or cancellation with other covariance terms can give a diagonal
+  matrix. `PretrendTests` retains the full transformed covariance instead of
+  asserting unconditional nondiagonality.
+* The balance-test covariance is derived under independent IID group samples
+  from a superpopulation, with sample fractions tending to an interior limit.
+  Conditional inference for a fixed finite population is a different design;
+  independence of its complementary treatment/control averages is not assumed
+  by the separate finite-population randomization results.
 
 ## Lecture 11: confidence sets
 
