@@ -209,3 +209,33 @@ SHA-256 values for the added PDFs:
 | Lecture11_Notes.pdf | `9846821c01b4d81276dac802e56bbb51ba035fdfb2bfe407d188271b84f58394` |
 | Lecture12_Notes.pdf | `52b18f555de3d162858477f4f456f8df097cd24360c87f7a2d8ce130e4fe83d2` |
 | Lecture13_Notes.pdf | `153e8df9319b57a88770a385e5488c6d60d98db0c4981807b38feb9fbc6f9cc4` |
+
+
+## Additional qualifications from the completion review
+
+- L7's blanket bootstrap-failure remark must distinguish the empirical and
+  parametric procedures. The checked empirical-bootstrap maximum counterexample
+  does not establish failure of every correctly specified parametric bootstrap.
+- L8's higher-order improvement discussion needs actual Edgeworth expansion
+  hypotheses; finite fourth moments and a nonzero gradient alone do not
+  imply an O(1/n) approximation error or even positive influence variance.
+- L10's Poisson value LR≈17.7 is now certified by rational bounds
+  17.67<LR<17.69. The rounded critical value 3.84 is not an exact equality.
+  A proved conservative bound on the actual 0.95 chi-square quantile suffices
+  to certify all displayed rejection decisions.
+- L10's formulation-invariance claim concerns the null set for LR and the
+  selected restricted estimate for LM. A nonlinear rewriting of the same
+  regular null can change the finite-sample plug-in Wald statistic.
+  `TestFormulation` compares g(t)=t with h(t)=t+t³ at estimate 1: both have
+  null {0} and nonzero derivative there, but their Wald values are n and n/4.
+- A finite numerical grid used to invert a test is an approximation to the
+  confidence set. Coverage of the entire continuum does not automatically
+  transfer to a grid omitting the true parameter; any interpolation or error
+  control must be specified.
+
+- `NormalVarianceTestOrdering` proves the normal-ordering counterexample from
+  the actual density with known mean zero and one observation x=√2. The global
+  variance MLE is 2 and the tested variance is 1. The actual score and expected
+  negative curvature give W=1/8 and LM=1/2, while the actual density likelihood
+  ratio gives LR=1−log2, strictly between them. Thus a blanket normal-family
+  LM≤LR≤W assertion is false, even at an interior variance estimate.

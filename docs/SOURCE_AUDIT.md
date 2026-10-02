@@ -196,3 +196,27 @@ conditioning atom. The count-space and real Bernoulli/binomial laws, including
 boundary parameters and empty sums, agree with the corresponding Mathlib laws.
 The new density and binomial-sum modules passed direct builds and an independent
 review against the notes before the complete 224-module audit.
+
+
+## Further source qualifications checked in Lean
+
+- L5's literal pointwise minimality implication fails even for strictly
+  positive densities on common support. `PointwiseMinimalityCounterexample`
+  modifies a Gaussian density at zero for one parameter, leaving the law
+  unchanged. Pointwise likelihood ratios distinguish the zero singleton,
+  but a constant sufficient statistic cannot reconstruct its indicator at
+  every point. Density-version invariance requires an almost-sure formulation.
+- L5 Example 11's statement that the mean alone is insufficient with unknown
+  variance requires n>1. With one observation the mean is the full sample.
+  `NormalJointInsufficiency` proves the qualified negative assertion using
+  actual normal sample mean/variance independence and changing variance laws.
+- The L2 median phrase “n/2-th highest” is ambiguous for odd n and selects a
+  different middle order statistic for even n if interpreted literally. The
+  nearby generalized-inverse definition selects ascending rank ceil(n/2).
+  `SamplingStatistics` explicitly uses that lower-quantile convention and
+  defines integer trimming rather than silently rounding “10%”.
+- L5's second-order Monte Carlo bias claim requires more than B→∞ when the
+  transform has nonzero linear influence. Averaging B resampled estimates
+  generally has fluctuation of order (nB)^(-1/2); making this negligible
+  relative to 1/n requires a stronger growth condition such as B/n→∞.
+  The separate first-order interval-coverage theorem only needs B→∞.

@@ -889,3 +889,60 @@ Independent review also passed for `IndependentLimits`,
 total-sample-size Wald scaling, singular joint mean/variance limit, and positive
 influence variance qualification for standardization were checked explicitly.
 These checks certify the included snapshot, not all remaining source material.
+
+
+## Sampling, nonlinear bootstrap and constrained-score review (2026-10-02)
+
+- The convolution density retains extended values on null sets, and the
+  shifted lognormal density equals the actual transformed Gaussian measure.
+  Positive latent variance is needed for a density rather than a point mass.
+- Survey sampling uses actual independent Bernoulli inclusion indicators.
+  Unbiased estimation of the general pair terms requires positive pair
+  inclusion probabilities; marginal positivity alone is insufficient.
+- The normal and regression sufficient pairs factor actual normalized product
+  densities. No design rank is needed for regression sufficiency. The negative
+  unknown-variance assertion uses n>1 and follows from an independent-statistic
+  law obstruction in a dominated model, not from informal density conditioning.
+- The pointwise minimality counterexample leaves every model law unchanged,
+  modifies a positive density only at one null point, and proves both the
+  pointwise ratio criterion and failure of pointwise recovery. It is compatible
+  with all correctly qualified almost-sure minimality statements.
+- Smooth mean/variance bootstrap results use the actual n−1 sample variance,
+  centered influence function, strict derivative and positive influence
+  variance. The fourth-moment assumption controls the necessary quadratic
+  remainders. The C² wrapper uses the actual Fréchet derivative. Independent
+  review checked the conditional laws, quantiles, scale cancellation and
+  rejection/coverage complements.
+- Monte Carlo quantiles use ceiling ranks, include ties and have a proved DKW
+  error bound. Actual P×Qₙ^B(n) laws represent data and independent simulation
+  seeds; dominated convergence integrates the pathwise conditional result.
+  B(n)→∞ suffices for first-order calibration. No across-row independence or
+  critical-value independence from the data is assumed.
+- ROC frontier proofs include budgets 0 and 1, treating null-density-zero
+  regions explicitly. The targeting budget uses the population mixture,
+  with positive prevalence specified where posterior rankings require it.
+- Linear and curved score tests derive the ambient restricted score from
+  effective curvature identities and the joint root limit under the common
+  score CLT. They do not assume a projected-score limit. The curved chart,
+  identity-information coordinates and consistency are explicit. Estimated
+  inverse information converges and positive codimension permits quantile
+  calibration. Independent semantic review passed all three modules.
+- The Poisson numerical comparison uses finite logarithm-series bounds with
+  a proved remainder; all decisions concern asymptotic reference rules. The
+  chi-square-one CDF formula establishes strict reference p-value ordering.
+- The Wald formulation counterexample has a regular null derivative and
+  uses the gradient at the estimate in its plug-in covariance. The LR
+  equality depends on literal equality of the two null sets.
+
+- Independent review of `NormalVarianceTestOrdering` checked the actual
+  positive-variance Gaussian log density, its score and expected curvature,
+  global maximization at x², and the strict reversed ordering at x=√2.
+  The mean is known, so the one-observation variance model has no unidentified
+  nuisance parameter.
+
+The complete 250-module snapshot passed the source scan, 8957-job build and
+transitive proof audit: 3240 declarations, including 2873 theorem declarations,
+with no prohibited dependencies. Verification-copy parity covered 257 files:
+230 unchanged Git object hashes and 27 changed/new byte comparisons. The
+26 added modules contain 161 source theorem declarations, 31 definitions and
+7 instances. These checks certify this snapshot, not all remaining material.

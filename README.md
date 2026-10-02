@@ -8,9 +8,10 @@ in the PDFs.
 
 The [coverage ledger](docs/COVERAGE.md) lists every numbered theorem and
 distinguishes proved, restricted, and missing results. Major remaining work
-includes the unrestricted minimal-sufficiency criterion, general IID
-posterior regularity beyond the explicit
-sufficient conditions, and several examples. The sharp two-sided DKW bound
+includes general IID posterior regularity beyond the explicit sufficient
+conditions, bootstrap bias correction, and several examples. The literal
+pointwise minimal-sufficiency criterion in the source is false; a checked
+null-point counterexample explains the almost-sure formulation used here. The sharp two-sided DKW bound
 is proved for arbitrary IID real laws, including atoms. Lindeberg–Feller, Lyapunov, and Glivenko–Cantelli are now
 proved, including non-identically distributed observations for the CLT and
 distributions with atoms for uniform CDF convergence. The CDF characterization
@@ -84,7 +85,19 @@ and Wald calibration; pre-trend contrasts retain the full covariance from shared
 baseline periods. Bootstrap sample-variance intervals and tests use the actual
 conditional resampling law under finite fourth moments. The nonlinear function
 of mean and variance has its joint influence-function CLT and delta-method limit;
-its conditional bootstrap extension is still being completed.
+its conditional bootstrap extension and basic interval/test calibration are
+proved under finite fourth moments, a local strict derivative, and positive
+influence variance. Conditional simulation quantiles are also consistent under
+the actual joint data/seed law when the replication count tends to infinity.
+
+Further checked examples include convolution sampling densities, shifted
+lognormal simulation, unequal-inclusion variance estimation, joint normal and
+regression sufficiency, and mean-alone insufficiency with unknown normal
+variance. Linear and curved constrained score tests have chi-square limits
+with codimension as degrees of freedom under explicit derivative and chart
+conditions. ROC frontiers include the endpoint budgets, and targeting uses
+the actual population-mixture budget. The Poisson example has certified
+statistic bounds, test decisions, and p-value ordering.
 
 The [source audit](docs/SOURCE_AUDIT.md) records mathematical corrections and
 extra hypotheses. The thirteen source PDFs are preserved unchanged. Compilation
