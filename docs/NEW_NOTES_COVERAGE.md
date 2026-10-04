@@ -91,8 +91,9 @@ not a line-by-line transcription of every informal argument in the PDFs.
   `MonteCarloBootstrapIntervals` control both sampling and simulation error
   under the actual joint law of data and independent index draws. Any
   replication count B(n) tending to infinity suffices for this limiting
-  interval coverage. A fixed B is not treated as exact; stronger rates are
-  needed for higher-order bias claims.
+  interval coverage. A fixed B is not treated as an exact conditional quantile;
+  stronger rates are needed for n-scaled simulation-error control. In contrast,
+  the expectation-level bias correction below needs no replication-growth rate.
 - `TargetingROC` and `ROCGeometry` prove ROC attainment, monotonicity and
   concavity on the entire closed budget interval, the Neyman–Pearson supporting
   line, and optimality under a total audit budget using the actual mixture
@@ -204,7 +205,19 @@ not a line-by-line transcription of every informal argument in the PDFs.
   simulated correction also has expected bias o(1/n), even for constant B.
   This is separate from simulation precision and interval coverage.
 
-## Verification
+## October 4 coverage review
+
+[AsymptoticCoverage](../LectureNotes/AsymptoticCoverage.lean) supplies the exact
+limits printed in L11 Remark 1, alongside the existing lower-coverage notions.
+For a nonempty parameter space and exact pointwise coverage, uniform lower
+coverage is equivalent to convergence of the infimum coverage to the target.
+One actual probability example has exact worst-case level but permanent
+overcoverage at another parameter. A second has exact pointwise coverage while
+the worst-case coverage remains zero at every sample size. These distinguish
+the source's quantifiers without assuming the conclusion in a calibration
+hypothesis. All numbered remarks are now separately tracked in the source index.
+
+## Verification on October 2
 
 On 2026-10-02, the complete project passed `scripts/check.sh` with the pinned
 Lean/Mathlib v4.33.0 dependencies: **299 imported source modules**, successful
@@ -225,3 +238,15 @@ The new statements were independently reviewed against their source material
 and hypotheses; findings and scope restrictions are recorded in
 `SEMANTIC_AUDIT.md`. Successful checks certify the included formal statements with their
 hypotheses; agreement with the source is a separate review obligation.
+
+## Verification on October 4
+
+After the independent semantic review, `scripts/check.sh` passed for **301
+imported source modules**: **9008 build jobs**, **4012 audited declarations**,
+and **3586 theorem declarations** including private/compiler-generated ones.
+The source scan and transitive axiom audit found no prohibited constructs.
+All **308** proof/audit/dependency files matched the verification copy, and
+the thirteen PDFs matched the supplied export. The source inventories and
+all 200 source-index links were rechecked. The two additions contain 18 source
+theorem declarations, seven definitions and two instances. See the October 4
+section of [SEMANTIC_AUDIT.md](SEMANTIC_AUDIT.md) for findings and qualifications.

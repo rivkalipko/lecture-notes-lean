@@ -109,6 +109,15 @@ source result has been proved. See the coverage ledger for proof status.
 
 ## Lecture 11: confidence sets
 
+* Remark 1 prints exact limits, while a nominal coverage guarantee is a lower
+  bound. `AsymptoticCoverage` now defines both exact pointwise coverage and
+  convergence of the infimum coverage. Given exact pointwise coverage and a
+  nonempty parameter space, uniform lower coverage is equivalent to the
+  displayed exact infimum limit. The latter alone does not force pointwise
+  equality: some parameters may overcover forever. Two checked fair-coin
+  experiments distinguish persistent overcoverage from the source's moving
+  undercoverage warning. The original `HasPointwiseAsymptoticCoverage` and
+  `HasUniformAsymptoticCoverage` explicitly retain their lower-bound meaning.
 * Test inversion preserves the inequality: tests of level at most α give
   coverage at least `1−α`, and the reverse construction gives a level bound,
   not necessarily exact size α.

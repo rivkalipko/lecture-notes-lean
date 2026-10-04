@@ -17,12 +17,16 @@ def coverage (P : Θ → Measure Ω) (C : Ω → Set Θ) (θ : Θ) : ℝ :=
 def HasConfidenceLevel (P : Θ → Measure Ω) (C : Ω → Set Θ) (γ : ℝ) : Prop :=
   ∀ θ, γ ≤ coverage P C θ
 
-/-- Pointwise asymptotic coverage, with θ fixed before the sample-size limit. -/
+/-- Pointwise asymptotic lower coverage: the limiting lower coverage is at
+least γ, with θ fixed before the sample-size limit. Exact equality is the
+separate `HasExactPointwiseAsymptoticCoverage` notion in `AsymptoticCoverage`. -/
 def HasPointwiseAsymptoticCoverage (P : Θ → Measure Ω)
     (C : ℕ → Ω → Set Θ) (γ : ℝ) : Prop :=
   ∀ θ, ∀ ε : ℝ, 0 < ε → ∀ᶠ n in Filter.atTop, γ - ε ≤ coverage P (C n) θ
 
-/-- Uniform asymptotic coverage uses one eventual sample-size bound for all θ. -/
+/-- Uniform asymptotic lower coverage uses one eventual sample-size bound
+for all θ. It permits overcoverage; exact convergence of the worst-case
+confidence level is defined separately in `AsymptoticCoverage`. -/
 def HasUniformAsymptoticCoverage (P : Θ → Measure Ω)
     (C : ℕ → Ω → Set Θ) (γ : ℝ) : Prop :=
   ∀ ε : ℝ, 0 < ε → ∀ᶠ n in Filter.atTop, ∀ θ, γ - ε ≤ coverage P (C n) θ

@@ -50,7 +50,7 @@ the source. The coverage ledger separately records that obligation.
 | L2 p11, variance estimation remark | Unbiased inverse-probability estimation of pair terms requires positive pair inclusion probabilities for those terms, not just positive marginal inclusion probabilities. |
 | L3 p1, Jensen | Require integrability of the random variable and its convex transform for a real-valued result. |
 | L3 pp2–3, Hoeffding | Specify `a<b` when dividing by `(b-a)^2`; a degenerate interval can instead be treated separately. |
-| L3 pp4–9, convergence and order | Require measurable random variables and nonzero deterministic scale sequences. The deterministic big-O definition needs an absolute value/bound on absolute ratios. |
+| L3 pp4–9, convergence and order | Require measurable random variables and nonzero deterministic scale sequences. Both deterministic and stochastic big-O definitions contain absolute-value bars in the PDF; text extraction can drop them. Visually verified on p9; the bars are not a source error. |
 | L3 p10, Example 2 | The last conclusion should be `X_n/n -> 0` in mean square, not `X_n -> 0`, when `X_n ~ N(0,n)`. |
 | L3 p10, Example 3 | Standardization by `sqrt(V(Y_n))` needs positive variances, or separate zero-variance cases. |
 | L3 p12, Lindeberg–Feller | Standard deviations `c_n` must be positive eventually; otherwise the normalizing ratios are undefined in the mathematical statement. |
@@ -203,13 +203,19 @@ review against the notes before the complete 224-module audit.
 
 ## Further source qualifications checked in Lean
 
+- L5 Remark 1's propensity score is a conditional-expectation version and is
+  defined only up to almost-sure equality. `PropensityScoreBalancing` proves
+  actual conditional independence for binary treatment and measurable recovery
+  from every balancing coarsening of the covariates. No overlap assumption is
+  required for this balancing theorem. Overlap is a separate requirement in
+  the ATE identification result.
 - L5's literal pointwise minimality implication fails even for strictly
   positive densities on common support. `PointwiseMinimalityCounterexample`
   modifies a Gaussian density at zero for one parameter, leaving the law
   unchanged. Pointwise likelihood ratios distinguish the zero singleton,
   but a constant sufficient statistic cannot reconstruct its indicator at
   every point. Density-version invariance requires an almost-sure formulation.
-- L5 Example 11's statement that the mean alone is insufficient with unknown
+- L5 Example 10's statement that the mean alone is insufficient with unknown
   variance requires n>1. With one observation the mean is the full sample.
   `NormalJointInsufficiency` proves the qualified negative assertion using
   actual normal sample mean/variance independence and changing variance laws.

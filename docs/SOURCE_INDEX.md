@@ -1,7 +1,9 @@
 # Source index for the thirteen lecture notes
 
 This index maps all **24 numbered definitions**, **54 numbered examples** and
-**2 numbered lemmas** to their formal counterparts. The **41 numbered theorems**
+**2 numbered lemmas** to their formal counterparts. All **15 numbered remarks**
+are separately indexed below, including remarks that defer a theory rather
+than state a fully specified theorem. The **41 numbered theorems**
 have statement-by-statement rows in [COVERAGE.md](COVERAGE.md) and
 [NEW_NOTES_COVERAGE.md](NEW_NOTES_COVERAGE.md). Grouped ranges include every
 number in the range. Source IDs refer to the unchanged `LectureN_Notes.pdf`
@@ -51,7 +53,9 @@ without a redundant copy of the proof under a new declaration name.
 | L5 E3 | Skewness estimator | [Skewness](../LectureNotes/Skewness.lean) | Preserves the n−1 sample-variance convention and proves the raw-moment expression. The source’s “most likely biased” wording is not a universal theorem. |
 | L5 E4 | Randomized experiment | [RandomizedExperiment](../LectureNotes/RandomizedExperiment.lean) | Actual uniform fixed-size assignment and design-unbiased treatment-effect estimator. |
 | L5 E5 | Normal variance estimators | [NormalVarianceRisk](../LectureNotes/NormalVarianceRisk.lean) | Exact biases, variances, MSEs and strict risk comparison for n>1 and positive variance. |
-| L5 E6–E8 | Minimum variance weights, MSE oracle and shrinkage | [WeightedEstimators](../LectureNotes/WeightedEstimators.lean), [ShrinkageImprovement](../LectureNotes/ShrinkageImprovement.lean) | Unit-sum weights give unbiasedness; its converse requires nonzero mean or all means. Uniqueness needs positive variance; the oracle may depend on unknown population parameters. |
+| L5 E6 | Minimum variance weights and MSE oracle | [WeightedEstimators](../LectureNotes/WeightedEstimators.lean), [ShrinkageImprovement](../LectureNotes/ShrinkageImprovement.lean) | Unit-sum weights give unbiasedness; its converse requires nonzero mean or all means. Uniqueness needs positive variance; the oracle may depend on unknown population parameters. |
+| L5 E7 | Sample mean and sample variance consistency | [LargeSample](../LectureNotes/LargeSample.lean), [Convergence](../LectureNotes/Convergence.lean), [VarianceAsymptotics](../LectureNotes/VarianceAsymptotics.lean) | The strong law gives mean consistency; `sampleVariance_strong_consistency` proves the n−1 variance result under finite second moments. Almost-sure convergence implies the source's convergence in probability. |
+| L5 E8 | Sample mean and sample variance asymptotic normality | [LargeSample](../LectureNotes/LargeSample.lean), [VarianceAsymptotics](../LectureNotes/VarianceAsymptotics.lean) | The sample mean CLT requires finite second moments; the variance CLT requires a finite fourth central moment and has variance μ₄−σ⁴, including a possible zero limit variance. |
 | L5 E9 | Two Bernoulli observations conditional on their sum | [BinomialConditioning](../LectureNotes/BinomialConditioning.lean), [BinomialMinimal](../LectureNotes/BinomialMinimal.lean) | The general Binomial(k,p) conditional singleton formula specializes to k=1, n=2; impossible conditioning events are excluded. |
 | L5 E10 | Normal sample mean sufficiency | [NormalSufficiency](../LectureNotes/NormalSufficiency.lean), [NormalJointInsufficiency](../LectureNotes/NormalJointInsufficiency.lean) | Known positive variance gives sufficiency/minimality; for n>1, mean alone is not sufficient when variance is unknown. |
 | L5 E11 | Normal location/scale sufficient statistics | [NormalJointSufficiency](../LectureNotes/NormalJointSufficiency.lean) | Actual joint family; sum/sum-of-squares and mean/variance formulations. |
@@ -83,6 +87,26 @@ without a redundant copy of the proof under a new declaration name.
 | L13 E1 | Affine normal risk | [NormalMeansDecision](../LectureNotes/NormalMeansDecision.lean) | Exact squared-error risk. |
 | L13 E2 | Sample averaging and constant-estimator admissibility | [NormalDecisionExamples](../LectureNotes/NormalDecisionExamples.lean) | Risk improvement for n>1; constant rules are admissible among all measurable rules of the full normal sample. |
 | L13 E3 | Normal Bayes rule and joint covariance | [NormalSampleConjugacy](../LectureNotes/NormalSampleConjugacy.lean), [NormalHierarchicalGaussian](../LectureNotes/NormalHierarchicalGaussian.lean), [NormalDecisionExamples](../LectureNotes/NormalDecisionExamples.lean) | Actual product likelihood/prior posterior, hierarchical joint law, covariance and estimator risk. |
+
+## Numbered remarks
+
+| Source | Topic | Formal location or scope | Formulation notes |
+| --- | --- | --- | --- |
+| L2 R1 | Plug-in quantiles and sample median | [EmpiricalQuantiles](../LectureNotes/EmpiricalQuantiles.lean), [SamplingStatistics](../LectureNotes/SamplingStatistics.lean) | Generalized inverse selects one-based rank ceil(np), with ties allowed. |
+| L2 R2 | Bias of the divisor-n variance | [NormalVarianceRisk](../LectureNotes/NormalVarianceRisk.lean), [BootstrapBias](../LectureNotes/BootstrapBias.lean), [SamplingMoments](../LectureNotes/SamplingMoments.lean) | The scaling identity is distribution-free; `empiricalVariance_expectation` gives (1−1/n)v under common moments and pairwise independence. Strict downward bias requires v>0. |
+| L2 R3 | Estimating design variance | [SurveySampling](../LectureNotes/SurveySampling.lean) | Inverse pair-inclusion weighting is unbiased when the required pair inclusion probabilities are positive. |
+| L3 R1 | Bernstein versus Hoeffding | [Bernstein](../LectureNotes/Bernstein.lean) | The displayed bound is proved; improvement also depends on the deviation threshold, not only on small variance. Mentioned extensions such as McDiarmid are not stated as theorems in the notes. |
+| L3 R2 | Weak convergence implies stochastic boundedness; converse fails | [StochasticOrder](../LectureNotes/StochasticOrder.lean), [AlternatingUniform](../LectureNotes/AlternatingUniform.lean) | Actual alternating uniform laws witness the converse failure; their CDFs are corrected on (0,1). |
+| L5 R1 | Propensity-score balancing and coarseness | [PropensityScoreBalancing](../LectureNotes/PropensityScoreBalancing.lean) | Binary treatment is conditionally independent of covariates given its propensity score. Every measurable balancing coarsening measurably recovers that score almost surely. No overlap assumption is needed. |
+| L6 R1 | Causal identification before plug-in estimation | [CausalIdentification](../LectureNotes/CausalIdentification.lean) | The displayed ATE formula needs consistency, conditional unconfoundedness and overlap, with integrable potential outcomes. |
+| L6 R2 | Semiparametric efficiency | Scope: literature motivation | The remark cites an efficiency bound without stating the bound, model, tangent space or regular-estimator hypotheses. No unspecified semiparametric efficiency theorem is claimed. |
+| L7 R1 | Vector MLE normality | [VectorMLE](../LectureNotes/VectorMLE.lean), [VectorScoreAsymptotics](../LectureNotes/VectorScoreAsymptotics.lean) | The IID score CLT and derivative control yield the sandwich covariance; inverse information requires the information identity and nonsingularity. |
+| L7 R2 | Bootstrap failure in nonregular examples | [BootstrapMaximum](../LectureNotes/BootstrapMaximum.lean); general claim deferred in source | The uniform maximum counterexample is proved for its actual law. The notes explicitly defer the broader assertion; no universal claim about all nonregular models or bootstrap schemes is made. |
+| L8 R1 | Multiple testing | [Testing](../LectureNotes/Testing.lean) | Bonferroni controls the familywise error by a union bound; no independence between tests is assumed. |
+| L9 R1 | Neyman–Pearson Lagrangian | [NeymanPearson](../LectureNotes/NeymanPearson.lean), [TargetingROC](../LectureNotes/TargetingROC.lean), [ROCGeometry](../LectureNotes/ROCGeometry.lean) | Threshold comparison and the ROC supporting-line theorem justify the constrained optimum, including ties and endpoint budgets. |
+| L9 R2 | Targeting and ROC frontier | [TargetingROC](../LectureNotes/TargetingROC.lean), [ROCGeometry](../LectureNotes/ROCGeometry.lean) | A total population budget uses the mixture law; a false-positive budget uses the null law. |
+| L11 R1 | Pointwise and uniform asymptotic coverage | [ConfidenceSets](../LectureNotes/ConfidenceSets.lean), [AsymptoticCoverage](../LectureNotes/AsymptoticCoverage.lean) | Lower bounds, exact pointwise limits, and exact worst-case limits are distinct. Under exact pointwise coverage, uniform lower coverage is equivalent to the displayed exact infimum limit. |
+| L12 R1 | General exponential-family conjugacy | [ExponentialConjugacy](../LectureNotes/ExponentialConjugacy.lean) | Actual normalized posterior updates require finite positive prior and posterior normalizers. |
 
 ## Lemmas and other displayed developments
 

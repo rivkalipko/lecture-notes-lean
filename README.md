@@ -6,7 +6,8 @@ Mathlib's measures, integrals, conditional expectations, independence, and
 convergence of probability laws.
 
 The [source index](docs/SOURCE_INDEX.md) maps all 24 numbered definitions,
-54 numbered examples and both numbered lemmas. The
+54 numbered examples and both numbered lemmas, and separately accounts for
+all 15 numbered remarks. The
 [coverage ledgers](docs/COVERAGE.md) account for all 41 numbered theorems and
 record the precise scope of each formal result. Qualified statements are not
 unconditional proofs of the corresponding informal assertions.
@@ -32,6 +33,8 @@ measurable carriers. Exponential-family canonical sums are sufficient in the
 actual IID product experiment, and the normal sample mean is minimal sufficient
 with known positive variance. Likelihood-ratio recovery also gives a general
 minimality criterion relative to a countable dominating mixture.
+The propensity score is proved to balance binary treatment and covariates;
+every measurable balancing coarsening recovers it almost surely.
 
 Scalar and vector IID MLE normality are proved under explicit derivative,
 moment, consistency, and interior-maximization conditions. The vector theorem
@@ -129,6 +132,11 @@ also derived. The χ²₁₀₀ numerical variance-test example is certified fro
 actual Gaussian-square law. The classifier sample-size example is numerically
 certified, and Bernstein's variance-sensitive bound is proved from its exponential-series argument.
 
+Exact pointwise asymptotic coverage, exact worst-case confidence level and
+uniform lower coverage are defined separately. Their valid implications and
+the source's moving-undercoverage warning are proved, with concrete probability
+experiments showing why the distinctions matter.
+
 The [source audit](docs/SOURCE_AUDIT.md) records mathematical corrections and
 extra hypotheses. The thirteen source PDFs are preserved unchanged. Compilation
 certifies the formal statements; it does not establish complete coverage or
@@ -192,7 +200,8 @@ proofs** passed; agreement with the source is a separate semantic-review obligat
   `FisherNeymanGeneral`, `ExponentialFamilySufficiency`, `MinimalSufficiency`,
   `MixtureMinimalSufficiency`, `NormalSufficiency`, `UniformSufficiency`,
   `TriangularSufficiency`, `GumbelSufficiency`, `CauchySufficiency`,
-  `BinomialTwoSufficiency`, `MethodOfMoments`, `InstrumentalVariables`.
+  `BinomialTwoSufficiency`, `MethodOfMoments`, `InstrumentalVariables`,
+  `CausalIdentification`, `PropensityScoreBalancing`.
 * MLE and testing: `MLEConsistency`, `Testing`, `NeymanPearson`,
   `MonotoneLikelihoodRatio`, `LikelihoodRatio`, `AsymptoticTests`,
   `LogisticRegression`, `MLEAsymptotics`, `IIDScoreAsymptotics`, `WilksAnalytic`,
@@ -201,7 +210,8 @@ proofs** passed; agreement with the source is a separate semantic-review obligat
   `NormalUnknownVarianceMLE`.
   Threshold existence and exact power: `Quantiles`, `NeymanPearsonExistence`,
   `MLRExistence`, `NormalTestPower`.
-* Confidence and Bayesian inference: `ConfidenceSets`, `WilsonInterval`, `EllipseProjection`,
+* Confidence and Bayesian inference: `ConfidenceSets`, `ConfidenceLevel`, `AsymptoticCoverage`,
+  `WilsonInterval`, `EllipseProjection`,
   `QuantileIntervals`, `SamplingAtomlessness`, `NormalConfidenceIntervals`, `BayesianUpdating`,
   `NormalConjugacy`, `BetaConjugacy`, `GammaConjugacy`, `ExponentialConjugacy`,
   `PosteriorAsymptotics`, `NormalPosteriorLimit`, `HighestDensity`, `HighestDensityExistence`,

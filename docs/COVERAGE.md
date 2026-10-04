@@ -17,7 +17,13 @@ Declaration names are in the `LectureNotes` namespace except where a nested
 namespace is shown. The files linked below are all imported by `LectureNotes.lean`.
 
 The [source index](SOURCE_INDEX.md) separately maps all 24 numbered definitions,
-54 numbered examples and both numbered lemmas across the thirteen lectures.
+54 numbered examples and both numbered lemmas across the thirteen lectures,
+and accounts for all 15 numbered remarks. In particular,
+[PropensityScoreBalancing](../LectureNotes/PropensityScoreBalancing.lean) proves
+L5 Remark 1's balancing and coarseness claims for binary treatment: the score
+balances treatment and covariates, and every measurable balancing coarsening
+measurably recovers it almost surely. The conditional-independence formulation
+uses a standard Borel sample space; overlap is not required.
 
 ## Numbered theorems
 

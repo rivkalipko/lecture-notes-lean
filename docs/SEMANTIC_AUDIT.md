@@ -1141,3 +1141,91 @@ checked counterexamples; unspecified general regularity, complete-class and
 MCMC remarks retain explicit scope qualifications. This does not assert
 unconditional versions of those remarks or a line-by-line copy of each
 informal proof.
+
+## Independent source and formulation review (2026-10-04)
+
+Starting revision: `232827534756df5da34649d2946eee4aedbd7167`. This fresh review
+used the supplied thirteen PDFs, newly extracted text and rendered checks of
+L3 p9, L5 p13 and L11 p5. All thirteen PDFs were compared with the supplied
+export and matched. Three independent topic reviews were combined with a
+separate review of the probability and asymptotic foundations. The review
+compared definitions, final statements and critical proof arguments; it does
+not claim that every line of all previously compiled proofs was reread.
+
+### Findings and corrections
+
+1. **L5 Remark 1 was missing.** `PropensityScoreBalancing` now defines the
+   actual propensity score as the conditional expectation of the binary
+   treatment indicator given the covariates. Tower and pullout identities
+   prove conditional independence of treatment and covariates given that
+   score. Conversely, every measurable balancing coarsening of the covariates
+   measurably recovers the score almost surely. The conditional-independence
+   results use a standard Borel sample space. There is no overlap hypothesis;
+   overlap is needed separately for the ATE formula. The new module received
+   two independent semantic reviews in addition to the integration review.
+2. **L11 Remark 1's exact limits needed separate definitions.** The existing
+   pointwise and uniform coverage predicates correctly express lower bounds,
+   but do not express the displayed exact limits. `AsymptoticCoverage` adds
+   exact pointwise coverage and an exact limiting infimum of coverage. It
+   proves their lower-bound implications and, under exact pointwise coverage
+   on a nonempty parameter space, equivalence of the exact infimum limit with
+   uniform lower coverage. An infimum limit alone need not force exact
+   pointwise coverage. This distinction is witnessed by a fair-coin experiment
+   with coverage one half at one parameter and one at another. A second
+   fair-coin experiment has parameter space ℕ and region
+   `{θ | θ < n ∧ x = true}`: each fixed parameter eventually has coverage one
+   half, but parameter n has coverage zero at sample size n. This proves the
+   source's moving-undercoverage warning using actual probability measures.
+   Independent cross-review checked both examples and the general implications.
+3. **Source-index corrections.** L5 Examples 6, 7 and 8 are now separated into
+   weighted-estimator calculations, mean/variance consistency and the CLTs.
+   The unknown-variance normal mean insufficiency passage is in Example 10,
+   not Example 11. All fifteen numbered remarks now have individual rows;
+   the semiparametric-efficiency citation and deferred general bootstrap
+   discussion retain explicit scope qualifications.
+4. **Two documentation corrections.** The L3 p9 big-O definitions do have
+   absolute-value bars in the PDF; extraction had obscured them. The Lean
+   definitions already had the correct absolute-value formulation. Bootstrap
+   replication-growth requirements apply to simulation precision and coverage,
+   while the proved expected-bias correction permits any positive finite
+   replication count. The coverage ledger now makes this distinction explicit.
+
+### Checks on the existing formulations
+
+| Area | Main checks |
+| --- | --- |
+| Probability, sampling and convergence | Event-based CDFs, measurable variables, actual sampling laws, n versus n−1 denominators, independence of normal projections, Gaussian covariance and conditioning, moment/integrability conditions, delta-method scales, Cramér–Wold directions, triangular-array limits, stochastic-order quantifiers and the actual empirical-CDF supremum. |
+| Sufficiency and estimation | One parameter-independent conditional kernel or estimator, almost-sure measurable recovery, actual density factorizations and support, common versus parameter-specific null sets, and explicit nonvacuous regularity for information identities and Cramér–Rao. |
+| MLE and testing | Actual likelihoods and degenerate boundary cases, derivative and moment assumptions, consistency and interiority, dimensions and inverse/sandwich covariance, score/Wald/LR normalization, full-sample randomized-test competitors, and exact versus asymptotic calibration. |
+| Confidence sets | Event inversion, atomless versus discrete quantiles, nonempty parameter spaces where needed for infima, shared-baseline covariance, positive scales, off-grid coverage failure, and pointwise versus uniform limit quantifiers. |
+| Bootstrap and simulation | Actual empirical product/index laws, finite second versus fourth moments, positive influence variance, ties in empirical quantiles, zero observed versus resampled variances, joint data/seed probabilities, and expected correction versus simulation precision. |
+| Bayesian and decision theory | Posterior normalization, affine Jacobians, rate/scale conventions, genuine local-quadratic/envelope premises, exact HPD plateau splitting and infinite-volume competitors, nonnegative extended risks, all measurable competing decisions, and noncircular singular-risk integrability. |
+| Causal, survey and weighted estimation | Treatment/covariate conditioning, separate identification assumptions, marginal versus joint inclusion probabilities, design normalization, and rank/nonzero-denominator conditions. |
+
+No additional mathematical defect was found in the inspected statements and
+proof arguments. This is a review finding, not a machine-certified equivalence
+between prose and Lean. Explicit limitations remain: curved asymptotic results
+use supplied local charts and identity-information coordinates; logistic
+information is conditional on fixed covariates; generic rectangle coverage
+needs a calibrated maximum-statistic cutoff. Unspecified universal regularity,
+semiparametric efficiency, complete-class and MCMC theories, and existence of
+the source's undeveloped Edgeworth expansions are not claimed as unconditional
+theorems. Earlier dated counts above describe historical checkpoints.
+
+The fresh numbered inventory contains **41 theorems, 24 definitions, 54
+examples, 15 remarks and 2 lemmas**. Expanding every grouped range in the
+source index and coverage ledgers gives the same IDs, with no omissions,
+extras or duplicates. All **200** relative links in the source index resolve,
+including 198 module links to 156 distinct Lean files. The thirteen committed
+PDFs match the supplied export. The verification copy matches all **308**
+proof/audit/dependency files: 304 unchanged Git object hashes and four
+changed/new byte comparisons.
+
+The final combined `scripts/check.sh` run passed: **301 imported source
+modules**, a successful **9008-job build**, and **4012 audited declarations**,
+including **3586 theorem declarations** when private/compiler-generated
+declarations are counted. No forbidden source tokens or prohibited transitive
+axiom dependencies were found. The two added modules contain 18 source theorem
+declarations (including four private helpers), seven definitions and two
+instances. The only edit to an existing Lean module clarifies two docstrings;
+its definitions and theorem statements are unchanged.

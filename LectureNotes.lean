@@ -1,4 +1,5 @@
 import LectureNotes.AlternatingUniform
+import LectureNotes.AsymptoticCoverage
 import LectureNotes.AsymptoticTests
 import LectureNotes.BayesianDecision
 import LectureNotes.BayesianTesting
@@ -222,6 +223,7 @@ import LectureNotes.PowerAnalysis
 import LectureNotes.PretrendTests
 import LectureNotes.ProbabilityExamples
 import LectureNotes.ProbabilityLaws
+import LectureNotes.PropensityScoreBalancing
 import LectureNotes.PseudoMLE
 import LectureNotes.QuantileConvergence
 import LectureNotes.QuantileIntervals
