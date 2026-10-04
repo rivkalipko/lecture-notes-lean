@@ -1291,3 +1291,53 @@ modules**, **9009 build jobs**, and **4021 audited declarations**, including
 counted. The new module contains six source theorem declarations and introduces
 no new definitions. Both the forbidden-token scan and the transitive axiom
 audit passed. Existing Lean definitions and theorem statements are unchanged.
+
+## Third independent review (2026-10-04)
+
+Starting revision: `2ef8d6c14cee6623ac990b486f0d4860827f98ca`. Reviewers rotated
+topics again, comparing the source passages with the definitions, quantifiers,
+hypotheses, conclusions and proof arguments in **158 distinct Lean modules**.
+This comprised 138 full-file reads and 20 additional files reviewed through
+all declarations and selected core proofs. No new mathematical defect or
+incorrect source transcription was found in the inspected material. This pass
+changes only this audit record; no Lean statement or proof was changed.
+
+### Mathematical checks
+
+| Area | What was checked |
+| --- | --- |
+| Sufficiency and optimal estimation | One parameter-independent conditional kernel and Rao–Blackwell estimator; parameter-specific exceptional null sets; both directions of sigma-finite Fisher–Neyman factorization; measurable almost-sure minimality and likelihood recovery; varying-support endpoint decoders; actual normal, regression, Cauchy, Gumbel and binomial experiments. The binomial conditional estimator retains counting coefficients, the zero-total branch, feasible totals and boundary parameters. Bernoulli UMVU quantifies over every model-unbiased competitor. |
+| Information and causal identification | Actual derivatives of normalized densities, integrable derivative bounds, differentiation of the estimator's expectation, and unbiasedness throughout an open parameter domain. The explicit Bernoulli model satisfies the regularity premises. The uniform-endpoint example proves nonzero expected score and failure of information additivity. Treatment identification uses conditional independence, consistency and overlap; the propensity-score balancing result does not need overlap. IV identification retains instrument relevance and the binary-group formula requires nonempty groups. |
+| Exact sampling and confidence sets | Actual chi-square, Student and F constructions; n versus n−1; correct residual degrees of freedom; almost-sure positive random denominators; known versus nuisance variance; reversed quantile endpoints in variance inversion. Pratt's identity permits infinite expected length, and its optimality theorem requires the stated UMP tests. No unrestricted shortest-length claim is made for ordinary two-sided Student intervals. |
+| Likelihood ratios and testing | Actual likelihood suprema, positivity and attainment conditions; empty and constant samples; Bernoulli and Poisson open-domain suprema at boundary data. Neyman–Pearson handles null-density zeros and the zero-threshold necessity case; MLR retains changing supports and randomized ties. Normal UMP/UMPU results compare all measurable randomized full-sample tests with known positive variance. Exact Gaussian calibration remains separate from Bernoulli, Poisson, ordinary t and Welch asymptotic calibration. |
+| Bootstrap and simulation | Actual empirical product/index laws with observation multiplicities; changing conditional-law CLTs; common almost-sure sets; derived variance and smooth-statistic remainders; n−1 corrections and rare zero scales. Simulated first-order interval coverage requires replication counts tending to infinity; expected bias correction permits any positive finite count under the stated integrability conditions. Edgeworth expansions remain explicit assumptions at a fixed evaluation point. The empirical-bootstrap maximum counterexample is distinct from the valid fitted-uniform parametric pivot. Off-grid confidence coverage is zero, as the source correction records. |
+| Concentration and convergence | Hoeffding/Bernstein constants, centered observations, independent summands, zero variance, and the explicit range in which Bernstein improves the Hoeffding bound. Classifiers may share a test set; the union bound does not assume independence between classifiers. The 26,492-observation guarantee uses a proved rational exponential bound. Convergence definitions, the uncorrelated weak law and alternating-uniform counterexample have the intended quantifiers. |
+| Quantiles and further examples | Lower generalized inverses, open/closed tail bracketing, ties, ceiling ranks, atomless exact calibration and data-dependent critical values. Logistic score roots give global maxima; full rank gives uniqueness without asserting existence, and complete separation precludes finite maxima. Wald ellipse projection uses the joint cutoff. A nonzero derivative alone does not imply positive influence variance. Gamma–Poisson concentration concerns the actual posterior and uses the rate/scale conversion. |
+
+The review preserves the documented scope restrictions. In particular, L5
+pp15–16's rejection-based Monte Carlo evaluation of a Rao–Blackwell estimator
+is an implementation suggestion. The exact conditional law, estimator,
+unbiasedness and variance reduction are proved; an accepted-draw stopping-time
+sampler and its repeated-simulation convergence are not separately formalized
+or claimed in the source index. General model-specific regularity, unrestricted
+pointwise minimality and the other previously documented qualifications remain
+unchanged. This review is not a fresh reading of every project dependency or a
+machine-certified equivalence between the PDFs and the Lean statements.
+
+### Verification
+
+The fresh combined `scripts/check.sh` run passed: **302 imported source
+modules**, a successful **9009-job build**, and **4021 audited declarations**,
+including **3595 theorem declarations** when private/compiler-generated
+declarations are counted. The source scan found no forbidden tokens, and the
+transitive dependency audit permitted only `propext`, `Classical.choice` and
+`Quot.sound`. Inspection of source options and declaration commands found no
+custom declaration insertion or kernel-check bypass.
+
+All **309** proof/audit/dependency files in the verification copy match their
+unchanged Git object hashes. All thirteen committed PDFs match the supplied
+export byte for byte. The independently reconstructed inventory again matches
+all **136** numbered source IDs exactly: 41 theorems, 24 definitions, 54
+examples, 15 remarks and 2 lemmas, with no omissions or duplicates. All **201**
+source-index links resolve. Rendered source checks included L3 p4's Bernstein
+constants and classifier budget and L6 p7's Cramér–Rao formulation.
