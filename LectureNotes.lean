@@ -222,6 +222,7 @@ import LectureNotes.PosteriorInformationIntervals
 import LectureNotes.PowerAnalysis
 import LectureNotes.PretrendTests
 import LectureNotes.ProbabilityExamples
+import LectureNotes.ProbabilityIdentities
 import LectureNotes.ProbabilityLaws
 import LectureNotes.PropensityScoreBalancing
 import LectureNotes.PseudoMLE

@@ -177,7 +177,7 @@ proofs** passed; agreement with the source is a separate semantic-review obligat
 
 ## Organization
 
-* Probability and moments: `Foundations`, `ProbabilityLaws`,
+* Probability and moments: `Foundations`, `ProbabilityLaws`, `ProbabilityIdentities`,
   `ConditionalExpectation`, `Correlation`.
 * Gaussian distributions: `GaussianQuadraticForms`, `GaussianMahalanobis`,
   `ChiSquaredMoments`, `GaussianConditioning`.

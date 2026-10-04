@@ -1229,3 +1229,65 @@ axiom dependencies were found. The two added modules contain 18 source theorem
 declarations (including four private helpers), seven definitions and two
 instances. The only edit to an existing Lean module clarifies two docstrings;
 its definitions and theorem statements are unchanged.
+
+## Second independent review (2026-10-04)
+
+Starting revision: `4f6ed7f8a6a765cc2c3d680e735bcc5aadb6a0d7`. The reviewers
+rotated topics for this pass and read the source passages directly. The review
+covered 120 distinct Lean modules, including the new corollaries below, plus
+the convergence definitions used by several of them. It inspected statements,
+definitions and proof arguments; it does not claim a fresh reading of every
+line in the entire project or an independent reconstruction of Mathlib.
+Rendered checks included L1 pp3–4 and p14, L3 p9, L4 p2 and L13 p3.
+
+### Findings
+
+No incorrect existing Lean statement or proof was identified in the inspected
+material. Two improvements make the source correspondence more explicit:
+
+- `ProbabilityIdentities` exports six corollaries for L1 pp3–4. Conditional
+  probability agrees with the actual normalized restriction measure; a nonnull
+  conditioning event gives a probability measure and the conditional-complement
+  formula. The two-event total-probability formula yields the exact printed
+  Bayes denominator. The CDF increment is the probability of `(a,b]`, allowing
+  atoms and coincident endpoints. These follow from existing general results
+  and Mathlib's measure API; no existing definition or theorem was weakened.
+  A separate reviewer checked all six proofs against the rendered source.
+- The L11 coverage-ledger sentence now says that **uniform lower coverage
+  implies pointwise lower coverage**. Its previous abbreviated wording could
+  be confused with the newly exported exact-limit notions. The previously
+  proved counterexample shows why that distinction is necessary.
+
+### Fresh mathematical checks
+
+| Area | What was checked |
+| --- | --- |
+| Empirical processes | All nine DKW modules, the actual measurable supremum over the whole real line, one common almost-sure event, atomic-law quantile coupling, open/closed tail conventions, and a deterministic common exponential tilt chosen before the sample. The proof uses a two-sided union bound only, without a union bound over grid points. |
+| Triangular arrays and stochastic order | Actual within-row independence, second moments and Lindeberg truncation for every positive threshold; derived negligibility; Lyapunov's arbitrary positive exponent increment; varying row spaces; separate diverging two-sample sizes; uniform-in-n stochastic boundedness; zero-variance and zero-scale qualifications. |
+| MLE and inference | Derivative-based likelihood expansions, consistency and interiority, rare singular finite-sample curvature, inverse/sandwich covariance orientation, dependent full/restricted scores, chart/rank hypotheses, total-size two-sample scaling, shared-baseline contrast covariance, and posterior content versus frequentist coverage. |
+| Conditional and Gaussian laws | Actual regular conditional measures under the marginal law, exceptional zero/infinite density fibers, absolute inverse Jacobians, positive definite conditioning blocks, potentially singular residual covariances, and the printed hierarchical-normal covariance matrix. |
+| Posterior and decision results | Positive evidence and properness; actual normalized sample likelihoods; rate/scale conventions; uniform bounds over all measurable events; affine determinants and covariance orientation; extended nonnegative risk; predictive-almost-everywhere minimization; exact HPD plateau splitting; quantile-reparameterization restrictions. |
+| Finite-sample examples | First-success and trimmed/median conventions, Bernoulli/binomial/Poisson laws and boundary parameters, binomial generating-function counts including zero totals, the actual uniform-square law, finite-space unbiasedness obstruction, finite-population and survey normalization, positive joint inclusion probabilities, observed-outcome randomization, oracle-weight dependence on unknown parameters, and exact quadratic bootstrap bias. |
+
+The mathematical scope restrictions remain part of the results. In particular,
+the general constrained/curved inference theorems use supplied charts and
+explicit regularity; the nondegenerate two-sample theorem requires both
+population variances positive; uniform CDF convergence requires an atomless
+limit; decreasing quantile transformations retain their support/continuity
+conditions. The stronger sufficient conditions in these theorems are recorded
+in the coverage ledgers and are not claims of unconditional source results.
+
+The fresh source inventory still has **41 theorems, 24 definitions, 54
+examples, 15 remarks and 2 lemmas**. All 136 numbered IDs match the expanded
+index/ledger rows exactly, without omissions or duplicates. All **201**
+source-index links resolve. The verification copy matches all **309**
+proof/audit/dependency files: 307 unchanged Git object hashes and two
+changed/new byte comparisons. Inspection of all source options and declaration
+commands found no kernel-check bypass or custom declaration-insertion command.
+
+The final combined `scripts/check.sh` run passed: **302 imported source
+modules**, **9009 build jobs**, and **4021 audited declarations**, including
+**3595 theorem declarations** when private/compiler-generated declarations are
+counted. The new module contains six source theorem declarations and introduces
+no new definitions. Both the forbidden-token scan and the transitive axiom
+audit passed. Existing Lean definitions and theorem statements are unchanged.
