@@ -215,8 +215,9 @@ review against the notes before the complete 224-module audit.
   unchanged. Pointwise likelihood ratios distinguish the zero singleton,
   but a constant sufficient statistic cannot reconstruct its indicator at
   every point. Density-version invariance requires an almost-sure formulation.
-- L5 Example 10's statement that the mean alone is insufficient with unknown
-  variance requires n>1. With one observation the mean is the full sample.
+- The statement in L5 Example 10, repeated at the end of Example 11, that the
+  mean alone is insufficient with unknown variance requires n>1. With one
+  observation the mean is the full sample.
   `NormalJointInsufficiency` proves the qualified negative assertion using
   actual normal sample mean/variance independence and changing variance laws.
 - The L2 median phrase “n/2-th highest” is ambiguous for odd n and selects a

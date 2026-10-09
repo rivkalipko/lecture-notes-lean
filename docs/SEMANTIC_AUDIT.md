@@ -1180,8 +1180,10 @@ not claim that every line of all previously compiled proofs was reread.
    Independent cross-review checked both examples and the general implications.
 3. **Source-index corrections.** L5 Examples 6, 7 and 8 are now separated into
    weighted-estimator calculations, mean/variance consistency and the CLTs.
-   The unknown-variance normal mean insufficiency passage is in Example 10,
-   not Example 11. All fifteen numbered remarks now have individual rows;
+   The unknown-variance normal mean insufficiency remark first appears in
+   Example 10 and is repeated at the end of Example 11; both rows cite
+   `NormalJointInsufficiency` (the Example 11 citation was added on
+   2026-10-09). All fifteen numbered remarks now have individual rows;
    the semiparametric-efficiency citation and deferred general bootstrap
    discussion retain explicit scope qualifications.
 4. **Two documentation corrections.** The L3 p9 big-O definitions do have
@@ -1342,3 +1344,49 @@ all **136** numbered source IDs exactly: 41 theorems, 24 definitions, 54
 examples, 15 remarks and 2 lemmas, with no omissions or duplicates. All **201**
 source-index links resolve. Rendered source checks included L3 p4's Bernstein
 constants and classifier budget and L6 p7's Cramér–Rao formulation.
+
+## Fourth independent review (2026-10-09)
+
+Starting revision: `91713daaa35ceda42816ebb48cbfb62997b0d773`. This pass reread
+all thirteen lecture texts and compared them with every Lean definition and
+with the declared statements of all **302** modules. It also rechecked each
+recorded source correction in [SOURCE_AUDIT.md](SOURCE_AUDIT.md) and
+[NEW_NOTES_AUDIT.md](NEW_NOTES_AUDIT.md) against the text. Pages whose
+extracted text was ambiguous were rendered: L3 p9, L4 p2, L5 pp8–9, L6 p4,
+and L11 pp5 and 7. The review covered definitions, quantifiers, hypotheses
+and conclusions; it did not reread every proof line.
+
+### Findings
+
+No incorrect Lean definition, theorem statement or proof was found. Three
+documentation entries misdescribed the source; they are corrected, and no
+Lean file changed:
+
+- **L6 Example 5 (p4).** The uniform likelihood is printed with closed
+  indicators, `I{θ ≥ x_(n)} I{x_(1) ≥ 0}`, matching the closed-support
+  density, so the stated maximizer `X_(n)` is attained. The previous records
+  described an inconsistent strict/closed version. Strict indicators occur
+  only in L5 Example 16, whose triangular density lives on `(0,θ)`.
+  `SOURCE_AUDIT`, `SOURCE_INDEX` and the "Concrete check against the notes"
+  paragraph above are corrected; the positive-maximum qualification is
+  unchanged.
+- **L1 p15.** Section 4.2 defines a quadratic form with a symmetric matrix,
+  so the chi-square result for idempotent matrices is about orthogonal
+  projections. The `SOURCE_AUDIT` row now records a clarification rather
+  than a source error; symmetry remains a necessary hypothesis.
+- **L5 Examples 10–11.** The remark that the mean alone is not sufficient
+  when the variance is unknown appears in both examples, not only in
+  Example 10. The Example 11 index row now also cites
+  `NormalJointInsufficiency` with the same `n>1` qualification, and the
+  source-audit bullet names both examples.
+
+### Verification
+
+`python3 scripts/check_sources.py` passed: **302 modules**, all imported, no
+forbidden tokens. The GitHub Actions run of `scripts/check.sh` on
+`7dea7c0888a14eec46a0ffc101a13ddef3655dbb`, whose Lean sources are identical
+to this revision's, completed a **9009-job build** and audited **4021
+declarations**, including **3595 theorem declarations**, using only
+`propext`, `Classical.choice` and `Quot.sound`. All **202** source-index
+links resolve; the extra link is the new Example 11 citation. The 136
+numbered source IDs are unchanged.
