@@ -101,9 +101,10 @@ unbiased Cramér–Rao theorem is applied to this actual estimator. These checks
 exercise the definitions together, including their parameter domains.
 
 L5 p10 and L6 pp4 and 6 were checked against rendered pages. The source's
-uniform MLE example contains inconsistent strict/closed endpoint indicators;
-this is recorded in [SOURCE_AUDIT.md](SOURCE_AUDIT.md). The formalization does
-not claim to prove that uncorrected example.
+uniform MLE example uses closed endpoint indicators throughout, consistent with
+its closed-support density, and `UniformEndpoint` proves it as printed, with the
+positive-maximum qualification recorded in [SOURCE_AUDIT.md](SOURCE_AUDIT.md).
+The strict indicators belong only to L5's triangular example on (0,θ).
 
 ## Verification and remaining scope
 
