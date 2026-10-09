@@ -42,7 +42,7 @@ the source. The coverage ledger separately records that obligation.
 | L1 p10, mixed CDF derivative | Continuity of the joint CDF alone is insufficient to recover a density by mixed differentiation. |
 | L1 pp11–12, best predictor | Require measurable competing predictors and use extended loss, or restrict the real-valued result to square-integrable competitors. |
 | L1 p13, covariance bound proof | Division by `V(Y)` needs a separate zero-variance case. Correlation requires nonzero variances and perfect correlation implies affine dependence almost surely. |
-| L1 p15, quadratic forms | The chi-square conclusion requires a symmetric idempotent matrix (an orthogonal projection), not merely an arbitrary idempotent matrix. |
+| L1 p15, quadratic forms | Clarification, not an error: section 4.2 defines quadratic forms with a symmetric matrix, so the chi-square result is for symmetric idempotent matrices (orthogonal projections). The symmetry hypothesis is genuinely needed; it fails for an arbitrary idempotent matrix. |
 | L2 p3, sampling without replacement | Ordered simple random draws are identically distributed, though generally dependent. The statement "nor identically distributed" is incorrect. |
 | L2 p6, Monte Carlo quantile | For the generalized inverse empirical quantile and one-based order statistics, use `ceil(alpha*B)`, not `floor(alpha*B)`. The latter can be zero. |
 | L2 p9, indicator covariance | Strict negativity requires `0<n<N` and `N>1`; at a census covariance is zero. |
@@ -69,7 +69,7 @@ the source. The coverage ledger separately records that obligation.
 | L6 p1, causal identification | Conditional unconfoundedness also needs overlap/positivity and consistency of observed and potential outcomes. |
 | L6 pp3–4, MLE first-order condition | Differentiability alone does not imply a zero score at a constrained/boundary maximum. Require an interior local maximum. Log-likelihood comparison requires positive likelihood or an extended logarithm convention. |
 | L6 p4, normal/uniform MLE | The normal variance MLE may fail to exist in the positive-variance parameter space if all observations coincide. The uniform endpoint MLE requires a positive observed maximum when the parameter space is positive. |
-| L6 p4, uniform likelihood indicators | The density initially includes the endpoints, but the later likelihood uses strict indicators `theta > X_(n)` and `X_(1) > 0`. The strict upper inequality excludes the claimed maximizer `theta = X_(n)`; with that version the supremum is not attained. Use the original closed-support density to obtain the stated endpoint MLE. Visually verified during the semantic audit. |
+| L6 p4, uniform likelihood indicators | No inconsistency: the likelihood is printed with closed indicators `I{theta >= x_(n)} I{x_(1) >= 0}`, matching the closed-support density on `[0, theta]`, so the stated maximizer `theta = X_(n)` is attained (subject to the positive-maximum caveat in the previous row). Strict indicators occur only in L5 Example 16, whose triangular density lives on `(0, theta)`. Visually verified against the rendered page. |
 | L6 pp4–5, information equalities | State sufficient local domination conditions for differentiating the density integral twice. A bound only on the second log-density derivative, as written, does not justify all interchanges automatically. |
 | L6 p7, Cramér–Rao | Require finite, positive Fisher information and explicit differentiation-under-integral regularity. |
 | L6 p8, uniform counterexample | Outside regular models information need not add: the joint uniform score is `-n/theta`, so its squared expectation is `n^2/theta^2`, not `n/theta^2`. The displayed latter value is only the invalid regular-model calculation. |
@@ -215,8 +215,9 @@ review against the notes before the complete 224-module audit.
   unchanged. Pointwise likelihood ratios distinguish the zero singleton,
   but a constant sufficient statistic cannot reconstruct its indicator at
   every point. Density-version invariance requires an almost-sure formulation.
-- L5 Example 10's statement that the mean alone is insufficient with unknown
-  variance requires n>1. With one observation the mean is the full sample.
+- The statement in L5 Example 10, repeated at the end of Example 11, that the
+  mean alone is insufficient with unknown variance requires n>1. With one
+  observation the mean is the full sample.
   `NormalJointInsufficiency` proves the qualified negative assertion using
   actual normal sample mean/variance independence and changing variance laws.
 - The L2 median phrase “n/2-th highest” is ambiguous for odd n and selects a
